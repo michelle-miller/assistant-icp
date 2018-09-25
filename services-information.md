@@ -53,7 +53,7 @@ The authentication mechanism used by your service instance impacts how you must 
         `wcs-{release-name}-serviceid-secret`
 
     1.  Click the secret.
-    1.  Click the unlock icon ![Unlock icon](images/unlock-api-icon.png) for `api_key`.
+    1.  Click the unlock icon ![Unlock icon](images/locked-api-key.png) for `api_key`.
     1.  Copy the key.
 
 1.  Use these credentials in your API call.
@@ -68,4 +68,6 @@ The authentication mechanism used by your service instance impacts how you must 
       ```
       {: codeblock}
 
-See [Platform overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/private){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
+    To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
+
+See [Platform overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
