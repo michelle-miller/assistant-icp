@@ -1,0 +1,86 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="watson-assistant-for-ibm-cloud-private" audience="service" href="/docs/services/assistant-icp/getting-started.html"}
+Watson Assistant for IBM Cloud Private
+
+    {: .navgroup id="learn"}
+    install.md
+    getting-started.md
+    index.md
+    tool-overview.md
+    [Demo: Banking Assistant](https://watson-conversation-duo-dev.ng.bluemix.net/)
+    resources.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    configure-workspace.md
+    catalog.md
+    intents.md
+
+    {: .topicgroup}
+    Building a dialog
+        dialog-overview.md
+        dialog-runtime.md
+        dialog-build.md
+        dialog-tips.md
+        dialog-slots.md
+        dialog-api.md
+        dialog-responses-json.md
+        implement-responses.md
+
+    entities.md
+    develop-app.md
+
+    {: .topicgroup}
+    Tutorials
+        tutorial.md
+        tutorial-slots.md
+        tutorial-slots-complex.md
+        tutorial-digressions.md
+        tutorial-car-dashboard.md
+        [Tutorial: Defining contextual entities](https://www.ibm.com/cloud/garage/demo/try-watson-assistant-contextual-entities)
+    {: .navgroup-end}
+
+    {: .navgroup id="reference"}
+    [API reference](https://console.bluemix.net/apidocs/assistant-icp)
+    dialog-methods.md
+    expression-language.md
+    filter-reference.md
+    sample-applications.md
+    lang-support.md
+    information-security.md
+
+    {: .topicgroup}
+    System entities
+        system-entities.md
+        supported-timezones.md
+
+    {: .topicgroup}
+    Watson SDKs
+        [Android SDK](https://github.com/watson-developer-cloud/android-sdk)
+        [Java SDK](https://github.com/watson-developer-cloud/java-sdk)
+        [Node.js SDK](https://github.com/watson-developer-cloud/node-sdk)
+        [Python SDK](https://github.com/watson-developer-cloud/python-sdk)
+        [.NET SDK](https://github.com/watson-developer-cloud/dotnet-standard-sdk)
+        [OpenWhisk SDK](https://github.com/watson-developer-cloud/openwhisk-sdk/)
+        [Salesforce SDK](https://github.com/watson-developer-cloud/salesforce-sdk)
+        [Swift SDK](https://github.com/watson-developer-cloud/swift-sdk)
+        [Unity SDK](https://github.com/watson-developer-cloud/unity-sdk)
+
+    [Watson GitHub repos](https://github.com/watson-developer-cloud/)
+    {: .navgroup-end}
+
+    {: .navgroup id="help"}
+    release-notes.md
+    services-information.md
+    feedback.md
+
+    {: .topicgroup}
+    Developer community
+        [StackOverflow](https://stackoverflow.com/questions/tagged/watson-conversation+or+watson-assistant)
+        [IBM Developer Answers](https://developer.ibm.com/answers/search.html?f=&amp;sort=relevance&amp;q=%5Bwatson-conversation%5D+%5Bwatson-assistant%5D+%24)
+        [WDC Slack channel](http://wdc-slack-inviter.mybluemix.net/)
+
+    accessibility.md
+    {: .navgroup-end}
