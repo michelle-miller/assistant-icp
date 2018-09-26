@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -177,100 +177,6 @@ Other actions you might want to take before starting the installation include:
 ### Install the service
 {: #admin-install}
 
-1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
-
-    ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} \
-    [--clustername {cluster_CA_domain}] --namespace conversation
-    ```
-    {: codeblock}
-
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the certificate authority domain.
-    - `namespace` is the Docker namespace that hosts the Docker image and must be set to `conversation`.
-
-    **Attention**: If you encounter an error during the load process, complete [this workaround](#workaround) instead of finishing this procedure.
-
-1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Admin** > **Repositories**.
-1.  Click **Sync Repositories**.
-
-    You must have the *cluster administrator* user type or access level to sync repositories.
-
-1.  From the navigation menu, select **Catalog**.
-1.  Scroll to find the **ibm-charts/watson-assistant-prod** package, and then click **Configure**.
-1.  Specify values for the configurable fields.
-
-    When you install the service, many configuration settings are applied to it for you unless you override them with your own values. You might want to change things like user names and passwords for databases or stores that are created for you, for example. You cannot change these settings after you complete the installation. See [Configuration details](#config-details) for help understanding the configuration choices.
-
-1.  Click **license agreements**.
-
-    Click **Next** multiple times to read the full agreement, and then click **Accept** to accept the license terms.
-
-1.  Click **Install**.
-
-#### Configuration details
-{: #config-details}
-
-At a minimum, you must provide your own values for the following configurable settings:
-
-- Release name
-- ICP Cluster URL
-
-Table 3. Configuration settings
-
-| Setting | Description |
-|---------|-------------|
-| Release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
-| Target namespace | Namespace used within the cluster to identify this service. You must choose `conversation` as the namespace. |
-| Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
-| ICP Cluster URL | Specify the base URL of your private cloud instance. For example: `my.company.name.icp.net`. This unique URL is typically referred to as `{icp-url}` in this documentation. |
-| Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](lang-support.html). |
-| Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. |
-| COS Access Key | Credential to access the store. |
-| COS Secret Key | Access key to the store used by CLU components. |
-| Bucket Prefix | Prefix of the bucket names to be used. |
-| COS Access Protocol | Only used if Create COS is deselected. Specifies the protocol used to connect to COS. Options are **http** and **https**. Typical protocol is **http**. |
-| COS Hostname | Only used if Create COS is deselected. Hostname to connect to the store. Typical hostname when COS is running in the cluster is `cos.namespace.svc.cluster.local`. |
-| COS Port | Only used if Create COS is deselected. Port where COS is listening. Typical port is `443`. |
-| Create Redis | Boolean. Specify `true` to have a Redis store created for you. Specify `false` to provide your own instance. The default value is true. |
-| Redis Hostname | Used only if Create Redis is deselected. Specifies the hostname of the running Redis service. |
-| Redis Password | Password for accessing Redis. (User is root.) |
-| Redis Port | Used only if Create Redis is deselected. Specifies the port from which the running Redis service can be accessed. |
-| Create Postgres | Boolean. Specify `true` to have a Postrgres store created for you. Specify `false` to provide your own instance. The default value is true. |
-| Postgres Hostname | Used only if Create Postgres is deselected. Specifies the hostname of the running Postrgres service.  |
-| Postgres Port | Used only if Create Postgres is deselected. Specifies the port from which the running Postrgres service can be accessed. |
-| Postgres Admin Name | User ID for a Postgres super user with rights to create databases and users in the Postgres database. If you use your own instance, then you must change this name and its associated password. |
-| Postgres Admin Password | Password associated with the user ID for a Postgres super user with rights to create databases and users in the Postgres database. If you use your own instance, then you must change this password and the associated name. |
-| Postgres Admin Database | Name of the database to connect to. |
-| SSL Mode | SSL mode to use for the Postgres connection. Options such as **verify-ca** or **verify-full** are not currently supported by the store microservice. Currently, only **SSL** is supported. Do not change from the default value. The default value is `allow`. |
-| Postgres Server Certificate | Used only if Create Postgres is deselected. Server certificate details. |
-| Create Database  | Boolean. Specify `true` to have the database and user created for you. If you specify `false`, then you must create the database and database user yourself. The default value is true. |
-| Create Schema | Boolean. Specify `true` to have the required tables, functions, and so on applied to the database that is created for you. The default value is true. |
-| Store Database Name | Database name that the store microservice uses. If left empty, the default value  "conversation_icp_{{ .Release.Name }}" is used. |
-| Postgres User Name | User name that the store miroservice uses to connect to the Postgres database. If left empty, the default value "store_icp_{{ .Release.Name }}" is used. |
-| Postgres User Password | Password associated with the user ID specified in Postgres User Name.|
-| Create Etcd Cluster | Boolean. Specify `true` to have the etcd cluster for the Watson Assistant service created for you. Specify `false` to provide your own etcd instance and the associated credentials. The default value is true. |
-| Enable Etcd Authentication | Boolean. If set to `true` the authentication is enabled in etcd. Watson Assistant requires authentication. Set to `false` only if you provide your own etcd cluster where authentication is already enabled. The default value is true. |
-| Etcd User | User ID used to access etcd. The default value is root. |
-| Etcd Password | Password associated with the Etcd User.  |
-| Connections details for etcd | Used only if Create Etcd Cluster is deselected. Etcd connection details. If you do not specify a connection, these default connection details are used: shema:http, host:etcd-ibm-wcd-etcd.default.svc.cluster.local, port:2379. No connection details are specified by default. |
-| Create MongoDB | Boolean. Specify `true` to have a MongoDB database created for you. Specify `false` to provide your own instance. The default value is true. |
-| MongoDB Hostname | Used only if Create MongoDB is deselected. Specifies the hostname of the running MongoDB database service. |
-| MongoDB Port | Used only if Create MongoDB is deselected. Specifies the port from which the running MongoDB database service can be accessed. |
-| Enable Authentication | Boolean. If true, authentication is enabled. The default value is true. |
-| MongoDB Admin User | User ID for a MongoDB super user with rights to create databases and users in the MongoDB database. If you use your own instance, then you must change this name and its associated password. |
-| MongoDB Admin Password | Password associated with the user ID for a MongoDB super user with rights to create databases and users in the MongoDB database. If you use your own instance, then you must change this password and the  associated name. |
-| Enable TLS | Boolean. Indicates whether to enable MongoDB TLS support. The default value is true. |
-| base64 encoded certificate | Replace the certificate with your own. See the Configuration page for certificate details. |
-| base64 encoded key | Replace the key with your own. See the Configuration page for key details. |
-| Subdomain | URL from which to access the Watson Assistant tool. The url syntax is typically `https://{{ subdomain }}.{{ icp-url }}/{{ applicationContext }}`. The default value is assistant. |
-| TLS Secret | Name of the secret that has the certificate and private key for the subdomain `{{ subdomain }}.{{ icp-url }}`. If empty, a secret with a self-signed certificate is created. By default, this setting is empty. |
-
-### Installation workaround
-{: #workaround}
-
-If you are unable to load the PPA file by using the load command, complete this procedure to finish the installation process.
-
 1.  From the Kubernetes command line tool, create the `conversation` namespace by using the following command:
 
     ```bash
@@ -280,7 +186,7 @@ If you are unable to load the PPA file by using the load command, complete this 
 
     If you do not have the Kubernetes command line tool set up, see [Accessing your IBM Cloud Private cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html) for instructions.
 
-1.  Get a certificate from your ICP cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You need must do one or the other for Docker to be able to pull from your ICP cluster.
+1.  Get a certificate from your ICP cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your ICP cluster.
 
     See [Specifying your own certificate authority (CA) for IBM Cloud Private services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/create_ca_cert.html)
 
@@ -290,7 +196,7 @@ If you are unable to load the PPA file by using the load command, complete this 
 
 1.  After completing the Solution 2 steps, specify values for the Docker image registries. (The image registry settings are included in the values.yaml file but are not described in the README file.)
 
-    When you use the alternative load command that is provided in Solution 2, it mimics the typical load command, except it does not perform the final step, in which the Docker registry is dynamically updated. You must specify the image registry information yourself.
+    When you use the load command that is provided in Solution 2, it does not dynamically update the Docker registry You must specify the image registry information yourself.
 
     See [Image registry details](#registry) for the steps to perform to provide the required registry information.
 
@@ -306,7 +212,7 @@ If you are unable to load the PPA file by using the load command, complete this 
 
     If this is the only settings that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
 
-1.  To install the chart from the Helm command line interface, enter the following command:
+1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command:
 
     ```bash
     helm install --tls --values {override-file-name} --namespace conversation \
