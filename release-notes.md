@@ -38,7 +38,7 @@ IBM releases services, features, and language support for your evaluation that a
 
 The following new features and changes to the service are available.
 
-### September
-{: #September2018}
+### 26 September 2018
+{: #26September2018}
 
 - **{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} 1.0.0 is available.**
