@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-21"
+lastupdated: "2018-09-26"
 
 ---
 
@@ -88,6 +88,8 @@ Copying a workspace makes a complete copy of the workspace within the same servi
 - To create a copy of an existing workspace within the same service instance, click the menu icon in the workspace tile and then select **Duplicate**.
 
     Specify the name, description, and language for the new workspace. All data (including intents, entities, and dialog) is included in the copy.
+
+You can export a workspace by using the API also. Include the `export=true` parameter with the request. See the [API reference](https://www.ibm.com/watson/developercloud/assistant/api/v1/curl.html?curl#get-workspace) for more details.
 
 ## Sharing the workspace with team members
 {: #invite-others}
