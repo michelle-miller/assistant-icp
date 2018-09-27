@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-26"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -397,7 +397,11 @@ If you omit the `--purge` option, Helm deletes all resources for the deployment 
 
 1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
-1.  Find the deployment named `watson-assistant-ui`, and then click **Launch**.
+1.  Find the deployment named `{release-name}-ui`.
+
+    If you don't know the `{release-name}`, filter the list of deployments to include only those associated with the `conversation` namespace, and then search on `-ui` to find it.
+
+1.  Click **Launch**.
 
     A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. For example: `https://assistant.{icp-url}`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
