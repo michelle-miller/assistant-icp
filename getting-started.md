@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-09-27"
 
 ---
 
@@ -37,7 +37,15 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
 
 1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
-1.  Find the deployment named `watson-assistant-ui`, and then click **Launch**.
+
+    ![Shows the ICP menu choices to get to the deployment launch button.](images/gs-icp-admin-menu.png)
+1.  Filter the list of deployments by the `conversation` namespace.
+
+    ![Shows the ICP namespace filter.](images/gs-convo-namespace.png)
+1.  Find the deployment named `{release-name}-ui`.
+
+    If you don't know the `{release-name}`, search on `-ui` to find it.
+1.  Click **Launch**.
 
     A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. For example: `https://assistant.{icp-url}`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
