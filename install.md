@@ -97,7 +97,7 @@ Table 2. Language resource requirements
 ## Step 1: Purchase and download installation artifacts
 {: #download-wa-icp}
 
-1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html).
+1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html).
 
 1.  Download the appropriate package for your environment.
 
@@ -125,9 +125,9 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 
 Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.keyword.icpfull_notm}} internal repository.
 
-You need 30GB of space on your local system to support the extraction and load of the archive file.
+You need 30 GB of space on your local system to support the extraction and loading of the archive file.
 
-1.  Complete steps 2 and 3 in [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html).
+1.  Complete steps 2 and 3 only in [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html), and then return to this procedure.
 
     (Step 1 covers getting the archive file from the Passport Advantage site, which you have already done.)
 
@@ -143,7 +143,9 @@ You need 30GB of space on your local system to support the extraction and load o
 
 A PersistentVolume (PV) is a unit of storage in the cluster. In the same way that a node is a cluster resource, a persistent volume is also a resource in the cluster. Ensure that you have enough persistent volumes to accommodate the [system requirements](#sys-reqs) outlined earlier.
 
-See [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) for more information.
+For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+
+See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
 
 ### Gather information about your environment
 {: #gather-info}
@@ -374,7 +376,9 @@ minioRepository: "{icp-url}:{port}/conversation/minio-mc"
 
 ### Uninstalling the service
 
-If you need to start the deployment over, be sure to remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. The PersistentVolumeClaims will not be deleted and will remain bounded to Persistent Volumes. You must remove them manually.
+If you need to start the deployment over, be sure to remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_volume.html) for more information.
+
+The PersistentVolumeClaims will not be deleted and will remain bounded to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
 
 To uninstall and delete the `my-release` deployment, run the following command from the Helm CLI:
 
