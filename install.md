@@ -46,10 +46,10 @@ Table 1. Resource requirements
 
 | Component | Number of replicas | Space per pod | Storage type |
 |-----------|-----------------|--------------|
-| Postgres  | 3 | 10 GB | local-storage |
-| etcd      | 3 | 10 GB | local-storage |
-| Minio     | 1 | 20 GB | local-storage |
-| MongoDB   | 3 | 80 GB | local-storage |
+| Postgres  | 3 | 10 Gi | local-storage |
+| etcd      | 3 | 10 Gi | local-storage |
+| Minio     | 1 | 20 Gi | local-storage |
+| MongoDB   | 3 | 80 Gi | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
 ## Microservices
@@ -146,6 +146,15 @@ A PersistentVolume (PV) is a unit of storage in the cluster. In the same way tha
 For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
 See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
+
+The following values are specific to {{site.data.keyword.conversationshort}}:
+
+| Field | Value |
+|-------|-------|
+| Storage class name | local-storage |
+| Access mode | ReadWriteOnce (RWO) |
+| Reclaim policy | Retain |
+| Storage type | hostPath |
 
 ### Gather information about your environment
 {: #gather-info}
