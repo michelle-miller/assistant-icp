@@ -147,7 +147,7 @@ For an overview, see [Persistent Volumes in the Kubernetes documentation ![Exter
 
 See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
 
-The following values are specific to {{site.data.keyword.conversationshort}}:
+Specify the following choices for {{site.data.keyword.conversationshort}}:
 
 | Field | Value |
 |-------|-------|
