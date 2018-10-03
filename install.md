@@ -88,11 +88,11 @@ Table 2. Language resource requirements
 
 ### Overview of the steps
 
-- [ ] [Download service installation artifacts](#download-wa-icp)
-- [ ] [Prepare the cloud environment](#install-icp)
-- [ ] [Add the service chart to the cloud repository](#add-wa-chart-to-icp)
-- [ ] [Install the service](#install-wa-from-catalog)
-- [ ] [Launch the tool](#launch-tool)
+1.  [] [Download service installation artifacts](#download-wa-icp)
+1.  [] [Prepare the cloud environment](#install-icp)
+1.  [] [Add the service chart to the cloud repository](#add-wa-chart-to-icp)
+1.  [] [Install the service](#install-wa-from-catalog)
+1.  [] [Launch the tool](#launch-tool)
 
 ## Step 1: Purchase and download installation artifacts
 {: #download-wa-icp}
@@ -150,14 +150,16 @@ When you install the service, persistent volume claims are created for the compo
 
 **Note**: You must be a cluster administrator to create local storage volumes.
 
-Specify the following choices for {{site.data.keyword.conversationshort}}:
+Specify the following choices for {{site.data.keyword.conversationshort}}.
 
 | Field | Value |
 |-------|-------|
-| Storage class name | local-storage |
+| Name | Specify a name that is unique across the 10 volumes |
+| Type | Hostpath |
+| Capacity | Check the system requirements table |
 | Access mode | ReadWriteOnce (RWO) |
-| Reclaim policy | Retain |
-| Storage type | hostPath |
+| Reclaim policy | Recycle |
+| Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across the 10 volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
 
 ### Create a subdomain for the tool user interface
 {: #create-subdomain}
@@ -235,7 +237,7 @@ Other actions you might want to take before starting the installation include:
 
     If this is the only settings that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
 
-1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command:
+1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
     ```bash
     helm install --tls --values {override-file-name} --namespace conversation \
@@ -244,9 +246,10 @@ Other actions you might want to take before starting the installation include:
     {: codeblock}
 
     - Replace `{my-release}` with a name for your release.
-    - Replace `{my-values.yaml}` with the path to a YAML file that specifies the values that are to be used with the `install` command. (Specify the YAML file you created in the previous step here.)
-    - Replace `{override-file-name}` with the name of the file that contains your Docker image registry details.
+    - Replace `{my-values.yaml}` with the path to a YAML file that specifies the values that are to be used with the `install` command. (Specify the YAML file you created in the previous step here.) For example: `ibm-watson-assistant-prod/my_values.yaml`
+    - Replace `{override-file-name}` with the path to the file that contains your Docker image registry details. For example: `ibm-watson-assistant-prod/image-details-override.yaml`
     - Note that the namespace `conversation` is used. Do not change it.
+    - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart.
 
 #### Image registry details
 {: #registry}
