@@ -231,9 +231,9 @@ Other actions you might want to take before starting the installation include:
 
     Replace the values in your version of the file with values that reflect your environment. The README has descriptions for each configurable setting.
 
-    At a minimum, you must provide your own values for the following configurable settings:
+    At a minimum, you must provide your own values for the following configurable setting:
 
-    - `global.icpUrl`
+    - `global.icpUrl`: Specify the cluster_CA_domain hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`).
 
     If this is the only settings that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
 
