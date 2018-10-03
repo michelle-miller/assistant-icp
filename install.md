@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-02"
+lastupdated: "2018-10-03"
 
 ---
 
@@ -135,6 +135,7 @@ You need 30 GB of space on your local system to support the extraction and loadi
 {: #install-wa-from-catalog}
 
 - [Create persistent volumes](#create-pvs)
+- [Set up a DNS subdomain for the tool](#create-subdomain)
 - [Gather information about your environment](#gather-info)
 - [Install the service](#admin-install)
 
@@ -157,6 +158,15 @@ Specify the following choices for {{site.data.keyword.conversationshort}}:
 | Access mode | ReadWriteOnce (RWO) |
 | Reclaim policy | Retain |
 | Storage type | hostPath |
+
+### Create a subdomain for the tool user interface
+{: #create-subdomain}
+
+Work with your DNS provider to create a subdomain on your cluster named `assistant` that can be used by the {{site.data.keyword.conversationshort}} tool user interface.
+
+For example, if you are using SoftLayer, log in to the SoftLayer portal, and go to Network > DNS > Forward Zones. In the DNS Forwarding Zone for your {{site.data.keyword.icpfull_notm}} cluster, add a new record with the host name 'assistant' that points to the IP address of your {{site.data.keyword.icpfull_notm}} cluster.
+
+You must be able to ping `assistant.{icp-url}` and get a reply.
 
 ### Gather information about your environment
 {: #gather-info}
@@ -245,7 +255,7 @@ To provide image registry details yourself, complete the following steps.
 
 1.  Create an override file. For example, `image-details-override.yaml`.
 1.  Copy the JSON block below into your override file.
-1.  Replace any references to `{icp-url}:{port}` with the appropriate value for your environment. For example, `my.icp.net:8500`.
+1.  Replace any references to `{icp-url}:{port}` with the appropriate value for the Docker image registry in your environment. For example, `my.icp.net:8500`.
 
 ```json
 #Images for ibm-watson-assistant-ui chart
