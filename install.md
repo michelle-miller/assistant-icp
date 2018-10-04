@@ -237,7 +237,7 @@ Other actions you might want to take before starting the installation include:
 
     If this is the only settings that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
 
-    **Attention**: Currently, the service does not support the ability to provide your own own instances of resources, such as Postgres or MongoDB. The values YAML has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
+    **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
 1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
