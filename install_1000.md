@@ -242,7 +242,7 @@ Other actions you might want to take before starting the installation include:
 
     - `global.icpUrl`: Specify the cluster_CA_domain hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`).
 
-    If this is the only settings that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
+    If this is the only setting that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
 
     **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
