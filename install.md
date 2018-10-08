@@ -232,8 +232,6 @@ Other actions you might want to take before starting the installation include:
     - `{cluster_CA_domain}` is the certificate authority domain.
     - `namespace` is the Docker namespace that hosts the Docker image and must be set to `conversation`.
 
-    **Attention**: You might encounter a time-out error during the load process. The load continues in the background. Give it time to complete.
-
 1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Admin** > **Repositories**.
 1.  Click **Sync Repositories**.
 
@@ -255,6 +253,8 @@ Other actions you might want to take before starting the installation include:
     Click **Next** multiple times to read the full agreement, and then click **Accept** to accept the license terms.
 
 1.  Click **Install**.
+
+    **Attention**: You might get a message that a timeout occurred during the installation process. However, the message can be ignored; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status.
 
 #### Configuration details
 {: #config-details}
