@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-05"
+lastupdated: "2018-10-09"
 
 ---
 
@@ -136,10 +136,10 @@ You need 30 GB of space on your local system to support the extraction and loadi
 ## Step 4: Install the service
 {: #install-wa-from-catalog}
 
-- 4.1 [Create persistent volumes](#create-pvs)
-- 4.2 [Set up a DNS subdomain for the tool](#create-subdomain)
-- 4.3 [Gather information about your environment](#gather-info)
-- 4.4 [Install the service](#admin-install)
+- [4.1 Create persistent volumes](#create-pvs)
+- [4.2 Set up a DNS subdomain for the tool](#create-subdomain)
+- [4.3 Gather information about your environment](#gather-info)
+- [4.4 Install the service](#admin-install)
 
 ### 4.1 Create persistent volumes
 {: #create-pvs}
@@ -223,22 +223,22 @@ Other actions you might want to take before starting the installation include:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} \
-    [--clustername {cluster_CA_domain}] --namespace conversation
+    bx pr load-ppa-archive --archive {compressed_file_name} 
+    --clustername {cluster_CA_domain} --namespace conversation
     ```
     {: codeblock}
 
     - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the certificate authority domain.
+    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as the {icp-url}.
     - `namespace` is the Docker namespace that hosts the Docker image and must be set to `conversation`.
 
-1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Admin** > **Repositories**.
+1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Manage** > **Helm Repositories**.
 1.  Click **Sync Repositories**.
 
     You must have the *cluster administrator* user type or access level to sync repositories.
 
 1.  From the navigation menu, select **Catalog**.
-1.  Scroll to find the **ibm-charts/ibm-watson-assistant-prod** package, and then click **Configure**.
+1.  Scroll to find the **ibm-watson-assistant-prod** package, and then click **Configure**.
 1.  Specify values for the configurable fields.
 
     When you install the service, many configuration settings are applied to it for you unless you override them with your own values. You might want to change things like user names and passwords for databases or stores that are created for you, for example. **You cannot change these settings after you complete the installation.**
@@ -246,7 +246,9 @@ Other actions you might want to take before starting the installation include:
     See [Configuration details](#config-details) for help understanding the configuration choices. At a minimum, you must provide your own values for the following configurable settings:
 
     - Release name
+    - Deployment Type
     - ICP Cluster URL
+    - Languages: If you do not need to support Czech, deselect it.
 
 1.  Click **license agreements**.
 
