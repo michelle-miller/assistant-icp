@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-09"
+lastupdated: "2018-10-10"
 
 ---
 
@@ -109,7 +109,7 @@ Table 2. Language resource requirements
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
-**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. The installation process was simplified with the PPA file version 1.0.0.1 made available on 5 October 2018. For a simpler installation experience, download the later version of the PPA file. If you choose to use the earlier version of the PPA file, see [Installation checklist 1.0.0.0 ![External link icon](../../icons/launch-glyph.svg "External link icon")](install_1000.html){: new_window} for detailed installation instructions.
+**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. The installation process was simplified with the PPA file version 1.0.0.1 made available on 5 October 2018. For a simpler installation experience, download the later version of the PPA file, named `IWAICP_V1.0.0.1.tar.gz`.
 
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
