@@ -40,9 +40,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## System requirements
 {: #sys-reqs}
 
-The minimum hardware requirements for a non-production deployment are these:
-
-Table 1. Mimimum hardware requirements for a development (non-production) environment
+Table 1. Mimimum hardware requirements for a development environment
 
 | Node type  | Number of nodes | CPU per node | Memory per node | Disk per node | Used by |
 |------------|-----------------|--------------|-----------------|---------------|---------|
