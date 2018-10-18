@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-18"
 
 ---
 
@@ -40,9 +40,24 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## System requirements
 {: #sys-reqs}
 
+The minimum hardware requirements for a non-production deployment are these:
+
+Table 1. Mimimum hardware requirements for a development (non-production) environment
+
+| Node type  | Number of nodes | CPU per node | Memory per node | Disk per node | Used by |
+|------------|-----------------|--------------|-----------------|---------------|---------|
+| boot       | 1               | 2            | 8               | 250           | cluster infrastructure |
+| master     | 1               | 4            | 8               | 250           | cluster infrastructure |
+| management | 1               | 4            | 8               | 250           | cluster infrastructure |
+| proxy      | 1               | 2            | 4               | 140           | cluster infrastructure
+| worker     | 4               | 8            | 32              | 500           | {{site.data.keyword.conversationshort}} |
+{: caption="Minimum non-production hardware requirements" caption-side="top"}
+
+See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+
 The following table lists the system resources that have been verified to support a deployment.
 
-Table 1. Resource requirements
+Table 2. Resource requirements
 
 | Component | Number of replicas | Space per pod | Storage type |
 |-----------|-----------------|--------------|
@@ -78,7 +93,7 @@ In addition to these microservices, the Helm chart installs the following resour
 
 The components that are necessary to process different natural languages require significant amounts of data. You can install another instance of {{site.data.keyword.conversationshort}} to add support for another language. However, each language you add increases the amount of resources you need to support it. English is always provided. If you specify a different language during the installation process, you get resources that support English plus the specified language.
 
-Table 2. Language resource requirements
+Table 3. Language resource requirements
 
 | Language | Required Virtual Private CPUs | Memory requirements per pod |
 |----------|-----------------------|-----------------------------|
@@ -97,7 +112,7 @@ Table 2. Language resource requirements
 ## Step 1: Purchase and download installation artifacts
 {: #download-wa-icp}
 
-1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html).
+1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html){:new_window}.
 
 1.  Download the appropriate package for your environment.
 
@@ -137,7 +152,7 @@ You need 30 GB of space on your local system to support the extraction and loadi
 {: #install-wa-from-catalog}
 
 - [4.1 Create persistent volumes](#create-pvs)
-- [4.2 Set up a DNS subdomain for the tool](#create-subdomain)
+- [4.2 Configure proper DNS name resolution](#dns-resolution)
 - [4.3 Gather information about your environment](#gather-info)
 - [4.4 Install the service](#admin-install)
 
@@ -154,7 +169,7 @@ When you install the service, persistent volume claims are created for the compo
 
 Specify the following choices for {{site.data.keyword.conversationshort}}.
 
-Table 3. Persistent volume settings
+Table 4. Persistent volume settings
 
 | Field | Value |
 |-------|-------|
@@ -166,14 +181,21 @@ Table 3. Persistent volume settings
 | Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across the 10 volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
 {: caption="Persistent volume settings" caption-side="top"}
 
-### 4.2 Create a subdomain for the tool user interface
-{: #create-subdomain}
+### 4.2 Configure proper DNS name resolution
+{: #dns-resolution}
+
+The cluster must be able to resolve the addresses of the following components:
+
+- Cluster (ICP Cluster URL or `global.icpUrl`)
+- Tool UI (Subdomain or `ui.subdomain`)
+
+The service assumes that the cluster and tool are available from the same node, and therefore have the same IP address. If they are not the same, be sure you know the address for each one.
 
 Work with your DNS provider to create a subdomain on your cluster named `assistant` that can be used by the {{site.data.keyword.conversationshort}} tool user interface.
 
 For example, if you are using SoftLayer, log in to the SoftLayer portal, and go to Network > DNS > Forward Zones. In the DNS Forwarding Zone for your {{site.data.keyword.icpfull_notm}} cluster, add a new record with the host name 'assistant' that points to the IP address of your {{site.data.keyword.icpfull_notm}} cluster.
 
-You must be able to ping `assistant.{icp-url}` and get a reply.
+You must be able to ping the {{site.data.keyword.conversationshort}} tool URL (`ui.subdomain`) and get a reply.
 
 ### 4.3 Gather information about your environment
 {: #gather-info}
@@ -223,8 +245,7 @@ Other actions you might want to take before starting the installation include:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} 
-    --clustername {cluster_CA_domain} --namespace conversation
+    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace conversation
     ```
     {: codeblock}
 
@@ -263,7 +284,7 @@ Other actions you might want to take before starting the installation include:
 
 Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. There are configuration settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
-Table 4. Configuration settings
+Table 5. Configuration settings
 
 | Setting | Description |
 |---------|-------------|
@@ -316,27 +337,57 @@ Table 4. Configuration settings
 
 ### Uninstalling the service
 
-If you need to start the deployment over, be sure to remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_volume.html) for more information.
+If you need to start the deployment over, be sure to remove all trace of the current installation before you try to install again.
 
-The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
+1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
 
-To uninstall and delete the `my-release` deployment, run the following command from the Helm CLI:
+    ```bash
+    helm delete --tls my-release
+    ```
+    {: codeblock}
 
-```bash
-$ helm delete --tls my-release
-```
-{: codeblock}
+    To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
-To irrevocably uninstall and delete the `my-release` deployment, run the following command:
+    ```bash
+    helm delete --purge --tls my-release
+    ```
+    {: codeblock}
 
-```bash
-$ helm delete --purge --tls my-release
-```
-{: codeblock}
+    If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
 
-If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
+1.  Remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_volume.html) for more information.
 
-## Step 5: Launch the tool
+1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
+
+## Step 5: Verify that the installation was successful
+
+To check the status of the installation process:
+
+1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
+1.  From the main menu, expand **Workloads**, and then choose **Helm releases**.
+1.  Find the release name you used for the deployment in the list.
+
+To run a test Helm chart:
+
+1.  From the Helm command line interface, run the following command:
+
+    ```bash
+    helm test --tls {release name} --timeout 900
+    ```
+
+1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs <testname> -n conversation -f --timestamps`. For example:
+
+    ```bash
+    kubectl logs my-release-bdd-test -n conversation -f --timestamps
+    ```
+
+1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod <podname> --namespace conversation`. For example:
+
+    ```bash
+    kubectl delete pod my-release-bdd-test --namespace conversation
+    ```
+
+## Step 6: Launch the tool
 {: #launch-tool}
 
 1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.

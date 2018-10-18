@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-18"
+lastupdated: "2018-10-18"
 ---
 
 {:shortdesc: .shortdesc}
@@ -18,27 +18,35 @@ lastupdated: "2018-09-18"
 
 # Release notes
 
-## Service API Versioning
-{: shortdesc}
-
-API requests require a version parameter that takes a date in the format `version=YYYY-MM-DD`. Whenever we change the API in a backwards-incompatible way, we release a new minor version of the API.
-
-Send the version parameter with every API request. The service uses the API version for the date you specify, or the most recent version before that date. Don't default to the current date. Instead, specify a date that matches a version that is compatible with your app, and don't change it until your app is ready for a later version.
-
-The current version is `2018-09-20`.
-
-The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is using version `2018-07-10`.
-
 ## Beta features
 
-IBM releases services, features, and language support for your evaluation that are classified as beta. These features might be unstable, might change frequently, and might be discontinued with short notice. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment. Beta features are supported only on the [IBM Developer Answers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/watson-conversation/){: new_window}.
+IBM releases services, features, and language support for your evaluation that are classified as beta. These features might be unstable, might change frequently, and might be discontinued with short notice. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment. Beta features are supported only on the [IBM Developer Answers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/watson-assistant/){: new_window}.
 
-## Changes
+## Change log
 {: #change-log}
 
-The following new features and changes to the service are available.
+### 5 October 2018
+{: #5October2018}
+
+- A revised Helm chart (version 1.0.0.1) was published, which improves the installation process.
 
 ### 26 September 2018
 {: #26September2018}
 
-- **{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} 1.0.0 is available.**
+**{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} 1.0.0 is available.** The following key features are included in the release:
+
+The tool includes a Build tab that offers pre-built intents you can add to your workspace from a content catalog, the ability to define your own intents and entities, and has a graphical user interface you can use to build a dialog. The following key features are available:
+
+  - Dialog: Digression and disambiguation support, nodes with slots, rich responses (including Connect to human agent)
+  - Entities: Contextual entities, system entities for currency, date, number, percentage, and time.
+  - Intents: Content catalog
+
+The following features are not available from {{site.data.keyword.icpfull}}, but are available in the public IBM Cloud instance at the time of the release:
+
+- There are no metrics or analytics capabilities. Therefore, the Improve tab is not included in the tool.
+- There are no deployment connectors or built-in integrations available. You must build a custom client application that can host the assistant. As a result, the Deploy tab is not included in the tool.
+- You cannot search in the tool.
+- The @sys-person and @sys-location system entities are not supported.
+- You cannot make programmatic calls to Cloud Functions actions from the dialog.
+- No entity synonym recommendations are available.
+- No intent conflict detection is available.
