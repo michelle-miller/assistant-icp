@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-10-18"
 
 ---
 
@@ -33,6 +33,17 @@ For information about artifact limits per plan, see these topics:
 - [Intents](intents.html#intent-limits)
 - [Entities](entities.html#entity-limits)
 
+## Service API Versioning
+{: shortdesc}
+
+API requests require a version parameter that takes a date in the format `version=YYYY-MM-DD`. Whenever we change the API in a backwards-incompatible way, we release a new minor version of the API.
+
+Send the version parameter with every API request. The service uses the API version for the date you specify, or the most recent version before that date. Don't default to the current date. Instead, specify a date that matches a version that is compatible with your app, and don't change it until your app is ready for a later version.
+
+The current version is `2018-09-20`.
+
+The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is using version `2018-07-10`.
+
 ## Authenticating API calls
 {: #authenticate-api-calls}
 
@@ -43,8 +54,6 @@ The authentication mechanism used by your service instance impacts how you must 
     1.  From a new tab in the web browser, go to a URL with the following syntax:
 
       `https://{icp-url}:8443/console/configuration/secrets`
-
-      **Note**: The `{icp-url}` is the segment that comes after `assistant.` in the URL for the tool.
 
     1.  Search for `-serviceid-secret`
 
