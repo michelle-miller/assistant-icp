@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 ---
 
 {:shortdesc: .shortdesc}
@@ -33,20 +33,20 @@ IBM releases services, features, and language support for your evaluation that a
 ### 26 September 2018
 {: #26September2018}
 
-**{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} 1.0.0 is available.** The following key features are included in the release:
+- **{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} 1.0.0 is available.**
 
-The tool includes a Build tab that offers pre-built intents you can add to your workspace from a content catalog, the ability to define your own intents and entities, and has a graphical user interface you can use to build a dialog. The following key features are available:
+  The {{site.data.keyword.conversationfull}} tool includes a Build tab that offers pre-built intents you can add to your workspace from a content catalog, the ability to define your own intents and entities, and has a graphical user interface you can use to build a dialog. The following key features are also available:
 
-  - Dialog: Digression and disambiguation support, nodes with slots, rich responses (including Connect to human agent)
+  - Dialog: Digression and disambiguation support, nodes with slots, rich responses (including *Connect to human agent*)
   - Entities: Contextual entities, system entities for currency, date, number, percentage, and time.
   - Intents: Content catalog
 
-The following features are not available from {{site.data.keyword.icpfull}}, but are available in the public IBM Cloud instance at the time of the release:
+  These features are not available from {{site.data.keyword.icpfull}}, but are available in the public IBM Cloud instance at the time of this release:
 
-- There are no metrics or analytics capabilities. Therefore, the Improve tab is not included in the tool.
-- There are no deployment connectors or built-in integrations available. You must build a custom client application that can host the assistant. As a result, the Deploy tab is not included in the tool.
-- You cannot search in the tool.
-- The @sys-person and @sys-location system entities are not supported.
-- You cannot make programmatic calls to Cloud Functions actions from the dialog.
-- No entity synonym recommendations are available.
-- No intent conflict detection is available.
+  - There are no metrics or analytics capabilities. Therefore, the *Improve* tab is not included in the tool.
+  - There are no deployment connectors or built-in integrations available. You must build a custom client application that can host the assistant. As a result, the *Deploy* tab is not included in the tool.
+  - You cannot search within the tool.
+  - The @sys-person and @sys-location system entities are not supported.
+  - You cannot make programmatic calls to Cloud Functions actions from the dialog.
+  - No entity synonym recommendations are available.
+  - No intent conflict detection is available.

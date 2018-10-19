@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -32,8 +32,8 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 
 - {{site.data.keyword.icpfull_notm}} 2.1.0.3
 - Kubernetes 1.10.0
-- Helm 2.7.3
-- Tiller (Helm server) 2.7.3
+- Helm 2.7.2
+- Tiller (Helm server) 2.7.2
 
 {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
 
@@ -42,14 +42,16 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 
 Table 1. Mimimum hardware requirements for a development environment
 
-| Node type  | Number of nodes | CPU per node | Memory per node | Disk per node | Used by |
-|------------|-----------------|--------------|-----------------|---------------|---------|
-| boot       | 1               | 2            | 8               | 250           | cluster infrastructure |
-| master     | 1               | 4            | 8               | 250           | cluster infrastructure |
-| management | 1               | 4            | 8               | 250           | cluster infrastructure |
-| proxy      | 1               | 2            | 4               | 140           | cluster infrastructure
-| worker     | 4               | 8            | 32              | 500           | {{site.data.keyword.conversationshort}} |
+| Node type  | Number of nodes | CPU per node | Memory per node | Disk per node |
+|------------|-----------------|--------------|-----------------|---------------|
+| boot       | 1               | 2            | 8               | 250           |
+| master     | 1               | 4            | 8               | 250           |
+| management | 1               | 4            | 8               | 250           |
+| proxy      | 1               | 2            | 4               | 140           |
+| worker     | 4               | 8            | 32              | 500           |
 {: caption="Minimum non-production hardware requirements" caption-side="top"}
+
+All nodes, with the exception of the worker nodes, host the cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -105,6 +107,7 @@ Table 3. Language resource requirements
 1.  [Prepare the cloud environment](#install-icp)
 1.  [Add the service chart to the cloud repository](#add-wa-chart-to-icp)
 1.  [Install the service](#install-wa-from-catalog)
+1.  [Verify that the installation was successful](#verify)
 1.  [Launch the tool](#launch-tool)
 
 ## Step 1: Purchase and download installation artifacts
@@ -122,7 +125,7 @@ Table 3. Language resource requirements
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
-**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. The installation process was simplified with the PPA file version 1.0.0.1 made available on 5 October 2018. For a simpler installation experience, download the later version of the PPA file, named `IWAICP_V1.0.0.1.tar.gz`.
+**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. The installation process was simplified with the PPA file version 1.0.0.1 made available on 5 October 2018. Download the later version of the PPA file, named `IWAICP_V1.0.0.1.tar.gz` instead.
 
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
@@ -133,7 +136,16 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 
     Complete any of the prerequisite steps that you need to complete before you load the chart. (Prerequisites only, and then return to this procedure.)
 
-    For example, setting up the {{site.data.keyword.icpfull_notm}} command line interface, logging in to your cluster, configuring authentication from your computer to the Docker private image registry host, and logging in to the private registry.
+    For example, the steps include setting up the {{site.data.keyword.icpfull_notm}} command line interface, logging in to your cluster, configuring authentication from your computer to the Docker private image registry host, and logging in to the private registry.
+
+1.  Set up the Helm command line interface.
+
+    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/app_center/create_helm_cli.html) for details.
+
+    **Attention**: Some notes about getting Helm.
+
+    - If you download Helm directly from GitHub, get version 2.7.2. Add the Helm executable binary file to your PATH.
+    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH. The version of Helm that results is version 2.7.3.
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
@@ -275,7 +287,7 @@ Other actions you might want to take before starting the installation include:
 
 1.  Click **Install**.
 
-    **Attention**: You might get a message that a timeout occurred during the installation process. However, the message can be ignored; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status.
+    **Attention**: You might get a message that a timeout occurred during the installation process. However, the message can be ignored; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#verify).
 
 #### Configuration details
 {: #config-details}
@@ -358,6 +370,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
 
 ## Step 5: Verify that the installation was successful
+{: #verify}
 
 To check the status of the installation process:
 
