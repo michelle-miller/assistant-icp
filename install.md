@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-10-22"
 
 ---
 
@@ -132,9 +132,7 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it.
 
-1.  Go to [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html).
-
-    Complete any of the prerequisite steps that you need to complete before you load the chart. (Prerequisites only, and then return to this procedure.)
+1.  Go to [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html), and complete any of the prerequisite steps that you need to complete before you load the chart. (Prerequisites only, and then return to this procedure.)
 
     For example, the steps include setting up the {{site.data.keyword.icpfull_notm}} command line interface, logging in to your cluster, configuring authentication from your computer to the Docker private image registry host, and logging in to the private registry.
 
@@ -161,12 +159,26 @@ You need 30 GB of space on your local system to support the extraction and loadi
 ## Step 4: Install the service
 {: #install-wa-from-catalog}
 
-- [4.1 Create persistent volumes](#create-pvs)
-- [4.2 Configure proper DNS name resolution](#dns-resolution)
+- [4.1 Configure DNS name resolution](#dns-resolution)
+- [4.2 Create persistent volumes](#create-pvs)
 - [4.3 Gather information about your environment](#gather-info)
 - [4.4 Install the service](#admin-install)
 
-### 4.1 Create persistent volumes
+### 4.1 Configure DNS name resolution
+{: #dns-resolution}
+
+Work with your DNS provider to create a subdomain on your cluster named `assistant` that can be used by the {{site.data.keyword.conversationshort}} tool user interface.
+
+For example, if you are using SoftLayer, log in to the SoftLayer portal, and go to Network > DNS > Forward Zones. In the DNS Forwarding Zone for your {{site.data.keyword.icpfull_notm}} cluster, add a new record with the host name 'assistant' that points to the IP address of your {{site.data.keyword.icpfull_notm}} cluster.
+
+The installation process and all worker nodes must be able to resolve the following components by name (not IP address):
+
+- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`)
+- {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`)
+
+You must be able to ping both URLs and get replies.
+
+### 4.2 Create persistent volumes
 {: #create-pvs}
 
 A PersistentVolume (PV) is a unit of storage in the cluster. In the same way that a node is a cluster resource, a persistent volume is also a resource in the cluster.
@@ -190,22 +202,6 @@ Table 4. Persistent volume settings
 | Reclaim policy | Recycle |
 | Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across the 10 volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
 {: caption="Persistent volume settings" caption-side="top"}
-
-### 4.2 Configure proper DNS name resolution
-{: #dns-resolution}
-
-The cluster must be able to resolve the addresses of the following components:
-
-- Cluster (ICP Cluster URL or `global.icpUrl`)
-- Tool UI (Subdomain or `ui.subdomain`)
-
-The service assumes that the cluster and tool are available from the same node, and therefore have the same IP address. If they are not the same, be sure you know the address for each one.
-
-Work with your DNS provider to create a subdomain on your cluster named `assistant` that can be used by the {{site.data.keyword.conversationshort}} tool user interface.
-
-For example, if you are using SoftLayer, log in to the SoftLayer portal, and go to Network > DNS > Forward Zones. In the DNS Forwarding Zone for your {{site.data.keyword.icpfull_notm}} cluster, add a new record with the host name 'assistant' that points to the IP address of your {{site.data.keyword.icpfull_notm}} cluster.
-
-You must be able to ping the {{site.data.keyword.conversationshort}} tool URL (`ui.subdomain`) and get a reply.
 
 ### 4.3 Gather information about your environment
 {: #gather-info}
