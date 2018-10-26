@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-22"
+lastupdated: "2018-10-26"
 
 ---
 
@@ -130,17 +130,21 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it.
+You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  Go to [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html), and complete any of the prerequisite steps that you need to complete before you load the chart. (Prerequisites only, and then return to this procedure.)
-
-    For example, the steps include setting up the {{site.data.keyword.icpfull_notm}} command line interface, logging in to your cluster, configuring authentication from your computer to the Docker private image registry host, and logging in to the private registry.
-
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers.html).
+1.  Synchronize the clocks of the client computer and the nodes in the IBM Cloud Private cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
+1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
+1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html).
+1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
+1.  Ensure that you have a stable network connection between your computer and the cluster.
+1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your IBM Cloud Private cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html).
+1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
 1.  Set up the Helm command line interface.
 
     See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/app_center/create_helm_cli.html) for details.
 
-    **Attention**: Some notes about getting Helm.
+    **Attention**: The instructions ask you to choose between two ways of installing Helm. Here are some things to know about each installation method:
 
     - If you download Helm directly from GitHub, get version 2.7.2. Add the Helm executable binary file to your PATH.
     - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH. The version of Helm that results is version 2.7.3.
@@ -150,11 +154,30 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 
 Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.keyword.icpfull_notm}} internal repository.
 
-You need 30 GB of space on your local system to support the extraction and loading of the archive file.
+1.  Ensure that you have enough disk space to load the images in the compressed files to your computer.
 
-1.  Complete steps 2 and 3 only in [Installing bundled products ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/install_entitled_workloads.html), and then return to this procedure.
+    You need 30 GB of space on your local system to support the extraction and loading of the archive file.
 
-    (Step 1 covers getting the archive file from the Passport Advantage site, which you have already done.)
+    1.  Check the Docker disk usage. Run the following command:
+
+        ```bash
+        docker system df
+        ```
+
+        For more command options, see [docker system df in the Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/system_df/).
+
+    1.  If you need more disk space, take one of the following actions:
+
+        - Remove old Docker images.
+        - Increase the amount of storage that the Docker daemon uses. To increase the amount of storage that the Docker daemon uses, see the entry for `dm.basesize` in the [dockerd Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/dockerd).
+
+1.  If you have not, log in to your cluster from the IBM Cloud Private CLI and log in to the Docker private image registry.
+
+    ```bash
+    bx pr login -a https://{icp-url}:8443 --skip-ssl-validation docker login {icp-url}:8500
+    ```
+
+    Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for IBM Cloud Private services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
 
 ## Step 4: Install the service
 {: #install-wa-from-catalog}
@@ -256,7 +279,7 @@ Other actions you might want to take before starting the installation include:
     {: codeblock}
 
     - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as the {icp-url}.
+    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
     - `namespace` is the Docker namespace that hosts the Docker image and must be set to `conversation`.
 
 1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Manage** > **Helm Repositories**.
