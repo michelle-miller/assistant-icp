@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-25"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -82,8 +82,13 @@ Language support by feature is detailed in the [Supported languages](lang-suppor
 
 Still have questions? Contact [IBM Sales ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/marketing/iwm/dre/signup?source=urx-20970){: new_window}.
 
+## Terms and notices
+{: #notices}
+
+See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/overview/terms-of-use/notices.html) for information about the terms of service.
+
 ## Trademarks
-{: #trademarks}
+{: trademarks}
 
 IBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. A current list of IBM trademarks is available on the web at [Copyright and trademark information ![External link icon](../../icons/launch-glyph.svg "External link icon")](www.ibm.com/legal/copytrade.shtml).
 
