@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-26"
+lastupdated: "2018-10-29"
 
 ---
 
@@ -67,7 +67,9 @@ Table 2. Resource requirements
 | MongoDB   | 3 | 80 Gi | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
-## Microservices
+You must provide at least 60 Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
+
+### Microservices
 
 Microservices are individual components that together comprise the service. The {{site.data.keyword.conversationshort}} service consists of the following microservices:
 
@@ -95,10 +97,10 @@ The components that are necessary to process different natural languages require
 
 Table 3. Language resource requirements
 
-| Language | Required Virtual Private CPUs | Memory requirements per pod |
-|----------|-----------------------|-----------------------------|
-| Base + English |              60 |                       40 GB |
-| Each language you add |        1 | 10 GB (12 GB for Portuguese and Chinese) |
+| Language | Memory requirements per pod |
+|----------|-----------------------------|
+| Base service + English |         40 GB |
+| Each language you add | 10 GB (12 GB for Portuguese and Chinese) |
 {: caption="Language resource requirements" caption-side="top"}
 
 ### Overview of the steps
