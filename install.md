@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-29"
+lastupdated: "2018-10-31"
 
 ---
 
@@ -40,7 +40,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## System requirements
 {: #sys-reqs}
 
-Table 1. Mimimum hardware requirements for a development environment
+Table 1. Minimum hardware requirements for a development environment
 
 | Node type  | Number of nodes | CPU per node | Memory per node | Disk per node |
 |------------|-----------------|--------------|-----------------|---------------|
@@ -439,4 +439,4 @@ To run a test Helm chart:
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
 - To learn more about the service first, read the [overview](index.html).
-- To see how it works for yourself, follow the steps in the [gettings started tutorial](getting-started.html).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](getting-started.html).
