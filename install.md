@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-31"
+lastupdated: "2018-11-05"
 
 ---
 
@@ -36,6 +36,8 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - Tiller (Helm server) 2.7.2
 
 {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
+
+The service must be hosted on systems with CPUs that support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
 
 ## System requirements
 {: #sys-reqs}
