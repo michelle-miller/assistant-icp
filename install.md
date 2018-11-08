@@ -192,7 +192,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 - [4.1 Configure DNS name resolution](#dns-resolution)
 - [4.2 Create persistent volumes](#create-pvs)
 - [4.3 Gather information about your environment](#gather-info)
-- [4.4 Install the service](#admin-install)
+- [4.4 Install the service from the catalog](#admin-install)
 
 ### 4.1 Configure DNS name resolution
 {: #dns-resolution}
@@ -262,7 +262,7 @@ Other actions you might want to take before starting the installation include:
   
   After you create the secret, update the TLS Secret configuration setting (or override the configuraton value `ui.ingress.tlsSecret`) with the name of that secret. Ingress will use that certificate when users access the tooling.
 
-### 4.4 Install the service
+### 4.4 Install the service from the catalog
 {: #admin-install}
 
 1.  From the Kubernetes command line tool, create the `conversation` namespace by using the following command:
@@ -423,6 +423,204 @@ To run a test Helm chart:
     ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
+
+### Installing from the command line
+{: #cli}
+
+If you have trouble when you install from the catalog, you can install by using the command line interface instead. 
+
+**Be sure to check that the installation from the catalog did not complete.** Even if you see an error message, the installation might complete successfully.
+
+To install from the command line, complete these steps:
+
+1.  If you have not completed Steps 1 and 2 from the [Install the service from the catalog](#admin-install) procedure, do so now to create the namespace and install your cluster certificate in the Docker registry.
+
+1.  Follow the steps for **Solution 2** in [Troubleshooting instructions ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SS8G7U_18.2.0/com.ibm.app.mgmt.doc/content/trouble_docker_login_time_ppa_load.htm).
+
+    The solution basically helps you to load the images from the chart one at a time.
+
+1.  After completing the Solution 2 steps, specify values for the Docker image registries. (The image registry settings are included in the values.yaml file but are not described in the README file.)
+
+    When you use the load command that is provided in Solution 2, it does not dynamically update the Docker registry You must specify the image registry information yourself.
+
+    See [Image registry details](#registry) for the steps to perform to provide the required registry information.
+
+1.  To specify all of your custom configuration values at once, you can define your own YAML file and use the Helm command line tool to install and pull values from your file.
+
+    Make a copy of the `values.yaml` file that is provided in the PPA archive. The archive file contains a TAR file that contains the Helm chart. The `values.yaml` file is stored with the chart.
+
+    Replace the values in your version of the file with values that reflect your environment. The README has descriptions for each configurable setting.
+
+    At a minimum, you must provide your own values for the following configurable setting:
+
+    - `global.icpUrl`: Specify the cluster_CA_domain hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`).
+
+    If this is the only setting that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
+
+    **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
+
+1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
+
+    ```bash
+    helm install --tls --values {override-file-name} --namespace conversation \
+    --name {my-release} -f {my-values.yaml} ibm-watson-assistant-prod
+    ```
+    {: codeblock}
+
+    - Replace `{my-release}` with a name for your release.
+    - Replace `{my-values.yaml}` with the path to a YAML file that specifies the values that are to be used with the `install` command. (Specify the YAML file you created in the previous step here.) For example: `ibm-watson-assistant-prod/my_values.yaml`
+    - Replace `{override-file-name}` with the path to the file that contains your Docker image registry details. For example: `ibm-watson-assistant-prod/image-details-override.yaml`
+    - Note that the namespace `conversation` is used. Do not change it.
+    - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart.
+
+#### Image registry details
+{: #registry}
+
+To provide image registry details yourself, complete the following steps.
+
+1.  Create an override file. For example, `image-details-override.yaml`.
+1.  Copy the JSON block below into your override file.
+1.  Replace any references to `{icp-url}:{port}` with the appropriate value for the Docker image registry in your environment. For example, `my.icp.net:8500`.
+
+```json
+#Images for ibm-watson-assistant-ui chart
+ui:
+  image:
+    repository: "{icp-url}:{port}/conversation/icp-wa-tooling-pathed"
+  imageOauth:
+    repository: "{icp-url}:{port}/conversation/conan-tools"
+
+cos:
+  minio:
+    image:
+      repository: "{icp-url}:{port}/conversation/minio"
+    mcImage:
+      repository: "{icp-url}:{port}/conversation/mc"
+
+
+etcd:
+  config:
+    image:
+      repository: "{icp-url}:{port}/conversation/etcd"
+
+postgres:
+  config:
+    #Images for ibm-watson-assistant-datastores-store-postgres chart 
+    image: "{icp-url}:{port}/conversation/stolon"
+  image:
+    #Images for ibm-watson-assistant-store_db_schema chart 
+    storeRepository: "{icp-url}:{port}/conversation/store"
+    #Images for ibm-watson-assistant-create_slot_store_db chart
+    repository: "{icp-url}:{port}/conversation/postgresql"
+
+ingress:
+  config:
+    #Images for ibm-watson-assistant-ingress chart 
+    # name of the auth service that we reference in `ingress.yaml`
+    authService:
+      # specify image if install is set to `true`
+      images:
+        repository: "{icp-url}:{port}/conversation/icp-auth"
+  
+    provisionPod:
+      images: 
+        repository: "{icp-url}:{port}/conversation/icp-provision"
+
+  storeReadyCheck:
+    image:
+      repository: "{icp-url}:{port}/conversation/conan-tools"
+
+bdd:
+  images:
+    repository: "{icp-url}:{port}/conversation/dvt-bdd"
+ 
+redis:
+  #Images for ibm-watson-assistant-datastores-redis chart
+  config:
+    image:
+      repository: "{icp-url}:{port}/conversation/redis-ha"
+
+slot:
+  #Images for ibm-watson-assistant-datastores-etcd-authentication & ibm-watson-assistant-create_slot charts
+  image:
+    repository: "{icp-url}:{port}/conversation/conan-tools"
+
+mongodb:
+  #Images for ibm-watson-assistant-datastores-mongodb chart
+  config:
+    image:
+      repository: "{icp-url}:{port}/conversation/mongo"
+      busyboxRepository: "{icp-url}:{port}/conversation/busybox"
+    imageTest:
+      testFramework:
+        repository: "{icp-url}:{port}/conversation/bats"
+    installImage:
+      repository: "{icp-url}:{port}/conversation/mongodb-install"
+
+mongodbloadclu:
+  #Images for ibm-watson-assistant-datastores-mongodb-load-clu
+  image:
+    repository: "{icp-url}:{port}/conversation/icp-load-wa-word-vectors"
+    
+tas:
+  #Images for ibm-watson-assistant-tas chart
+  image:
+    repository: "{icp-url}:{port}/conversation/slad-tas-runtime"
+    mongoloaderRepository: "{icp-url}:{port}/conversation/improve-recommendations-mongo-loader"
+
+master:
+  #Images for ibm-watson-assistant-master chart
+  image:
+    repository: "{icp-url}:{port}/conversation/master"
+    mongoloaderRepository: "{icp-url}:{port}/conversation/improve-recommendations-mongo-loader"
+
+nlu:
+  #Images for ibm-watson-assistant-nlu chart
+  image:
+    repository: "{icp-url}:{port}/conversation/nlu"
+
+environment:
+  #Images for ibm-watson-assistant-environment chart
+  image:
+    repository: "{icp-url}:{port}/conversation/conan-tools"
+
+ed:
+  #Images for ibm-watson-assistant-ed chart
+  image:
+    runtimeRepository: "{icp-url}:{port}/conversation/model-mesh"
+    mmRepository:      "{icp-url}:{port}/conversation/entities"
+    py4jRepository:    "{icp-url}:{port}/conversation/objectstore-py4j-bridge"
+
+sireg:
+  #Images for ibm-watson-assistant-sireg chart
+  image:
+    repository:      "{icp-url}:{port}/conversation/sireg"
+    modelRepository: "{icp-url}:{port}/conversation/sireg-model"
+
+dialog:
+  #Images for ibm-watson-assistant-dialog chart
+  image:
+    repository: "{icp-url}:{port}/conversation/dialog"
+
+store:
+  #Images for ibm-watson-assistant-store chart
+  image:
+    repository: "{icp-url}:{port}/conversation/store"
+
+    # Store init images
+    init:
+      schemaCheck:
+        repository: "{icp-url}:{port}/conversation/postgresql"
+      cluStarted:
+        repository: "{icp-url}:{port}/conversation/conan-tools"
+
+image:
+  #Images for ibm-watson-assistant-prod chart
+minioRepository: "{icp-url}:{port}/conversation/minio-mc"
+```
+{: codeblock}
+
+See [Verify that the installation was successful](#verify).
 
 ## Step 6: Launch the tool
 {: #launch-tool}
