@@ -482,7 +482,7 @@ To provide image registry details yourself, complete the following steps.
 1.  Copy the JSON block below into your override file.
 1.  Replace any references to `{icp-url}:{port}` with the appropriate value for the Docker image registry in your environment. For example, `my.icp.net:8500`.
 
-```json
+```yaml
 #Images for ibm-watson-assistant-ui chart
 ui:
   image:
@@ -533,7 +533,7 @@ ingress:
 bdd:
   images:
     repository: "{icp-url}:{port}/conversation/dvt-bdd"
- 
+
 redis:
   #Images for ibm-watson-assistant-datastores-redis chart
   config:
@@ -561,7 +561,7 @@ mongodbloadclu:
   #Images for ibm-watson-assistant-datastores-mongodb-load-clu
   image:
     repository: "{icp-url}:{port}/conversation/icp-load-wa-word-vectors"
-    
+
 tas:
   #Images for ibm-watson-assistant-tas chart
   image:
