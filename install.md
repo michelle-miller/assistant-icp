@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-08"
 
 ---
 
@@ -35,10 +35,6 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - Helm 2.7.2
 - Tiller (Helm server) 2.7.2
 
-{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
-
-The service must be hosted on systems with CPUs that support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
-
 ## System requirements
 {: #sys-reqs}
 
@@ -54,6 +50,13 @@ Table 1. Minimum hardware requirements for a development environment
 {: caption="Minimum non-production hardware requirements" caption-side="top"}
 
 All nodes, with the exception of the worker nodes, host the cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
+
+The systems must meet these requirements:
+
+- {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
+- CPUs must have 2.4 GHz or higher clock speed
+- CPUs must support Linux SSE 4.2
+- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -151,7 +154,7 @@ You must have cluster administrator or team administrator access to the systems 
     **Attention**: The instructions ask you to choose between two ways of installing Helm. Here are some things to know about each installation method:
 
     - If you download Helm directly from GitHub, get version 2.7.2. Add the Helm executable binary file to your PATH.
-    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH. The version of Helm that results is version 2.7.3.
+    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH. The version of Helm that results is version 2.7.3. If you use this approach, get Tiller version 2.7.3 also. The client and server must use the same version number.
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
