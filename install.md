@@ -479,7 +479,7 @@ To install from the command line, complete these steps:
 To provide image registry details yourself, complete the following steps.
 
 1.  Create an override file. For example, `image-details-override.yaml`.
-1.  Copy the JSON block below into your override file.
+1.  Copy the YAML block below into your override file.
 1.  Replace any references to `{icp-url}:{port}` with the appropriate value for the Docker image registry in your environment. For example, `my.icp.net:8500`.
 
 ```yaml
