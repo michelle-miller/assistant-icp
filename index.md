@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -90,7 +90,7 @@ See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.
 ## Trademarks
 {: trademarks}
 
-IBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. A current list of IBM trademarks is available on the web at [Copyright and trademark information ![External link icon](../../icons/launch-glyph.svg "External link icon")](www.ibm.com/legal/copytrade.shtml).
+IBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. A current list of IBM trademarks is available on the web at [Copyright and trademark information ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/legal/us/en/copytrade.shtml).
 
 Java and all Java-based trademarks and logos are trademarks or registered trademarks of Oracle and/or its affiliates.
 

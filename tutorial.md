@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-08-16"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -817,7 +817,3 @@ Now that you have built and tested your workspace, you can deploy it by connecti
 ### Build your own front-end application
 
 You can use the Watson SDKs to [build your own](develop-app.html) front-end application that connects to your workspace using the {{site.data.keyword.conversationshort}} REST API.
-
-### Deploy to social media or messaging channels
-
-You can use the [Botkit framework](integrations.html) to build a bot application that you can integrate with social media and messaging channels such as Slack, Facebook, and Twilio.

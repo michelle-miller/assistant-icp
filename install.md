@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-08"
+lastupdated: "2018-11-14"
 
 ---
 
@@ -66,10 +66,10 @@ Table 2. Resource requirements
 
 | Component | Number of replicas | Space per pod | Storage type |
 |-----------|-----------------|--------------|
-| Postgres  | 3 | 10 Gi | local-storage |
-| etcd      | 3 | 10 Gi | local-storage |
-| Minio     | 1 | 20 Gi | local-storage |
-| MongoDB   | 3 | 80 Gi | local-storage |
+| Postgres  | 3 | 10 GB | local-storage |
+| etcd      | 3 |  1 GB | local-storage |
+| Minio     | 1 | 20 GB | local-storage |
+| MongoDB   | 3 | 80 GB | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
 You must provide at least 60 Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
@@ -251,6 +251,8 @@ Other actions you might want to take before starting the installation include:
   1.  Encode it in base64 format.
 
       `$ cat ca.key | base64 -w0`
+
+      where `-w0` prevents base64 from wrapping the line when it reaches more than 80 characters in length. This option might not be supported on all base64 versions. If your version does not, then use another method to ensure that the output is a single line.
 
   1.  Update the base64 encoded certificate and base64 encoded key configuration settings (or override the configuraton values `global.mongodb.tls.cacert` and `global.mongodb.tls.cakey`) with the new certificate and key values.
 
@@ -614,9 +616,10 @@ store:
       cluStarted:
         repository: "{icp-url}:{port}/conversation/conan-tools"
 
-image:
+  image:
   #Images for ibm-watson-assistant-prod chart
-minioRepository: "{icp-url}:{port}/conversation/minio-mc"
+    minioRepository: "{icp-url}:{port}/conversation/minio-mc"
+
 ```
 {: codeblock}
 
