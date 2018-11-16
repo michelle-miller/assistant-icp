@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-14"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -806,4 +806,4 @@ In this tutorial you tested a node with slots and made changes that optimize how
 ## Next steps
 {: #deploy}
 
-Deploy your workspace by connecting it to a user interface. There are several ways you can do this. See [Deployment overview](deploy.html) for more details.
+Deploy your workspace by connecting it to a user interface.

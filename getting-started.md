@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -28,7 +28,7 @@ In this short tutorial, we introduce the {{site.data.keyword.conversationshort}}
 ## Before you begin
 {: #prerequisites}
 
-You'll need a service instance to start. The administrator must install the service for you. Details are provided in [Installation checklist](icp-install.html).
+You'll need a service instance to start. The administrator must install the service for you. Details are provided in [Installation checklist](install.html).
 
 If a {{site.data.keyword.conversationshort}} service instance is already set up in your {{site.data.keyword.BluOpenStackDed_full}} environment, then you're all set with these prerequisites. Go to [Step 1](#launch-tool).
 

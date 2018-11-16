@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-27"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -943,8 +943,6 @@ To enable disambiguation, complete the following steps:
 {: #choose-nodes}
 
 Choose nodes that serve as the root of a distinct branch of the dialog to be disambiguation choices. These can include nodes that are children of other nodes. The key is for the node to condition on some distinct value or values that distinguish it from everything else.
-
-**Note**: The tool can recognize intent conflicts, which occur when two or more intents have user examples that overlap. [Resolve any such conflicts](intents.html#conflict-intents) first to ensure that the intents themselves are as unique as possible, which helps the service attain better intent confidence scores.
 
 Keep in mind:
 
