@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-14"
+lastupdated: "2018-11-19"
 
 ---
 
@@ -33,7 +33,11 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - {{site.data.keyword.icpfull_notm}} 2.1.0.3
 - Kubernetes 1.10.0
 - Helm 2.7.2
-- Tiller (Helm server) 2.7.2
+- Tiller (Helm server) 2.7.3+icp
+
+{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
+
+The service must be hosted on systems with CPUs that support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
 
 ## System requirements
 {: #sys-reqs}
@@ -51,13 +55,6 @@ Table 1. Minimum hardware requirements for a development environment
 
 All nodes, with the exception of the worker nodes, host the cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
 
-The systems must meet these requirements:
-
-- {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
-- CPUs must have 2.4 GHz or higher clock speed
-- CPUs must support Linux SSE 4.2
-- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
-
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 The following table lists the system resources that have been verified to support a deployment.
@@ -68,7 +65,7 @@ Table 2. Resource requirements
 |-----------|-----------------|--------------|
 | Postgres  | 3 | 10 GB | local-storage |
 | etcd      | 3 |  1 GB | local-storage |
-| Minio     | 1 | 20 GB | local-storage |
+| Minio     | 4 |  5 GB | local-storage |
 | MongoDB   | 3 | 80 GB | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
@@ -98,14 +95,14 @@ In addition to these microservices, the Helm chart installs the following resour
 
 ### Language considerations
 
-The components that are necessary to process different natural languages require significant amounts of data. You can install another instance of {{site.data.keyword.conversationshort}} to add support for another language. However, each language you add increases the amount of resources you need to support it. English is always provided. If you specify a different language during the installation process, you get resources that support English plus the specified language.
+The components that are necessary to process different natural languages require significant amounts of data. Resources to support English are always provided. Each other language that you enable during the installation process (besides Czech), increases the amount of resources that you need to support it.
 
 Table 3. Language resource requirements
 
 | Language | Memory requirements per pod |
 |----------|-----------------------------|
-| Base service + English |         40 GB |
-| Each language you add | 10 GB (12 GB for Portuguese and Chinese) |
+| Base service + English, Czech | 40 GB |
+| Each other language you add | 10 GB (12 GB for Portuguese and Chinese) |
 {: caption="Language resource requirements" caption-side="top"}
 
 ### Overview of the steps
@@ -132,7 +129,7 @@ Table 3. Language resource requirements
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
-**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. The installation process was simplified with the PPA file version 1.0.0.1 made available on 5 October 2018. Download the later version of the PPA file, named `IWAICP_V1.0.0.1.tar.gz` instead.
+**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. If you downloaded the PPA file between 5 October 2018 and 19 November 2018, then you have version 1.0.0.1 of the service. The installation process was simplified with the PPA file version 1.0.1 made available on 20 November 2018. Download the later version of the PPA file, named `IWAICP_V1.0.1.tar.gz` instead.
 
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
@@ -140,6 +137,7 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers.html).
+
 1.  Synchronize the clocks of the client computer and the nodes in the IBM Cloud Private cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
 1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html).
@@ -154,7 +152,28 @@ You must have cluster administrator or team administrator access to the systems 
     **Attention**: The instructions ask you to choose between two ways of installing Helm. Here are some things to know about each installation method:
 
     - If you download Helm directly from GitHub, get version 2.7.2. Add the Helm executable binary file to your PATH.
-    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH. The version of Helm that results is version 2.7.3. If you use this approach, get Tiller version 2.7.3 also. The client and server must use the same version number.
+    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH.
+
+    1.  Initialize the Helm command line interface.
+
+        ```bash
+        helm init --client-only
+        ```
+        {: codeblock}
+
+        **Important**: Do not use the `--upgrade` flag with the init command. Adding the `--upgrade` flag replaces the server version of Helm Tiller that is installed with {{site.data.keyword.icpfull_notm}}.
+
+    1.  You can confirm the version numbers by running the following command:
+
+        ```bash
+        helm version --tls
+        ```
+        {: codeblock}
+
+        The response indicates version numbers similar to these:
+
+        Client: &version.Version{SemVer:"v2.7.2" ... }
+        Server: &version.Version{SemVer:"v2.7.3+icp" ... }
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
@@ -203,8 +222,8 @@ For example, if you are using SoftLayer, log in to the SoftLayer portal, and go 
 
 The installation process and all worker nodes must be able to resolve the following components by name (not IP address):
 
-- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`)
-- {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`)
+- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`): Maps to {{site.data.keyword.icpfull_notm}} management node IP address.
+- {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`): Maps to the {{site.data.keyword.icpfull_notm}} proxy node IP address.
 
 You must be able to ping both URLs and get replies.
 
@@ -267,7 +286,14 @@ Other actions you might want to take before starting the installation include:
 ### 4.4 Install the service from the catalog
 {: #admin-install}
 
-1.  From the Kubernetes command line tool, create the `conversation` namespace by using the following command:
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
+
+    ```bash
+    kubectl create namespace {name}
+    ```
+    {:codeblock}
+
+    For example:
 
     ```bash
     kubectl create namespace conversation
@@ -283,13 +309,13 @@ Other actions you might want to take before starting the installation include:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace conversation
+    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
     ```
     {: codeblock}
 
     - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
     - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
-    - `namespace` is the Docker namespace that hosts the Docker image and must be set to `conversation`.
+    - `namespace` is the Docker namespace that hosts the Docker image that you created in Step 1.
 
 1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Manage** > **Helm Repositories**.
 1.  Click **Sync Repositories**.
@@ -327,9 +353,11 @@ Table 5. Configuration settings
 | Setting | Description |
 |---------|-------------|
 | Release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
-| Target namespace | Namespace used within the cluster to identify this service. You must choose `conversation` as the namespace. |
+| Target namespace | Namespace used within the cluster to identify this service. Specify the namespace that you created earlier. The namespace must be `conversation` if you enable a language other than English and Czech. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
-| ICP Cluster URL | Specify the cluster_CA_domain hostname of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. |
+| Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
+| IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
+| Hostname of the ICP cluster proxy node | Specify the hostname (or IP address) of the proxy node of your private cloud instance. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
 | Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](lang-support.html). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
@@ -414,22 +442,21 @@ To run a test Helm chart:
     helm test --tls {release name} --timeout 900
     ```
 
-1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs <testname> -n conversation -f --timestamps`. For example:
+1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n conversation -f --timestamps`. For example:
 
     ```bash
     kubectl logs my-release-bdd-test -n conversation -f --timestamps
     ```
 
-1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod <podname> --namespace conversation`. For example:
+1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace name. For example:
 
     ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
-
 ### Installing from the command line
 {: #cli}
 
-If you have trouble when you install from the catalog, you can install by using the command line interface instead. 
+If you have trouble when you install from the catalog, you can install by using the command line interface instead.
 
 **Be sure to check that the installation from the catalog did not complete.** Even if you see an error message, the installation might complete successfully.
 
@@ -464,7 +491,7 @@ To install from the command line, complete these steps:
 1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
     ```bash
-    helm install --tls --values {override-file-name} --namespace conversation \
+    helm install --tls --values {override-file-name} --namespace {name} \
     --name {my-release} -f {my-values.yaml} ibm-watson-assistant-prod
     ```
     {: codeblock}
@@ -472,7 +499,7 @@ To install from the command line, complete these steps:
     - Replace `{my-release}` with a name for your release.
     - Replace `{my-values.yaml}` with the path to a YAML file that specifies the values that are to be used with the `install` command. (Specify the YAML file you created in the previous step here.) For example: `ibm-watson-assistant-prod/my_values.yaml`
     - Replace `{override-file-name}` with the path to the file that contains your Docker image registry details. For example: `ibm-watson-assistant-prod/image-details-override.yaml`
-    - Note that the namespace `conversation` is used. Do not change it.
+    - Replace `{name}` with the namespace you created for the service. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
     - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart.
 
 #### Image registry details
@@ -486,139 +513,8 @@ To provide image registry details yourself, complete the following steps.
 
 ```yaml
 #Images for ibm-watson-assistant-ui chart
-ui:
-  image:
-    repository: "{icp-url}:{port}/conversation/icp-wa-tooling-pathed"
-  imageOauth:
-    repository: "{icp-url}:{port}/conversation/conan-tools"
 
-cos:
-  minio:
-    image:
-      repository: "{icp-url}:{port}/conversation/minio"
-    mcImage:
-      repository: "{icp-url}:{port}/conversation/mc"
-
-
-etcd:
-  config:
-    image:
-      repository: "{icp-url}:{port}/conversation/etcd"
-
-postgres:
-  config:
-    #Images for ibm-watson-assistant-datastores-store-postgres chart 
-    image: "{icp-url}:{port}/conversation/stolon"
-  image:
-    #Images for ibm-watson-assistant-store_db_schema chart 
-    storeRepository: "{icp-url}:{port}/conversation/store"
-    #Images for ibm-watson-assistant-create_slot_store_db chart
-    repository: "{icp-url}:{port}/conversation/postgresql"
-
-ingress:
-  config:
-    #Images for ibm-watson-assistant-ingress chart 
-    # name of the auth service that we reference in `ingress.yaml`
-    authService:
-      # specify image if install is set to `true`
-      images:
-        repository: "{icp-url}:{port}/conversation/icp-auth"
-  
-    provisionPod:
-      images: 
-        repository: "{icp-url}:{port}/conversation/icp-provision"
-
-  storeReadyCheck:
-    image:
-      repository: "{icp-url}:{port}/conversation/conan-tools"
-
-bdd:
-  images:
-    repository: "{icp-url}:{port}/conversation/dvt-bdd"
-
-redis:
-  #Images for ibm-watson-assistant-datastores-redis chart
-  config:
-    image:
-      repository: "{icp-url}:{port}/conversation/redis-ha"
-
-slot:
-  #Images for ibm-watson-assistant-datastores-etcd-authentication & ibm-watson-assistant-create_slot charts
-  image:
-    repository: "{icp-url}:{port}/conversation/conan-tools"
-
-mongodb:
-  #Images for ibm-watson-assistant-datastores-mongodb chart
-  config:
-    image:
-      repository: "{icp-url}:{port}/conversation/mongo"
-      busyboxRepository: "{icp-url}:{port}/conversation/busybox"
-    imageTest:
-      testFramework:
-        repository: "{icp-url}:{port}/conversation/bats"
-    installImage:
-      repository: "{icp-url}:{port}/conversation/mongodb-install"
-
-mongodbloadclu:
-  #Images for ibm-watson-assistant-datastores-mongodb-load-clu
-  image:
-    repository: "{icp-url}:{port}/conversation/icp-load-wa-word-vectors"
-
-tas:
-  #Images for ibm-watson-assistant-tas chart
-  image:
-    repository: "{icp-url}:{port}/conversation/slad-tas-runtime"
-    mongoloaderRepository: "{icp-url}:{port}/conversation/improve-recommendations-mongo-loader"
-
-master:
-  #Images for ibm-watson-assistant-master chart
-  image:
-    repository: "{icp-url}:{port}/conversation/master"
-    mongoloaderRepository: "{icp-url}:{port}/conversation/improve-recommendations-mongo-loader"
-
-nlu:
-  #Images for ibm-watson-assistant-nlu chart
-  image:
-    repository: "{icp-url}:{port}/conversation/nlu"
-
-environment:
-  #Images for ibm-watson-assistant-environment chart
-  image:
-    repository: "{icp-url}:{port}/conversation/conan-tools"
-
-ed:
-  #Images for ibm-watson-assistant-ed chart
-  image:
-    runtimeRepository: "{icp-url}:{port}/conversation/model-mesh"
-    mmRepository:      "{icp-url}:{port}/conversation/entities"
-    py4jRepository:    "{icp-url}:{port}/conversation/objectstore-py4j-bridge"
-
-sireg:
-  #Images for ibm-watson-assistant-sireg chart
-  image:
-    repository:      "{icp-url}:{port}/conversation/sireg"
-    modelRepository: "{icp-url}:{port}/conversation/sireg-model"
-
-dialog:
-  #Images for ibm-watson-assistant-dialog chart
-  image:
-    repository: "{icp-url}:{port}/conversation/dialog"
-
-store:
-  #Images for ibm-watson-assistant-store chart
-  image:
-    repository: "{icp-url}:{port}/conversation/store"
-
-    # Store init images
-    init:
-      schemaCheck:
-        repository: "{icp-url}:{port}/conversation/postgresql"
-      cluStarted:
-        repository: "{icp-url}:{port}/conversation/conan-tools"
-
-  image:
-  #Images for ibm-watson-assistant-prod chart
-    minioRepository: "{icp-url}:{port}/conversation/minio-mc"
+tbd
 
 ```
 {: codeblock}
@@ -632,11 +528,11 @@ See [Verify that the installation was successful](#verify).
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
 1.  Find the deployment named `{release-name}-ui`.
 
-    If you don't know the `{release-name}`, filter the list of deployments to include only those associated with the `conversation` namespace, and then search on `-ui` to find it.
+    If you don't know the `{release-name}`, filter the list of deployments to include only those associated with the namespace you used for the service, and then search on `-ui` to find it.
 
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. For example: `https://assistant.{icp-url}`.
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.assistant.mycluster.icp`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Next steps

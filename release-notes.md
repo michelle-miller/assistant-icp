@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-19"
+lastupdated: "2018-11-19"
 ---
 
 {:shortdesc: .shortdesc}
@@ -24,6 +24,12 @@ IBM releases services, features, and language support for your evaluation that a
 
 ## Change log
 {: #change-log}
+
+### 20 November 2018
+{: #20November2018}
+
+- A revised Helm chart (version 1.0.1) was published, which improves the Helm chart and packaging.
+- New configuration settings were added that allow you to specify domain names and IP addresses for the master and proxy nodes of the {{site.data.keyword.icpfull}} cluster.
 
 ### 5 October 2018
 {: #5October2018}

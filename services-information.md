@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-10-19"
 
 ---
 
@@ -67,7 +67,9 @@ The authentication mechanism used by your service instance impacts how you must 
 
 1.  Use these credentials in your API call.
 
-    - The base URL uses the syntax `{icp-url}/assistant/api`. (Yours might have a different syntax if you changed the Ingress path for your deployment during the installation.)
+    - The base URL uses the syntax `http://{{ global.icp.proxyHostname }}/{{ ingres.config.backednService.ingressPath }}`
+    
+      where the default value for `ingres.config.backednService.ingressPath` is `/assistant/ap1`. For example,   `https://mycluster.icp/assistant/api`.
     - Provide the API key when you call the service. The following example shows an API key being used.
 
       ```curl
