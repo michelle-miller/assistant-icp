@@ -35,10 +35,6 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - Helm 2.7.2
 - Tiller (Helm server) 2.7.3+icp
 
-{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
-
-The service must be hosted on systems with CPUs that support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
-
 ## System requirements
 {: #sys-reqs}
 
@@ -54,6 +50,13 @@ Table 1. Minimum hardware requirements for a development environment
 {: caption="Minimum non-production hardware requirements" caption-side="top"}
 
 All nodes, with the exception of the worker nodes, host the cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
+
+The systems must meet these requirements:
+
+- {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
+- CPUs must have 2.4 GHz or higher clock speed
+- CPUs must support Linux SSE 4.2
+- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -442,13 +445,13 @@ To run a test Helm chart:
     helm test --tls {release name} --timeout 900
     ```
 
-1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n conversation -f --timestamps`. For example:
+1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n {name} -f --timestamps`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
     ```bash
     kubectl logs my-release-bdd-test -n conversation -f --timestamps
     ```
 
-1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace name. For example:
+1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
     ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
@@ -482,9 +485,11 @@ To install from the command line, complete these steps:
 
     At a minimum, you must provide your own values for the following configurable setting:
 
-    - `global.icpUrl`: Specify the cluster_CA_domain hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`).
+    - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
+    - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
+    - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
 
-    If this is the only setting that you want to replace, then you can pass the value for it in the command line with the following parameter instead of providing your own YAML file: `--global.icpUrl {your ICP url}`
+    If there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line instead of providing your own YAML file. Use the following syntax to specify each parameter: `--global.icp.masterHostname {your ICP hostname}`
 
     **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 

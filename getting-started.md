@@ -47,7 +47,7 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
     If you don't know the `{release-name}`, search on `-ui` to find it.
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.assistant.mycluster.icp`.
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.mycluster.icp`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Step 2: Create a workspace
