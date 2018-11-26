@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-26"
 ---
 
 {:shortdesc: .shortdesc}
@@ -25,11 +25,12 @@ IBM releases services, features, and language support for your evaluation that a
 ## Change log
 {: #change-log}
 
-### 20 November 2018
-{: #20November2018}
+### 23 November 2018
+{: #23November2018}
 
 - A revised Helm chart (version 1.0.1) was published, which improves the Helm chart and packaging.
-- New configuration settings were added that allow you to specify domain names and IP addresses for the master and proxy nodes of the {{site.data.keyword.icpfull}} cluster.
+- New configuration settings were added that allow you to specify domain names and IP addresses for the master and proxy nodes of the {{site.data.keyword.icpfull}} cluster. A new checkbox is visible for enabling recommendations; however, do not select it as the feature is not fully supported yet.
+- The resources required for a development deployment changed for Minio from one 20 GB replica to four 5 GB replicas. This change means you need to create 13 persistent volumes instead of 10 to support the deployment.
 
 ### 5 October 2018
 {: #5October2018}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-26"
 
 ---
 
@@ -132,22 +132,22 @@ Table 3. Language resource requirements
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
-**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. If you downloaded the PPA file between 5 October 2018 and 19 November 2018, then you have version 1.0.0.1 of the service. The installation process was simplified with the PPA file version 1.0.1 made available on 20 November 2018. Download the later version of the PPA file, named `IWAICP_V1.0.1.tar.gz` instead.
+**Attention**: If you downloaded the PPA file between 26 September 2018 and 4 October 2018, then you have version 1.0.0.0 of the service. If you downloaded the PPA file between 5 October 2018 and 22 November 2018, then you have version 1.0.0.1 of the service. The installation process was simplified with the PPA file version 1.0.1 made available on 23 November 2018. Download the later version of the PPA file, named `IWAICP_V1.0.1.tar.gz` instead.
 
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers.html).
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it. See [Installing a standard {{site.data.keyword.icpfull_notm}} environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers.html).
 
-1.  Synchronize the clocks of the client computer and the nodes in the IBM Cloud Private cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
-1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
+1.  Synchronize the clocks of the client computer and the nodes in the {{site.data.keyword.icpfull_notm}} cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
+1.  If you have not done so, install the {{site.data.keyword.icpfull_notm}} command line interface and log in to your cluster. See [Installing the {{site.data.keyword.icpfull_notm}} CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
-1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your IBM Cloud Private cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html).
-1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
+1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html).
+1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a {{site.data.keyword.icpfull_notm}} account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
 1.  Set up the Helm command line interface.
 
     See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/app_center/create_helm_cli.html) for details.
@@ -200,13 +200,13 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
         - Remove old Docker images.
         - Increase the amount of storage that the Docker daemon uses. To increase the amount of storage that the Docker daemon uses, see the entry for `dm.basesize` in the [dockerd Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/dockerd).
 
-1.  If you have not, log in to your cluster from the IBM Cloud Private CLI and log in to the Docker private image registry.
+1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
     ```bash
     bx pr login -a https://{icp-url}:8443 --skip-ssl-validation docker login {icp-url}:8500
     ```
 
-    Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for IBM Cloud Private services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
+    Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
 
 ## Step 4: Install the service
 {: #install-wa-from-catalog}
@@ -225,7 +225,7 @@ For example, if you are using SoftLayer, log in to the SoftLayer portal, and go 
 
 The installation process and all worker nodes must be able to resolve the following components by name (not IP address):
 
-- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`): Maps to {{site.data.keyword.icpfull_notm}} management node IP address.
+- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`): Maps to {{site.data.keyword.icpfull_notm}} master node IP address.
 - {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`): Maps to the {{site.data.keyword.icpfull_notm}} proxy node IP address.
 
 You must be able to ping both URLs and get replies.
@@ -303,11 +303,11 @@ Other actions you might want to take before starting the installation include:
     ```
     {:codeblock}
 
-    If you do not have the Kubernetes command line tool set up, see [Accessing your IBM Cloud Private cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html) for instructions.
+    If you do not have the Kubernetes command line tool set up, see [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html) for instructions.
 
 1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
 
-    See [Specifying your own certificate authority (CA) for IBM Cloud Private services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/create_ca_cert.html)
+    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/create_ca_cert.html)
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
@@ -344,7 +344,7 @@ Other actions you might want to take before starting the installation include:
 
 1.  Click **Install**.
 
-    **Attention**: You might get a message that a timeout occurred during the installation process. However, the message can be ignored; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#verify).
+    **Attention**: You might see an error message (that begins with `Error making request: Error: ESOCKETTIMEDOUT POST`) during the installation process. However, you can ignore the message; the installation continues in the background. Give it time (up to 6 minutes) to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#verify).
 
 #### Configuration details
 {: #config-details}
@@ -357,10 +357,11 @@ Table 5. Configuration settings
 |---------|-------------|
 | Release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
 | Target namespace | Namespace used within the cluster to identify this service. Specify the namespace that you created earlier. The namespace must be `conversation` if you enable a language other than English and Czech. |
+| Config template | Do not change the value of this field. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
-| Hostname of the ICP cluster proxy node | Specify the hostname (or IP address) of the proxy node of your private cloud instance. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
+| Hostname of the ICP cluster proxy node | Specify the hostname of the proxy node of your private cloud instance. To discover this value, run the command: `kubectl get nodes --show-labels`, and then find the node that shows `proxy=true`, and get the hostname value. It might be an IP address instead of a typical hostname. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
 | Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](lang-support.html). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
@@ -403,6 +404,8 @@ Table 5. Configuration settings
 | Subdomain | URL from which to access the Watson Assistant tool. The url syntax is typically `https://{{ subdomain }}.{{ icp-url }}/{{ applicationContext }}`. The default value is assistant. |
 | TLS Secret | Name of the secret that has the certificate and private key for the subdomain `{{ subdomain }}.{{ icp-url }}`. If empty, a secret with a self-signed certificate is created. By default, this setting is empty. |
 {: caption="Configuration settings" caption-side="top"}
+
+**Attention**: Do not select the **Install recommends** checkbox. It is not fully supported at the moment.
 
 ### Uninstalling the service
 
@@ -465,66 +468,70 @@ If you have trouble when you install from the catalog, you can install by using 
 
 To install from the command line, complete these steps:
 
-1.  If you have not completed Steps 1 and 2 from the [Install the service from the catalog](#admin-install) procedure, do so now to create the namespace and install your cluster certificate in the Docker registry.
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
 
-1.  Follow the steps for **Solution 2** in [Troubleshooting instructions ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SS8G7U_18.2.0/com.ibm.app.mgmt.doc/content/trouble_docker_login_time_ppa_load.htm).
+    ```bash
+    kubectl create namespace {name}
+    ```
+    {:codeblock}
 
-    The solution basically helps you to load the images from the chart one at a time.
+    For example:
 
-1.  After completing the Solution 2 steps, specify values for the Docker image registries. (The image registry settings are included in the values.yaml file but are not described in the README file.)
+    ```bash
+    kubectl create namespace conversation
+    ```
+    {:codeblock}
 
-    When you use the load command that is provided in Solution 2, it does not dynamically update the Docker registry You must specify the image registry information yourself.
+    If you do not have the Kubernetes command line tool set up, see [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html) for instructions.
 
-    See [Image registry details](#registry) for the steps to perform to provide the required registry information.
+1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
 
-1.  To specify all of your custom configuration values at once, you can define your own YAML file and use the Helm command line tool to install and pull values from your file.
+    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/create_ca_cert.html)
 
-    Make a copy of the `values.yaml` file that is provided in the PPA archive. The archive file contains a TAR file that contains the Helm chart. The `values.yaml` file is stored with the chart.
+1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
-    Replace the values in your version of the file with values that reflect your environment. The README has descriptions for each configurable setting.
+    ```bash
+    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
+    ```
+    {: codeblock}
 
-    At a minimum, you must provide your own values for the following configurable setting:
+    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
+    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
+    - `{name}` is the Docker namespace that hosts the Docker image. This is the namespace you created in Step 1.
+
+1.  Download the chart from `https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.0.1.tgz`.
+
+1.  Extract the TAR file from the TGZ file, and then extract files from the TAR file.
+
+1.  Determine if you want to override any values from the `values.yaml` file with your own configuration settings. The README has descriptions for each configurable setting. 
+
+    - If you only want to replace a few settings, you can pass values for them as parameters of the install command.
+
+    - If you want to replace many values, make a copy of the values.yaml. The `values.yaml` file is stored with the chart.  Rename the file. For example, `my-override.yaml`. In your copy of the file, remove all but the configuration settings that you want to replace with your own values. Replace the values in your version of the file with values that reflect your environment.
+
+    At a minimum, you must provide your own values for the following configurable settings:
 
     - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
     - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
     - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
 
-    If there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line instead of providing your own YAML file. Use the following syntax to specify each parameter: `--global.icp.masterHostname {your ICP hostname}`
-
     **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
-1.  After you define any custom configuration settings and specify your Docker image registry details, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
+1.  After you define any custom configuration settings, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
     ```bash
-    helm install --tls --values {override-file-name} --namespace {name} \
-    --name {my-release} -f {my-values.yaml} ibm-watson-assistant-prod
+    helm install --tls --values {override-file-name} --namespace {name} --name {my-release} ibm-watson-assistant-prod
     ```
     {: codeblock}
 
     - Replace `{my-release}` with a name for your release.
-    - Replace `{my-values.yaml}` with the path to a YAML file that specifies the values that are to be used with the `install` command. (Specify the YAML file you created in the previous step here.) For example: `ibm-watson-assistant-prod/my_values.yaml`
-    - Replace `{override-file-name}` with the path to the file that contains your Docker image registry details. For example: `ibm-watson-assistant-prod/image-details-override.yaml`
+    - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `ibm-watson-assistant-prod/my-override.yaml`
     - Replace `{name}` with the namespace you created for the service. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
-    - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart.
+    - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart that you downloaded and extracted. Alternatively, you can specify the name of the downloaded chart by using `ibm-watson-assistant-prod-1.0.1.tgz` as the value instead.
 
-#### Image registry details
-{: #registry}
+    Again, if there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line directly. Use the following syntax to specify a parameter: `--global.icp.masterHostname {your ICP hostname}`
 
-To provide image registry details yourself, complete the following steps.
-
-1.  Create an override file. For example, `image-details-override.yaml`.
-1.  Copy the YAML block below into your override file.
-1.  Replace any references to `{icp-url}:{port}` with the appropriate value for the Docker image registry in your environment. For example, `my.icp.net:8500`.
-
-```yaml
-#Images for ibm-watson-assistant-ui chart
-
-tbd
-
-```
-{: codeblock}
-
-See [Verify that the installation was successful](#verify).
+After the installation finishes, [verify](#verify) that it was successful.
 
 ## Step 6: Launch the tool
 {: #launch-tool}
