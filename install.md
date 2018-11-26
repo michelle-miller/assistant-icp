@@ -98,7 +98,7 @@ In addition to these microservices, the Helm chart installs the following resour
 
 ### Language considerations
 
-The components that are necessary to process different natural languages require significant amounts of data. Resources to support English are always provided. Each other language that you enable during the installation process (besides Czech), increases the amount of resources that you need to support it.
+The components that are necessary to process different natural languages require significant amounts of data. Resources to support English are always provided. Each other language that you enable during the installation process (besides Czech) increases the amount of resources that you need to support it.
 
 Table 3. Language resource requirements
 
