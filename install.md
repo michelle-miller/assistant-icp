@@ -225,7 +225,7 @@ For example, if you are using SoftLayer, log in to the SoftLayer portal, and go 
 
 The installation process and all worker nodes must be able to resolve the following components by name (not IP address):
 
-- {{site.data.keyword.icpfull_notm}} cluster (**ICP Cluster URL** or `global.icpUrl`): Maps to {{site.data.keyword.icpfull_notm}} master node IP address.
+- {{site.data.keyword.icpfull_notm}} cluster (**Hostname of the ICP cluster Master node** or `global.icp.masterHostname`): Maps to {{site.data.keyword.icpfull_notm}} master node IP address.
 - {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`): Maps to the {{site.data.keyword.icpfull_notm}} proxy node IP address.
 
 You must be able to ping both URLs and get replies.
