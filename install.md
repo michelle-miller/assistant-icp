@@ -67,7 +67,7 @@ Table 2. Resource requirements
 | Component | Number of replicas | Space per pod | Storage type |
 |-----------|-----------------|--------------|
 | Postgres  | 3 | 10 GB | local-storage |
-| etcd      | 3 |  1 GB | local-storage |
+| etcd      | 3 | 10 GB | local-storage |
 | Minio     | 4 |  5 GB | local-storage |
 | MongoDB   | 3 | 80 GB | local-storage |
 {: caption="Resource requirements" caption-side="top"}
