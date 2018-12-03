@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-26"
+lastupdated: "2018-12-03"
 
 ---
 
@@ -407,30 +407,6 @@ Table 5. Configuration settings
 
 **Attention**: Do not select the **Install recommends** checkbox. It is not fully supported at the moment.
 
-### Uninstalling the service
-
-If you need to start the deployment over, be sure to remove all trace of the current installation before you try to install again.
-
-1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
-
-    ```bash
-    helm delete --tls my-release
-    ```
-    {: codeblock}
-
-    To irrevocably uninstall and delete the `my-release` deployment, run the following command:
-
-    ```bash
-    helm delete --purge --tls my-release
-    ```
-    {: codeblock}
-
-    If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
-
-1.  Remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_volume.html) for more information.
-
-1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
-
 ## Step 5: Verify that the installation was successful
 {: #verify}
 
@@ -459,6 +435,32 @@ To run a test Helm chart:
     ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
+
+### Uninstalling the service
+{: #uninstall}
+
+If you need to start the deployment over, be sure to remove all trace of the current installation before you try to install again.
+
+1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
+
+    ```bash
+    helm delete --tls my-release
+    ```
+    {: codeblock}
+
+    To irrevocably uninstall and delete the `my-release` deployment, run the following command:
+
+    ```bash
+    helm delete --purge --tls my-release
+    ```
+    {: codeblock}
+
+    If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
+
+1.  Remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_volume.html) for more information.
+
+1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/delete_app_volume.html) for details.
+
 ### Installing from the command line
 {: #cli}
 
@@ -529,7 +531,7 @@ To install from the command line, complete these steps:
     - Replace `{name}` with the namespace you created for the service. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
     - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart that you downloaded and extracted. Alternatively, you can specify the name of the downloaded chart by using `ibm-watson-assistant-prod-1.0.1.tgz` as the value instead.
 
-    Again, if there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line directly. Use the following syntax to specify a parameter: `--global.icp.masterHostname {your ICP hostname}`
+    Again, if there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line directly. Use the following syntax to specify a parameter: `--set global.icp.masterHostname={your ICP hostname}`
 
 After the installation finishes, [verify](#verify) that it was successful.
 
