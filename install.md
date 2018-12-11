@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-12-03"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -56,7 +56,7 @@ The systems must meet these requirements:
 - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
-- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
+- CPUs must support the AVX instruction set extension. The `ed-mm` microservice cannot function properly without AVX support.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -178,6 +178,15 @@ You must have cluster administrator or team administrator access to the systems 
         Client: &version.Version{SemVer:"v2.7.2" ... }
         Server: &version.Version{SemVer:"v2.7.3+icp" ... }
 
+1.  Validate that AVX is supported on the systems in your cluster. (AVX support is a hardware requirement.) To do so, run the following command:
+
+    ```bash
+    kubectl exec {name-of-pod-hosting-service} -n {namespace-name} -- cat /proc/cpuinfo | grep avx
+    ```
+    {: codeblock}
+
+    You should see one hit for each CPU on the worker node.
+
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
 
@@ -192,6 +201,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
         ```bash
         docker system df
         ```
+        {: codeblock}
 
         For more command options, see [docker system df in the Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/system_df/).
 
@@ -203,8 +213,10 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
     ```bash
-    bx pr login -a https://{icp-url}:8443 --skip-ssl-validation docker login {icp-url}:8500
+    bx pr login -a https://{icp-url}:8443 --skip-ssl-validation
+    docker login {icp-url}:8500
     ```
+    {: codeblock}
 
     Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
 
@@ -247,12 +259,12 @@ Table 4. Persistent volume settings
 
 | Field | Value |
 |-------|-------|
-| Name | Specify a name that is unique across the 10 volumes |
+| Name | Specify a name that is unique across all of the volumes |
 | Type | Hostpath |
 | Capacity | Check the system requirements table |
 | Access mode | ReadWriteOnce (RWO) |
 | Reclaim policy | Recycle |
-| Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across the 10 volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
+| Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across all of the volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
 {: caption="Persistent volume settings" caption-side="top"}
 
 ### 4.3 Gather information about your environment
@@ -423,18 +435,21 @@ To run a test Helm chart:
     ```bash
     helm test --tls {release name} --timeout 900
     ```
+    {: codeblock}
 
 1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n {name} -f --timestamps`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
     ```bash
     kubectl logs my-release-bdd-test -n conversation -f --timestamps
     ```
+    {: codeblock}
 
 1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
     ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
+    {: codeblock}
 
 ### Uninstalling the service
 {: #uninstall}
