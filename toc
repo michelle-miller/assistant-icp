@@ -43,7 +43,7 @@ Watson Assistant for IBM Cloud Private
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    [API reference](https://console.bluemix.net/apidocs/assistant-icp)
+    [API reference](https://cloud.ibm.com/apidocs/assistant-icp)
     dialog-methods.md
     expression-language.md
     filter-reference.md

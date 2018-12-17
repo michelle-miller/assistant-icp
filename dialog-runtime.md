@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-16"
+lastupdated: "2018-12-17"
 
 ---
 
@@ -101,7 +101,7 @@ There are response types other than a text response that you can define. See [Re
 
 If you specify an API version that pre-dates the introduction of the rich response types (version `2018-07-10`), then a workspace that contains non-textual or multiple response types will produce the first text response only. Only one text response can fit into the message `output.text` object. With version `2018-07-10`, existing workspaces with text responses in the older format produce both the `output.text` and `output.generic` objects to represent the text response.
 
-You can learn more about the /message API call from the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/watson/developercloud/conversation/api/v1/){: new_window}.
+You can learn more about the /message API call from the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/assistant?curl=#get-response-to-user-input){: new_window}.
 
 ### Retaining information across dialog turns
 {: #context}
