@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-16"
+lastupdated: "2018-12-17"
 
 ---
 
@@ -58,7 +58,7 @@ You use the {{site.data.keyword.conversationshort}} tool to create workspaces.
         **Important:**
 
         - The imported JSON file must use UTF-8 encoding.
-        - The maximum size for a workspace JSON file is 10MB. If you need to import a larger workspace, consider importing the intents and entities separately after you have imported the workspace. (You can also import larger workspaces using the REST API. For more information, see the [API Reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/watson/developercloud/conversation/api/v1/#create_workspace){: new_window}.)
+        - The maximum size for a workspace JSON file is 10MB. If you need to import a larger workspace, consider importing the intents and entities separately after you have imported the workspace. (You can also import larger workspaces using the REST API. For more information, see the [API Reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/assistant?curl=#create-workspace){: new_window}.)
         - The JSON cannot contain tabs, newlines, or carriage returns.
 
         Specify the data you want to include:
@@ -89,7 +89,7 @@ Copying a workspace makes a complete copy of the workspace within the same servi
 
     Specify the name, description, and language for the new workspace. All data (including intents, entities, and dialog) is included in the copy.
 
-You can export a workspace by using the API also. Include the `export=true` parameter with the request. See the [API reference](https://www.ibm.com/watson/developercloud/assistant/api/v1/curl.html?curl#get-workspace) for more details.
+You can export a workspace by using the API also. Include the `export=true` parameter with the request. See the [API reference](https://cloud.ibm.com/apidocs/assistant?curl=#get-information-about-a-workspace) for more details.
 
 ## Sharing the workspace with team members
 {: #invite-others}
