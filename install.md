@@ -33,7 +33,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - {{site.data.keyword.icpfull_notm}} 3.1.0
 - Kubernetes 1.11.1
 - Helm 2.9.1
-- Tiller (Helm server) 2.9.1
+- Tiller (Helm server) 2.9.1+icp
 
 ## System requirements
 {: #sys-reqs}
@@ -539,7 +539,7 @@ After the installation finishes, [verify](#verify) that it was successful.
 
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ global.icp.masterHostname }}{{ global.icp.ingress.path }}`. For example: `https://mycluster.icp/myrelease/assistant`.
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy/myrelease/assistant/ui`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Next steps

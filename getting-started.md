@@ -47,7 +47,7 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
     If you don't know the `{release-name}`, search on `-ui` to find it.
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. For example: `https://{icp-url}/{release-name}/assistant`.
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. For example: `https://myproxy/myrelease/assistant/ui`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Step 2: Create a workspace

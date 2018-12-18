@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-12-13"
+lastupdated: "2018-12-18"
 
 ---
 
@@ -70,7 +70,7 @@ The authentication mechanism used by your service instance impacts how you must 
 
 1.  Use these credentials in your API call.
 
-    - The base URL uses the syntax `{icp-url}/assistant/api`. (Yours might have a different syntax if you changed the Ingress path for your deployment during the installation.)
+    - The base URL uses the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/api`. For example: `https://myproxy/myrelease/assistant/api`.
     - Provide the API key when you call the service. The following example shows an API key being used.
 
       ```curl
