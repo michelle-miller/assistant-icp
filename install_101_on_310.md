@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2015, 2019
+  years: 2015, 2018
 lastupdated: "2018-12-27"
 
 ---
@@ -19,10 +19,10 @@ lastupdated: "2018-12-27"
 {:download: .download}
 {:gif: data-image-type='gif'}
 
-# Installing on IBM Cloud Private 2.1.0.3
-{: #install}
+# Installing on IBM Cloud Private 3.1.0
+{: #install_101_on_310}
 
-Learn how to install {{site.data.keyword.conversationshort}} version 1.0.1 into {{site.data.keyword.icpfull}} version 2.1.0.3.
+Learn how to install {{site.data.keyword.conversationshort}} version 1.0.1 into {{site.data.keyword.icpfull}} version 3.1.0.
 {: shortdesc}
 
 The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
@@ -30,10 +30,10 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## Software requirements
 {: #prereqs}
 
-- {{site.data.keyword.icpfull_notm}} 2.1.0.3
-- Kubernetes 1.10.0
-- Helm 2.7.2
-- Tiller (Helm server) 2.7.3+icp
+- {{site.data.keyword.icpfull_notm}} 3.1.0
+- Kubernetes 1.11.1
+- Helm 2.9.1
+- Tiller (Helm server) 2.9.1+icp
 
 ## System requirements
 {: #sys-reqs}
@@ -56,7 +56,7 @@ The systems must meet these requirements:
 - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
-- CPUs must support the AVX instruction set extension. The `ed-mm` microservice cannot function properly without AVX support.
+- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -126,36 +126,28 @@ Table 3. Language resource requirements
 
     {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} includes {{site.data.keyword.icpfull_notm}} Foundation version 2.1.0.3.
 
-    If you have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up in your environment already, you can download the archive for {{site.data.keyword.conversationshort}} only.
-
-    If you do not have {{site.data.keyword.icpfull_notm}} set up in your organization, then you must install version 2.1.0.3. To get the {{site.data.keyword.icpfull_notm}} 2.1.0.3 archive included, choose the e-assembly that includes {{site.data.keyword.icpfull_notm}}.
+    If you want to use {{site.data.keyword.icpfull_notm}} version 3.1.0 instead, download the archive for {{site.data.keyword.conversationshort}} only and install {{site.data.keyword.icpfull_notm}} 3.1.0 separately. See [Prepare the cloud environment](#install-icp).
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
-**Attention**: If you downloaded the PPA file before 23 November 2018, then you have an earlier version of the service. The installation process was simplified with the PPA file version 1.0.1 made available on 23 November 2018. Download the latest version of the PPA file, named `ibm-watson-assistant-prod-1.0.1.tgz`.
+**Attention**: If you downloaded the PPA file between 26 September 2018 and 22 November 2018, then you have an earlier version of the service package. The installation process was simplified with the PPA file version 1.0.1 made available on 23 November 2018. Download the latest version of the PPA file, named `ibm-watson-assistant-prod-1.0.1.tgz`.
 
 ## Step 2: Prepare the cloud environment
 {: #install-icp}
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 2.1.0.3 set up, install it. See [Installing a standard {{site.data.keyword.icpfull_notm}} environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/install_containers.html).
-
-1.  Synchronize the clocks of the client computer and the nodes in the {{site.data.keyword.icpfull_notm}} cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
-1.  If you have not done so, install the {{site.data.keyword.icpfull_notm}} command line interface and log in to your cluster. See [Installing the {{site.data.keyword.icpfull_notm}} CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
-1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html).
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
+1.  Synchronize the clocks of the client computer and the nodes in the IBM Cloud Private cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
+1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
+1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
-1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html).
-1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a {{site.data.keyword.icpfull_notm}} account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
+1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
 1.  Set up the Helm command line interface.
 
-    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/app_center/create_helm_cli.html) for details.
-
-    **Attention**: The instructions ask you to choose between two ways of installing Helm. Here are some things to know about each installation method:
-
-    - If you download Helm directly from GitHub, get version 2.7.2. Add the Helm executable binary file to your PATH.
-    - If you use the Helm package that is included with {{site.data.keyword.icpfull_notm}}, you are instructed to run a Docker command to install it. The Docker command downloads Helm from a publicly available Docker image (from Dockerhub), extracts a single Helm file from it, and then copies this file to a directory on your PATH.
+    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
 
     1.  Initialize the Helm command line interface.
 
@@ -175,17 +167,8 @@ You must have cluster administrator or team administrator access to the systems 
 
         The response indicates version numbers similar to these:
 
-        Client: &version.Version{SemVer:"v2.7.2" ... }
-        Server: &version.Version{SemVer:"v2.7.3+icp" ... }
-
-1.  Validate that AVX is supported on the systems in your cluster. (AVX support is a hardware requirement.) To do so, run the following command:
-
-    ```bash
-    kubectl exec {name-of-pod-hosting-service} -n {namespace-name} -- cat /proc/cpuinfo | grep avx
-    ```
-    {: codeblock}
-
-    You should see one hit for each CPU on the worker node.
+        Client: &version.Version{SemVer:"v2.9.1" ... }
+        Server: &version.Version{SemVer:"v2.9.1+icp" ... }
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
@@ -213,12 +196,12 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
     ```bash
-    bx pr login -a https://{icp-url}:8443 --skip-ssl-validation
-    docker login {icp-url}:8500
+    cloudctl login -a https://{icp_url}:8443 --skip-ssl-validation
+    docker login {icp_url}:8500
     ```
     {: codeblock}
 
-    Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
+    `{icp-url}` is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
 
 ## Step 4: Install the service
 {: #install-wa-from-catalog}
@@ -226,7 +209,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 - [4.1 Configure DNS name resolution](#dns-resolution)
 - [4.2 Create persistent volumes](#create-pvs)
 - [4.3 Gather information about your environment](#gather-info)
-- [4.4 Install the service from the catalog](#admin-install)
+- [4.4 Install the service from the command line](#cli)
 
 ### 4.1 Configure DNS name resolution
 {: #dns-resolution}
@@ -237,8 +220,8 @@ For example, if you are using SoftLayer, log in to the SoftLayer portal, and go 
 
 The installation process and all worker nodes must be able to resolve the following components by name (not IP address):
 
-- {{site.data.keyword.icpfull_notm}} cluster (**Hostname of the ICP cluster Master node** or `global.icp.masterHostname`)
-- {{site.data.keyword.conversationshort}} tool user interface (**Subdomain** or `ui.subdomain`)
+- Master node of the {{site.data.keyword.icpfull_notm}} cluster (**Hostname of the ICP cluster Master node** or `global.icp.masterHostname`)
+- Proxy node that hosts the {{site.data.keyword.conversationshort}} tool user interface (**Hostname of the ICP cluster proxy node** or `global.icp.proxyHostname`)
 
 You must be able to ping both URLs and get replies.
 
@@ -249,7 +232,7 @@ A PersistentVolume (PV) is a unit of storage in the cluster. In the same way tha
 
 For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
-When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is local-storage, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
+When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is local-storage, you must explicitly create persistent volumes before you install the service. Create one persistent volume to accommodate each replica specified in the [system requirements](#sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
 
 **Note**: You must be a cluster administrator to create local storage volumes.
 
@@ -298,8 +281,14 @@ Other actions you might want to take before starting the installation include:
   
   After you create the secret, update the TLS Secret configuration setting (or override the configuraton value `ui.ingress.tlsSecret`) with the name of that secret. Ingress will use that certificate when users access the tooling.
 
-### 4.4 Install the service from the catalog
-{: #admin-install}
+### 4.4 Installing from the command line
+{: #cli}
+
+If you have trouble when you install from the catalog, you can install by using the command line interface instead.
+
+**Be sure to check that the installation from the catalog did not complete.** Even if you see an error message, the installation might complete successfully.
+
+To install from the command line, complete these steps:
 
 1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
 
@@ -324,42 +313,61 @@ Other actions you might want to take before starting the installation include:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
+    cloudctl catalog load-archive  --registry “{icp_url}:8500” --archive  ibm-watson-assistant.1.0.1.tar.gz  --repo local-charts
     ```
     {: codeblock}
 
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
-    - `namespace` is the Docker namespace that hosts the Docker image that you created in Step 1.
+1.  Run this command to download the chart from the IBM Cloud Private repository:
 
-1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Manage** > **Helm Repositories**.
-1.  Click **Sync Repositories**.
+    ```bash
+    wget --no-check-certificate https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.0.1.tgz
+    ```
+    {: codeblock}
 
-    You must have the *cluster administrator* user type or access level to sync repositories.
+1.  If you have a pre-existing version of the service on your cluster, remove its TGZ file. For example:
 
-1.  From the navigation menu, select **Catalog**.
-1.  Scroll to find the **ibm-watson-assistant-prod** package, and then click **Configure**.
-1.  Specify values for the configurable fields.
+    ```bash
+    rm ibm-watson-assistant-prod-1.0.0.tgz
+    ```
+    {: codeblock}
 
-    When you install the service, many configuration settings are applied to it for you unless you override them with your own values. **You cannot change these settings after you complete the installation.**
+1.  Extract the TAR file from the TGZ file, and then extract files from the TAR file by using the following command:
 
-    See [Configuration details](#config-details) for help understanding the configuration choices. At a minimum, you must provide your own values for the following configurable settings:
+    ```bash
+    tar -xvzf /path/to/ibm-watson-assistant-prod-1.0.1.tgz
+    ```
+    {: codeblock}
 
-    - Helm release name
-    - Deployment Type
-    - Hostname of the IBM Cloud Private cluster Master node
-    - IP (v4) address of the master node
-    - Hostname of the IBM Cloud Private cluster proxy node
-    - Languages: If you do not need to support Czech, deselect it.
-    - Repository fields: Repository values have the syntax: `{icp_url}:8500/{namespace-name}/{unique-path-value}`. Edit the `{icp_url}` and `{namespace-name}` values to reflect your environment. Leave the `{unique-path-value}` (such as `icp-wa-tooling-pathed`) as is.
+1.  Edit values in the `values.yaml` file.
 
-1.  Click **license agreements**.
+    To do so, first make a copy of the values.yaml. The `values.yaml` file is stored with the chart.  Rename the file. For example, `my-override.yaml`.
 
-    Click **Next** multiple times to read the full agreement, and then click **Accept** to accept the license terms.
+    In your copy of the file, remove all but the configuration settings that you want to replace with your own values.
 
-1.  Click **Install**.
+    Edit the Docker image repository values in the file with values that reflect your environment.     Each image repository value must have the syntax `{icp_url}:8500/{namespace-name}/{unique-path-value}` where `{unique-path-value}` reflects the path from the existing YAML file, such as `icp-wa-tooling-pathed`.
 
-    **Attention**: You might see an error message (that begins with `Error making request: Error: ESOCKETTIMEDOUT POST`) during the installation process. However, you can ignore the message; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#verify).
+    At a minimum, you must provide your own values for the following configurable settings also:
+
+    - `global.deploymentType`: Specify whether you want to set up a development or production instance.
+    - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
+    - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
+    - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
+
+    **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
+
+1.  After you define any custom configuration settings, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
+
+    ```bash
+    helm install --tls --values {override-file-name} --namespace {namespace-name} --name {my-release} ibm-watson-assistant-prod-1.0.1.tgz
+    ```
+    {: codeblock}
+
+    - Replace `{my-release}` with a name for your release.
+    - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `ibm-watson-assistant-prod/my-override.yaml`
+    - Replace `{namespace-name}` with the name of the Kubernetes namespace that hosts the Docker pods. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
+    - The `ibm-watson-assistant-prod-1.0.1.tgz` parameter represents the name of the downloaded file that contains the Helm chart.
+
+After the installation finishes, [verify](#verify) that it was successful.
 
 #### Configuration details
 {: #config-details}
@@ -415,11 +423,9 @@ Table 5. Configuration settings
 | Enable TLS | Boolean. Indicates whether to enable MongoDB TLS support. The default value is true. |
 | base64 encoded certificate | Replace the certificate with your own. See the Configuration page for certificate details. |
 | base64 encoded key | Replace the key with your own. See the Configuration page for key details. |
-| Subdomain | URL from which to access the Watson Assistant tool. The url syntax is typically `https://{{ subdomain }}.{{ icp-url }}/{{ applicationContext }}`. The default value is `assistant`. |
+| Subdomain | URL from which to access the Watson Assistant tool. The url syntax is typically `https://{{ subdomain }}.{{ icp-url }}/{{ applicationContext }}`. The default value is assistant. |
 | TLS Secret | Name of the secret that has the certificate and private key for the subdomain `{{ subdomain }}.{{ icp-url }}`. If empty, a secret with a self-signed certificate is created. By default, this setting is empty. |
 {: caption="Configuration settings" caption-side="top"}
-
-**Attention**: Do not select the **Install recommends** checkbox. It is not fully supported at the moment.
 
 ## Step 5: Verify that the installation was successful
 {: #verify}
@@ -481,88 +487,14 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 1.  Delete the Helm chart.
 
     ```bash
-    bx pr delete-helm-chart --name ibm-watson-assistant-prod
+    cloudctl catalog delete-helm-chart --name ibm-watson-assistant-prod
     ```
 
 1.  Delete the namespace you used.
 
     ```bash
     kubectl delete namespace conversation
-
-### Installing from the command line
-{: #cli}
-
-If you have trouble when you install from the catalog, you can install by using the command line interface instead.
-
-**Be sure to check that the installation from the catalog did not complete.** Even if you see an error message, the installation might complete successfully.
-
-To install from the command line, complete these steps:
-
-1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
-
-    ```bash
-    kubectl create namespace {name}
     ```
-    {:codeblock}
-
-    For example:
-
-    ```bash
-    kubectl create namespace conversation
-    ```
-    {:codeblock}
-
-    If you do not have the Kubernetes command line tool set up, see [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html) for instructions.
-
-1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
-
-    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/installing/create_ca_cert.html)
-
-1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
-
-    ```bash
-    bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
-    ```
-    {: codeblock}
-
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
-    - `{name}` is the Docker namespace that hosts the Docker image. This is the namespace you created in Step 1.
-
-1.  Download the chart from `https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.0.1.tgz`.
-
-1.  Extract the TAR file from the TGZ file, and then extract files from the TAR file.
-
-1.  Edit values in the `values.yaml` file.
-
-    To do so, first make a copy of the values.yaml. The `values.yaml` file is stored with the chart.  Rename the file. For example, `my-override.yaml`.
-
-    In your copy of the file, remove all but the configuration settings that you want to replace with your own values.
-
-    Edit the Docker image repository values in the file with values that reflect your environment.     Each image repository value must have the syntax `{icp_url}:8500/{namespace-name}/{unique-path-value}` where `{unique-path-value}` reflects the path from the existing YAML file, such as `icp-wa-tooling-pathed`.
-
-    At a minimum, you must provide your own values for the following configurable settings also:
-
-    - `global.deploymentType`: Specify whether you want to set up a development or production instance.
-    - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
-    - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
-    - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
-
-    **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
-
-1.  After you define any custom configuration settings, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
-
-    ```bash
-    helm install --tls --values {override-file-name} --namespace {name} --name {my-release} ibm-watson-assistant-prod
-    ```
-    {: codeblock}
-
-    - Replace `{my-release}` with a name for your release.
-    - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `ibm-watson-assistant-prod/my-override.yaml`
-    - Replace `{name}` with the namespace you created for the service. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
-    - The `ibm-watson-assistant-prod` parameter represents the name of the Helm chart that you downloaded and extracted. Alternatively, you can specify the name of the downloaded chart by using `ibm-watson-assistant-prod-1.0.1.tgz` as the value instead.
-
-After the installation finishes, [verify](#verify) that it was successful.
 
 ## Step 6: Launch the tool
 {: #launch-tool}
@@ -575,8 +507,47 @@ After the installation finishes, [verify](#verify) that it was successful.
 
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.assistant.mycluster.icp`.
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.mycluster.icp`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
+
+### Authenticating API calls
+{: #authenticate-api-calls}
+
+The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
+
+1.  Get the service credentials by using the Kubernetes command line interface.
+
+    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+
+    1.  Log in to IBM Cloud Private.
+
+        ```bash
+        cloudctl login -a https://{icp_url}:8443
+        ```
+
+    1.  To get the API key for the secret, run the following command:
+
+        ```bash
+        kubectl -n [namespace-name} get secret wcs-{release-name}-serviceid-secret -o go-template='{{ index .data "api_key" | base64decode }}'
+        ```
+
+        The key is returned. For example: `icp-CXTvuAA2QwXZbETadG3zIpvqmi3djUmGBBBzV4803C6D`.
+    1.  Copy the key.
+
+1.  Use these credentials in your API call.
+
+    - The base URL uses the syntax `http://{{ global.icp.proxyHostname }}/{{ ingres.config.backendService.ingressPath }}`
+
+      where the default value for `ingres.config.backednService.ingressPath` is `/assistant/api`. For example, `https://mycluster.icp/assistant/api`.
+
+    - Provide the API key when you call the service. The following example shows an API key being used.
+
+      ```curl
+      curl -k -u "apikey:{API_KEY}" https://{icp_url}/assistant/api/v1/workspaces?version=2018-09-20
+      ```
+      {: codeblock}
+
+    To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
 
 ## Next steps
 {: #next-steps}

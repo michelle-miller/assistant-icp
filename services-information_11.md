@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-12-27"
+lastupdated: "2018-12-18"
 
 ---
 
@@ -49,38 +49,33 @@ The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is 
 
 The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
 
-**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 2.1.0.3. If you are using {{site.data.keyword.icpfull}} version 3.1.0, then see [Authenticating API calls](install_101_on_310.html#authenticate-api-calls) instead.
+1.  Get the service credentials by using the Kubernetes command line interface.
 
-1.  Get the service credentials.
+    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
 
-    1.  From a new tab in the web browser, go to a URL with the following syntax:
+    1.  Log in to IBM Cloud Private.
 
-      `https://{icp-url}:8443/console/configuration/secrets`
+        ```bash
+        cloudctl login -a https://{icp_url}:8443
+        ```
 
-    1.  Search for `-serviceid-secret`
+    1.  To get the API key for the secret, run the following command:
 
-        The search result includes a secret with a name that has the following syntax:
+        ```bash
+        kubectl -n [namespace-name} get secret wcs-{release-name}-serviceid-secret -o go-template='{{ index .data "api_key" | base64decode }}'
+        ```
 
-        `wcs-{release-name}-serviceid-secret`
-
-    1.  Click the secret.
-    1.  Click the unlock icon ![Unlock icon](images/locked-api-key.png) for `api_key`.
+        The key is returned. For example: `icp-CXTvuAA2QwXZbETadG3zIpvqmi3djUmGBBBzV4803C6D`.
     1.  Copy the key.
 
 1.  Use these credentials in your API call.
 
-    - The base URL uses the syntax `http://{{ global.icp.proxyHostname }}/{{ ingress.config.backendService.ingressPath }}`
-
-      where the default value for `ingres.config.backednService.ingressPath` is `/assistant/ap1`. For example, `https://mycluster.icp/assistant/api`.
+    - The base URL uses the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/api`. For example: `https://myproxy/myrelease/assistant/api`.
     - Provide the API key when you call the service. The following example shows an API key being used.
 
       ```curl
-      curl -X GET \
-      -u "apikey:{api_key}"\
-      'https://myicp.net/assistant/api/v1/workspaces?version=2018-09-20' \
+      curl -k -H "apikey:{API_KEY}" https://{icp_url}/assistant/api/v1/workspaces?version=2018-09-20
       ```
       {: codeblock}
 
     To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
-
-See [Platform overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.

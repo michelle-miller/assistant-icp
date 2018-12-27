@@ -5,7 +5,12 @@
 Watson Assistant for IBM Cloud Private
 
     {: .navgroup id="learn"}
-    install.md
+
+    {: .topicgroup}
+    Installing
+        install.md
+        install_101_on_310.md
+
     getting-started.md
     index.md
     tool-overview.md
