@@ -74,7 +74,7 @@ The authentication mechanism used by your service instance impacts how you must 
     - Provide the API key when you call the service. The following example shows an API key being used.
 
       ```curl
-      curl -k -H "api-key:{API_KEY}" https://{icp_url}/assistant/api/v1/workspaces?version=2018-09-20
+      curl -k -H "apikey:{API_KEY}" https://{icp_url}/assistant/api/v1/workspaces?version=2018-09-20
       ```
       {: codeblock}
 
