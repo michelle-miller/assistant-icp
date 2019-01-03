@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-12-27"
+lastupdated: "2018-12-28"
 
 ---
 
@@ -517,7 +517,7 @@ The authentication mechanism used by your service instance impacts how you must 
 
 1.  Get the service credentials by using the Kubernetes command line interface.
 
-    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+    1.  You should have already installed the Kubernetes CLI (kubectl), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
 
     1.  Log in to IBM Cloud Private.
 
@@ -536,9 +536,9 @@ The authentication mechanism used by your service instance impacts how you must 
 
 1.  Use these credentials in your API call.
 
-    - The base URL uses the syntax `http://{{ global.icp.proxyHostname }}/{{ ingres.config.backendService.ingressPath }}`
+    - The base URL uses the syntax `http://{{ global.icp.proxyHostname }}/{{ ingress.config.backendService.ingressPath }}`
 
-      where the default value for `ingres.config.backednService.ingressPath` is `/assistant/api`. For example, `https://mycluster.icp/assistant/api`.
+      where the default value for `ingress.config.backendService.ingressPath` is `/assistant/api`. For example, `https://mycluster.icp/assistant/api`.
 
     - Provide the API key when you call the service. The following example shows an API key being used.
 
