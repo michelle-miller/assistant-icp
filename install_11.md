@@ -270,7 +270,7 @@ For volumnes 11-13 that have a size of `80Gi`:
 
 If you use the same `{name}` value as the `{dir-name}` value, it will be easier to map the volume name to its physical location. The `{size}` values should map to the sizes specified in the [resource requirements table](#resource-requirements).
 
-Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml}`.
+Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml`.
 
 The result is 13 volumes with names like these:
 
