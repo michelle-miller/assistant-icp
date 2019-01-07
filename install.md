@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2018-12-27"
+lastupdated: "2018-01-07"
 
 ---
 
@@ -59,6 +59,9 @@ The systems must meet these requirements:
 - CPUs must support the AVX instruction set extension. The `ed-mm` microservice cannot function properly without AVX support.
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+
+### Resource requirements
+{: #resource-requirements}
 
 The following table lists the system resources that have been verified to support a deployment.
 
@@ -249,23 +252,71 @@ A PersistentVolume (PV) is a unit of storage in the cluster. In the same way tha
 
 For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
-When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is local-storage, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
+When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is **local-storage**, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/manage_cluster/create_volume.html) for the steps to take to create one.
 
 **Note**: You must be a cluster administrator to create local storage volumes.
 
-Specify the following choices for {{site.data.keyword.conversationshort}}.
+To create the volumes, you can define each volume configuration in a YAML file, and then use the Kubectl command line to push the configuration changes to the cluster. Use the [apply ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#kubectl-apply) command in a command with the following syntax:
 
-Table 4. Persistent volume settings
+```bash
+kubectl apply -f {pv-yaml-file-name}
+```
+{: codeblock}
 
-| Field | Value |
-|-------|-------|
-| Name | Specify a name that is unique across all of the volumes |
-| Type | Hostpath |
-| Capacity | Check the system requirements table |
-| Access mode | ReadWriteOnce (RWO) |
-| Reclaim policy | Recycle |
-| Path | Specify a directory location on a worker node of the cluster where there is enough space for data. The directory must be unique across all of the volumes. For example, `/mnt/local-storage/storage/pv_10gi-postgres1` |
-{: caption="Persistent volume settings" caption-side="top"}
+Create 13 YAML files, one for each volume. Specify the following settings in the YAML files.
+
+#### Persistent volume settings
+
+```bash
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: {name}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: {size}
+  hostPath:
+    path: /mnt/local-storage/storage/{dir-name}
+    type: ''
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: local-storage
+```
+{: codeblock}
+
+If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these for the `{name}`:
+
+For volumes 1 through 6 that have a size of `10Gi`:
+`pv-10g-n` where n starts at 1 and goes up to 6.
+
+For volumes 4-10 that have a size of `5Gi`:
+`pv-5g-n` where n starts at 1 and goes up to 4.
+
+For volumnes 11-13 that have a size of `80Gi`:
+`pv-80g-n` where n starts at 1 and goes up to 3.
+
+If you use the same `{name}` value as the `{dir-name}` value, it will be easier to map the volume name to its physical location. The `{size}` values should map to the sizes specified in the [resource requirements table](#resource-requirements).
+
+Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml}`.
+
+The result is 13 volumes with names like these:
+
+- pv-10g-1
+- pv-10g-2
+- pv-10g-3
+- pv-10g-4
+- pv-10g-5
+- pv-10g-6
+- pv-5g-1
+- pv-5g-2
+- pv-5g-3
+- pv-5g-4
+- pv-80g-1
+- pv-80g-2
+- pv-80g-3
 
 ### 4.3 Gather information about your environment
 {: #gather-info}
