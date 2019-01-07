@@ -246,60 +246,61 @@ kubectl apply -f {pv-yaml-file-name}
 ```
 {: codeblock}
 
-Create 13 YAML files, one for each volume. Specify the following settings in the YAML files.
 
-#### Persistent volume settings
+1.  Create 13 YAML files, one for each volume.
 
-```bash
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
-  name: {name}
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: {size}
-  hostPath:
-    path: /mnt/local-storage/storage/{dir-name}
-    type: ''
-  persistentVolumeReclaimPolicy: Recycle
-  storageClassName: local-storage
-```
-{: codeblock}
+    Specify the following settings in the YAML files.
 
-If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these for the `{name}`:
+    ```bash
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      finalizers:
+      - kubernetes.io/pv-protection
+      name: {name}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      capacity:
+        storage: {size}
+      hostPath:
+        path: /mnt/local-storage/storage/{dir-name}
+        type: ''
+      persistentVolumeReclaimPolicy: Recycle
+      storageClassName: local-storage
+    ```
+    {: codeblock}
 
-For volumes 1 through 6 that have a size of `10Gi`:
-`pv-10g-n` where n starts at 1 and goes up to 6.
+    Replace the variables in this snippet with the appropriate value for the volume.
 
-For volumes 4-10 that have a size of `5Gi`:
-`pv-5g-n` where n starts at 1 and goes up to 4.
+    - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
-For volumnes 11-13 that have a size of `80Gi`:
-`pv-80g-n` where n starts at 1 and goes up to 3.
+      - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
+      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
-If you use the same `{name}` value as the `{dir-name}` value, it will be easier to map the volume name to its physical location. The `{size}` values should map to the sizes specified in the [resource requirements table](#resource-requirements).
+    - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
+    - `{size}`: Reflect the size specified in the [resource requirements table](#resource-requirements).
 
-Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml`.
+1.  Run the `apply` command on each YAML file that you create.
 
-The result is 13 volumes with names like these:
+    For example: `kubectl apply -f pv_001.yaml`. Rerun this command for each file up to `kubectl apply -f pv_013.yaml`.
 
-- pv-10g-1
-- pv-10g-2
-- pv-10g-3
-- pv-10g-4
-- pv-10g-5
-- pv-10g-6
-- pv-5g-1
-- pv-5g-2
-- pv-5g-3
-- pv-5g-4
-- pv-80g-1
-- pv-80g-2
-- pv-80g-3
+    The result is 13 volumes with names like these:
+
+    - pv-10g-1
+    - pv-10g-2
+    - pv-10g-3
+    - pv-10g-4
+    - pv-10g-5
+    - pv-10g-6
+    - pv-5g-1
+    - pv-5g-2
+    - pv-5g-3
+    - pv-5g-4
+    - pv-80g-1
+    - pv-80g-2
+    - pv-80g-3
 
 ### 4.3 Gather information about your environment
 {: #gather-info}
@@ -364,7 +365,7 @@ To install from the command line, complete these steps:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    cloudctl catalog load-archive  --registry “{icp_url}:8500” --archive  ibm-watson-assistant.1.0.1.tar.gz  --repo local-charts
+    cloudctl catalog load-archive  --registry {icp_url}:8500 --archive  ibm-watson-assistant.1.0.1.tar.gz  --repo local-charts
     ```
     {: codeblock}
 

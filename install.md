@@ -263,60 +263,60 @@ kubectl apply -f {pv-yaml-file-name}
 ```
 {: codeblock}
 
-Create 13 YAML files, one for each volume. Specify the following settings in the YAML files.
+1.  Create 13 YAML files, one for each volume.
 
-#### Persistent volume settings
+    Specify the following settings in the YAML files.
 
-```bash
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
-  name: {name}
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: {size}
-  hostPath:
-    path: /mnt/local-storage/storage/{dir-name}
-    type: ''
-  persistentVolumeReclaimPolicy: Recycle
-  storageClassName: local-storage
-```
-{: codeblock}
+    ```bash
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      finalizers:
+      - kubernetes.io/pv-protection
+      name: {name}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      capacity:
+        storage: {size}
+      hostPath:
+        path: /mnt/local-storage/storage/{dir-name}
+        type: ''
+      persistentVolumeReclaimPolicy: Recycle
+      storageClassName: local-storage
+    ```
+    {: codeblock}
 
-If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these for the `{name}`:
+    Replace the variables in this snippet with the appropriate value for the volume.
 
-For volumes 1 through 6 that have a size of `10Gi`:
-`pv-10g-n` where n starts at 1 and goes up to 6.
+    - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
-For volumes 4-10 that have a size of `5Gi`:
-`pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
+      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
-For volumnes 11-13 that have a size of `80Gi`:
-`pv-80g-n` where n starts at 1 and goes up to 3.
+    - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
+    - `{size}`: Reflect the size specified in the [resource requirements table](#resource-requirements).
 
-If you use the same `{name}` value as the `{dir-name}` value, it will be easier to map the volume name to its physical location. The `{size}` values should map to the sizes specified in the [resource requirements table](#resource-requirements).
+1.  Run the `apply` command on each YAML file that you create.
 
-Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml`.
+    For example: `kubectl apply -f pv_001.yaml`. Rerun this command for each file up to `kubectl apply -f pv_013.yaml`.
 
-The result is 13 volumes with names like these:
+    The result is 13 volumes with names like these:
 
-- pv-10g-1
-- pv-10g-2
-- pv-10g-3
-- pv-10g-4
-- pv-10g-5
-- pv-10g-6
-- pv-5g-1
-- pv-5g-2
-- pv-5g-3
-- pv-5g-4
-- pv-80g-1
-- pv-80g-2
-- pv-80g-3
+    - pv-10g-1
+    - pv-10g-2
+    - pv-10g-3
+    - pv-10g-4
+    - pv-10g-5
+    - pv-10g-6
+    - pv-5g-1
+    - pv-5g-2
+    - pv-5g-3
+    - pv-5g-4
+    - pv-80g-1
+    - pv-80g-2
+    - pv-80g-3
 
 ### 4.3 Gather information about your environment
 {: #gather-info}
