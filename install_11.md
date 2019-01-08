@@ -233,60 +233,60 @@ kubectl apply -f {pv-yaml-file-name}
 ```
 {: codeblock}
 
-Create 13 YAML files, one for each volume. Specify the following settings in the YAML files.
+1.  Create 13 YAML files, one for each volume.
 
-#### Persistent volume settings
+    Specify the following settings in the YAML files.
 
-```bash
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
-  name: {name}
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: {size}
-  hostPath:
-    path: /mnt/local-storage/storage/{dir-name}
-    type: ''
-  persistentVolumeReclaimPolicy: Recycle
-  storageClassName: local-storage
-```
-{: codeblock}
+    ```bash
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      finalizers:
+      - kubernetes.io/pv-protection
+      name: {name}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      capacity:
+        storage: {size}
+      hostPath:
+        path: /mnt/local-storage/storage/{dir-name}
+        type: ''
+      persistentVolumeReclaimPolicy: Recycle
+      storageClassName: local-storage
+    ```
+    {: codeblock}
 
-If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these for the `{name}`:
+    Replace the variables in this snippet with the appropriate value for the volume.
 
-For volumes 1 through 6 that have a size of `10Gi`:
-`pv-10g-n` where n starts at 1 and goes up to 6.
+    - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
-For volumes 4-10 that have a size of `5Gi`:
-`pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
+      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
-For volumnes 11-13 that have a size of `80Gi`:
-`pv-80g-n` where n starts at 1 and goes up to 3.
+    - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
+    - `{size}`: Reflect the size specified in the [resource requirements table](#resource-requirements).
 
-If you use the same `{name}` value as the `{dir-name}` value, it will be easier to map the volume name to its physical location. The `{size}` values should map to the sizes specified in the [resource requirements table](#resource-requirements).
+1.  Run the `apply` command on each YAML file that you create.
 
-Run the apply command on each YAML file that you create. For example: `kubectl apply -f pv_001.yaml`.
+    For example: `kubectl apply -f pv_001.yaml`. Rerun this command for each file up to `kubectl apply -f pv_013.yaml`.
 
-The result is 13 volumes with names like these:
+    The result is 13 volumes with names like these:
 
-- pv-10g-1
-- pv-10g-2
-- pv-10g-3
-- pv-10g-4
-- pv-10g-5
-- pv-10g-6
-- pv-5g-1
-- pv-5g-2
-- pv-5g-3
-- pv-5g-4
-- pv-80g-1
-- pv-80g-2
-- pv-80g-3
+    - pv-10g-1
+    - pv-10g-2
+    - pv-10g-3
+    - pv-10g-4
+    - pv-10g-5
+    - pv-10g-6
+    - pv-5g-1
+    - pv-5g-2
+    - pv-5g-3
+    - pv-5g-4
+    - pv-80g-1
+    - pv-80g-2
+    - pv-80g-3
 
 ### 4.2 Generate a MongoDB TLS certificate
 {: #mongodb-tls}
@@ -520,18 +520,14 @@ To install from the command line, complete these steps:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    cloudctl catalog load-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {namespace-name}
+    cloudctl catalog load-archive  --registry {icp_url}:8500 --archive  ibm-watson-assistant.1.1.0.tar.gz  --repo local-charts
     ```
     {: codeblock}
-
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
-    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
-    - `{namespace-name}` is the Docker namespace that hosts the Docker image. This is the namespace you created in Step 1.
 
 1.  Run this command to download the chart from the IBM Cloud Private repository:
 
     ```bash
-    wget https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.1.0.tgz --no-check-certificate
+    wget --no-check-certificate https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.1.0.tgz
     ```
     {: codeblock}
 
@@ -549,14 +545,24 @@ To install from the command line, complete these steps:
     ```
     {: codeblock}
 
-1.  Determine whether you want to override any values from the `values.yaml` file with your own configuration settings. The README has descriptions for each configurable setting.
+1.  Extract the TAR file from the TGZ file, and then extract files from the TAR file by using the following command:
 
-    - If you only want to replace a few settings, you can pass values for them as parameters of the install command.
+    ```bash
+    tar -xvzf /path/to/ibm-watson-assistant-prod-1.0.1.tgz
+    ```
+    {: codeblock}
 
-    - If you want to replace many values, make a copy of the values.yaml. The `values.yaml` file is stored with the chart.  Rename the file. For example, `my-override.yaml`. In your copy of the file, remove all but the configuration settings that you want to replace with your own values. Replace the values in your version of the file with values that reflect your environment.
+1.  Edit values in the `values.yaml` file.
 
-    At a minimum, you must provide your own values for the following configurable settings:
+    To do so, first make a copy of the values.yaml. The `values.yaml` file is stored with the chart.  Rename the file. For example, `my-override.yaml`.
 
+    In your copy of the file, remove all but the configuration settings that you want to replace with your own values.
+
+    Edit the Docker image repository values in the file with values that reflect your environment.     Each image repository value must have the syntax `{icp_url}:8500/{namespace-name}/{unique-path-value}` where `{unique-path-value}` reflects the path from the existing YAML file, such as `icp-wa-tooling-pathed`.
+
+    At a minimum, you must provide your own values for the following configurable settings also:
+
+    - `global.deploymentType`: Specify whether you want to set up a development or production instance.
     - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
     - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
     - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
@@ -572,10 +578,8 @@ To install from the command line, complete these steps:
 
     - Replace `{my-release}` with a name for your release.
     - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `ibm-watson-assistant-prod/my-override.yaml`
-    - Replace `{namespace-name}` with the namespace you created for the service. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
+    - Replace `{namespace-name}` with the name of the Kubernetes namespace that hosts the Docker pods. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
     - The `ibm-watson-assistant-prod-1.1.0.tgz` parameter represents the name of the downloaded file that contains the Helm chart.
-
-    Again, if there are only one or two settings that you want to replace, then you can pass the values for the settings in the command line directly. Use the following syntax to specify a parameter: `--set global.icp.masterHostname={your ICP hostname}`
 
 After the installation finishes, [verify](#verify) that it was successful.
 
