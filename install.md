@@ -354,14 +354,14 @@ Other actions you might want to take before starting the installation include:
 
 1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
 
-    ```bash
+    ```
     kubectl create namespace {name}
     ```
     {:codeblock}
 
     For example:
 
-    ```bash
+    ```
     kubectl create namespace conversation
     ```
     {:codeblock}
