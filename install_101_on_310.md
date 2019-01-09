@@ -154,7 +154,7 @@ You must have cluster administrator or team administrator access to the systems 
 
     1.  Initialize the Helm command line interface.
 
-        ```bash
+        ```pre
         helm init --client-only
         ```
         {: codeblock}
@@ -163,7 +163,7 @@ You must have cluster administrator or team administrator access to the systems 
 
     1.  You can confirm the version numbers by running the following command:
 
-        ```bash
+        ```pre
         helm version --tls
         ```
         {: codeblock}
@@ -184,7 +184,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 
     1.  Check the Docker disk usage. Run the following command:
 
-        ```bash
+        ```pre
         docker system df
         ```
         {: codeblock}
@@ -198,7 +198,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
-    ```bash
+    ```pre
     cloudctl login -a https://{icp_url}:8443 --skip-ssl-validation
     docker login {icp_url}:8500
     ```
@@ -241,7 +241,7 @@ When you install the service, persistent volume claims are created for the compo
 
 To create the volumes, you can define each volume configuration in a YAML file, and then use the Kubectl command line to push the configuration changes to the cluster. Use the [apply ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#kubectl-apply) command in a command with the following syntax:
 
-```bash
+```pre
 kubectl apply -f {pv-yaml-file-name}
 ```
 {: codeblock}
@@ -344,14 +344,14 @@ To install from the command line, complete these steps:
 
 1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
 
-    ```bash
+    ```pre
     kubectl create namespace {name}
     ```
     {:codeblock}
 
     For example:
 
-    ```bash
+    ```pre
     kubectl create namespace conversation
     ```
     {:codeblock}
@@ -364,28 +364,28 @@ To install from the command line, complete these steps:
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
-    ```bash
+    ```pre
     cloudctl catalog load-archive  --registry {icp_url}:8500 --archive  ibm-watson-assistant.1.0.1.tar.gz  --repo local-charts
     ```
     {: codeblock}
 
 1.  Run this command to download the chart from the IBM Cloud Private repository:
 
-    ```bash
+    ```pre
     wget --no-check-certificate https://{cluster_CA_domain}:8443/helm-repo/requiredAssets/ibm-watson-assistant-prod-1.0.1.tgz
     ```
     {: codeblock}
 
 1.  If you have a pre-existing version of the service on your cluster, remove its TGZ file. For example:
 
-    ```bash
+    ```pre
     rm ibm-watson-assistant-prod-1.0.0.tgz
     ```
     {: codeblock}
 
 1.  Extract the TAR file from the TGZ file, and then extract files from the TAR file by using the following command:
 
-    ```bash
+    ```pre
     tar -xvzf /path/to/ibm-watson-assistant-prod-1.0.1.tgz
     ```
     {: codeblock}
@@ -409,7 +409,7 @@ To install from the command line, complete these steps:
 
 1.  After you define any custom configuration settings, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
-    ```bash
+    ```pre
     helm install --tls --values {override-file-name} --namespace {namespace-name} --name {my-release} ibm-watson-assistant-prod-1.0.1.tgz
     ```
     {: codeblock}
@@ -492,21 +492,21 @@ To run a test Helm chart:
 
 1.  From the Helm command line interface, run the following command:
 
-    ```bash
+    ```pre
     helm test --tls {release name} --timeout 900
     ```
     {: codeblock}
 
 1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n {name} -f --timestamps`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
-    ```bash
+    ```pre
     kubectl logs my-release-bdd-test -n conversation -f --timestamps
     ```
     {: codeblock}
 
 1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
-    ```bash
+    ```pre
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
     {: codeblock}
@@ -518,14 +518,14 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 
 1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
 
-    ```bash
+    ```pre
     helm delete --tls my-release
     ```
     {: codeblock}
 
     To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
-    ```bash
+    ```pre
     helm delete --purge --tls my-release
     ```
     {: codeblock}
@@ -538,13 +538,13 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 
 1.  Delete the Helm chart.
 
-    ```bash
+    ```pre
     cloudctl catalog delete-helm-chart --name ibm-watson-assistant-prod
     ```
 
 1.  Delete the namespace you used.
 
-    ```bash
+    ```pre
     kubectl delete namespace conversation
     ```
 
@@ -573,13 +573,13 @@ The authentication mechanism used by your service instance impacts how you must 
 
     1.  Log in to IBM Cloud Private.
 
-        ```bash
+        ```pre
         cloudctl login -a https://{icp_url}:8443
         ```
 
     1.  To get the API key for the secret, run the following command:
 
-        ```bash
+        ```pre
         kubectl -n [namespace-name} get secret wcs-{release-name}-serviceid-secret -o go-template='{{ index .data "api_key" | base64decode }}'
         ```
 
