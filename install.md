@@ -162,19 +162,19 @@ You must have cluster administrator or team administrator access to the systems 
 
     1.  Initialize the Helm command line interface.
 
-        ```pre
+        ```bash
         helm init --client-only
         ```
-        {: codeblock}
+        {: pre}
 
         **Important**: Do not use the `--upgrade` flag with the init command. Adding the `--upgrade` flag replaces the server version of Helm Tiller that is installed with {{site.data.keyword.icpfull_notm}}.
 
     1.  You can confirm the version numbers by running the following command:
 
-        ```pre
+        ```bash
         helm version --tls
         ```
-        {: codeblock}
+        {: pre}
 
         The response indicates version numbers similar to these:
 
@@ -183,10 +183,10 @@ You must have cluster administrator or team administrator access to the systems 
 
 1.  Validate that AVX is supported on the systems in your cluster. (AVX support is a hardware requirement.) To do so, run the following command:
 
-    ```pre
+    ```bash
     kubectl exec {name-of-pod-hosting-service} -n {namespace-name} -- cat /proc/cpuinfo | grep avx
     ```
-    {: codeblock}
+    {: pre}
 
     You should see one hit for each CPU on the worker node.
 
@@ -201,10 +201,10 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 
     1.  Check the Docker disk usage. Run the following command:
 
-        ```pre
+        ```bash
         docker system df
         ```
-        {: codeblock}
+        {: pre}
 
         For more command options, see [docker system df in the Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/system_df/).
 
@@ -215,11 +215,11 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
-    ```pre
+    ```bash
     bx pr login -a https://{icp-url}:8443 --skip-ssl-validation
     docker login {icp-url}:8500
     ```
-    {: codeblock}
+    {: pre}
 
     Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/create_ca_cert.html).
 
@@ -258,10 +258,10 @@ When you install the service, persistent volume claims are created for the compo
 
 To create the volumes, you can define each volume configuration in a YAML file, and then use the Kubectl command line to push the configuration changes to the cluster. Use the [apply ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#kubectl-apply) command in a command with the following syntax:
 
-```pre
+```bash
 kubectl apply -f {pv-yaml-file-name}
 ```
-{: codeblock}
+{: pre}
 
 1.  Create 13 YAML files, one for each volume.
 
@@ -374,10 +374,10 @@ Other actions you might want to take before starting the installation include:
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
-    ```pre
+    ```bash
     bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
     ```
-    {: codeblock}
+    {: pre}
 
     - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
     - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
@@ -485,24 +485,24 @@ To run a test Helm chart:
 
 1.  From the Helm command line interface, run the following command:
 
-    ```pre
+    ```bash
     helm test --tls {release name} --timeout 900
     ```
-    {: codeblock}
+    {: pre}
 
 1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {testname} -n {name} -f --timestamps`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
-    ```pre
+    ```bash
     kubectl logs my-release-bdd-test -n conversation -f --timestamps
     ```
-    {: codeblock}
+    {: pre}
 
 1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {name}`. If you enable a language other than English and Czech, then you must specify `conversation` as the namespace name. For example:
 
-    ```pre
+    ```bash
     kubectl delete pod my-release-bdd-test --namespace conversation
     ```
-    {: codeblock}
+    {: pre}
 
 ### Uninstalling the service
 {: #uninstall}
@@ -511,17 +511,17 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 
 1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
 
-    ```pre
+    ```bash
     helm delete --tls my-release
     ```
-    {: codeblock}
+    {: pre}
 
     To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
-    ```pre
+    ```bash
     helm delete --purge --tls my-release
     ```
-    {: codeblock}
+    {: pre}
 
     If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
 
@@ -531,13 +531,13 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 
 1.  Delete the Helm chart.
 
-    ```pre
+    ```bash
     bx pr delete-helm-chart --name ibm-watson-assistant-prod
     ```
 
 1.  Delete the namespace you used.
 
-    ```pre
+    ```bash
     kubectl delete namespace conversation
 
 ### Installing from the command line
@@ -551,14 +551,14 @@ To install from the command line, complete these steps:
 
 1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
 
-    ```pre
+    ```bash
     kubectl create namespace {name}
     ```
     {:codeblock}
 
     For example:
 
-    ```pre
+    ```bash
     kubectl create namespace conversation
     ```
     {:codeblock}
@@ -571,10 +571,10 @@ To install from the command line, complete these steps:
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
-    ```pre
+    ```bash
     bx pr load-ppa-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {name}
     ```
-    {: codeblock}
+    {: pre}
 
     - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
     - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
@@ -603,10 +603,10 @@ To install from the command line, complete these steps:
 
 1.  After you define any custom configuration settings, you can install the chart from the Helm command line interface. Enter the following command from the directory where the package was loaded in your local system:
 
-    ```pre
+    ```bash
     helm install --tls --values {override-file-name} --namespace {name} --name {my-release} ibm-watson-assistant-prod
     ```
-    {: codeblock}
+    {: pre}
 
     - Replace `{my-release}` with a name for your release.
     - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `ibm-watson-assistant-prod/my-override.yaml`
