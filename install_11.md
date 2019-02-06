@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2019-01-09"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -38,7 +38,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## System requirements
 {: #sys-reqs}
 
-Table 1. Minimum hardware requirements for a development environment
+Table 1. Minimum hardware requirements for a deployment into a development environment
 
 | Node type  | Number of nodes | CPU per node | Memory per node | Disk per node |
 |------------|-----------------|--------------|-----------------|---------------|
@@ -57,6 +57,8 @@ The systems must meet these requirements:
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
 - CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
+- Minimum CPU 23,900m
+- Minimum Memory 202Gi
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -262,7 +264,7 @@ kubectl apply -f {pv-yaml-file-name}
     - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
       - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
-      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 7-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
       - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
     - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
@@ -310,7 +312,7 @@ If you create your own certificate authority, you can replace the default values
 ### 4.3 Install the service from the catalog
 {: #admin-install}
 
-1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. Use the following command to create the namespace:
 
     ```bash
     kubectl create namespace {namespace-name}
@@ -385,7 +387,8 @@ Table 5. Configuration settings
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
 | Hostname of the ICP cluster proxy node | Specify the hostname of the proxy node of your private cloud instance. To discover this value, run the command: `kubectl get nodes --show-labels`, and then find the node that shows `proxy=true`, and get the hostname value. It might be an IP address instead of a typical hostname. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
-| Ingress path | Part of the Watson Assistant tool URL. The url syntax is https://{{ global.icp.masterHostname }}{{global.icp.ingress.path}}. If left empty, the default value `{{ .Release.Name }}/assistant` is used. |
+| Ingress path | Part of the Watson Assistant tool URL. You can access the service from`https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}`. The API is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/api`. The tool is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/ui`). If left empty, the default value `/{{ .Release.Name }}/assistant` is used. |
+| Ingress Secret | If you want to provide your own secret, specify it using the syntax: `api_key` for the API key, `instance_id` that is a UUID or GUID value for the INSTANCE_ID, and `service_name` using all lowercase letters separated with dashes (-) for the SERVICE_NAME of the Ingress. If empty, then a secret is created for you. |
 | Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](lang-support.html). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
@@ -395,8 +398,8 @@ Table 5. Configuration settings
 | COS Hostname | Only used if Create COS is deselected. Hostname to connect to the store. Typical hostname when COS is running in the cluster is `cos.namespace.svc.cluster.local`. |
 | COS Port | Only used if Create COS is deselected. Port where COS is listening. Typical port is `443`. |
 | Create Redis | Boolean. Specify `true` to have a Redis store created for you. Specify `false` to provide your own instance. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.** |
+| Redis Secret | If you want to specify a custom password for Redis, create a secret with the password and specify the name of the secret. To create the secret, you can use the command `kubectl create --namespace "{{ .Release.Namespace }}" secret generic customsecrets-redis-password --from-literal=password=YOUR_REDIS_PASSORD`.  If empty, a random password is generated. |
 | Redis Hostname | Used only if Create Redis is deselected. Specifies the hostname of the running Redis service. |
-| Redis Password | Password for accessing Redis. (User is root.) |
 | Redis Port | Used only if Create Redis is deselected. Specifies the port from which the running Redis service can be accessed. |
 | Create Postgres | Boolean. Specify `true` to have a Postrgres store created for you. Specify `false` to provide your own instance. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.** |
 | Postgres Hostname | Used only if Create Postgres is deselected. Specifies the hostname of the running Postrgres service.  |
@@ -478,7 +481,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
     ```bash
-    helm delete --purge --tls my-release
+    helm delete --tls --no-hooks --purge my-release
     ```
     {: pre}
 
@@ -497,7 +500,7 @@ If you have trouble when you install from the catalog, you can install by using 
 
 To install from the command line, complete these steps:
 
-1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. Use the following command to create the namespace:
 
     ```bash
     kubectl create namespace {namespace-name}
@@ -586,15 +589,7 @@ After the installation finishes, [verify](#verify) that it was successful.
 ## Step 6: Launch the tool
 {: #launch-tool}
 
-1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
-1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
-1.  Find the deployment named `{release-name}-ui`.
-
-    If you don't know the `{release-name}`, filter the list of deployments to include only those associated with the namespace you used for the service, and then search on `-ui` to find it.
-
-1.  Click **Launch**.
-
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy/myrelease/assistant/ui`.
+1.  Open a new tab in a web browser, and then enter a URL with the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy/myrelease/assistant/ui`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Next steps

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2018-01-09"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -292,7 +292,7 @@ kubectl apply -f {pv-yaml-file-name}
     - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
       - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
-      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 7-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
       - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
     - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
@@ -519,7 +519,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
     ```bash
-    helm delete --purge --tls my-release
+    helm delete --tls --no-hooks --purge my-release
     ```
     {: pre}
 
