@@ -1,13 +1,16 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-25"
+  years: 2015, 2019
+lastupdated: "2019-02-08"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
+{:important: .important}
+{:note: .note}
 {:tip: .tip}
 {:pre: .pre}
 {:codeblock: .codeblock}
@@ -31,21 +34,21 @@ The first table shows the level of support for all features, except those relate
 
 **Table 1. Feature support details**
 
-| Language | **[Defining intents](intents.html)** and **[dialog](dialog-build.html)** | **[Absolute scoring and 'Mark as irrelevant'](intents.html#mark-irrelevant)** | **Search** | **[Content Catalog](catalog.html)** |
-|:---|:---:|:---:|:---:|:---:|
-| **English (en)**                   | GA | GA | GA | GA |
-| **Arabic (ar)**                    | GA | Beta | NA | NA |
-| **Chinese (Simplified) (zh-cn)**   | GA | GA | Beta | NA |
-| **Chinese (Traditional) (zh-tw)**  | Beta | Beta | Beta | NA |
-| **Czech (cs)**                     | Beta | Beta | Beta | NA |
-| **Dutch (nl)**                     | GA | GA | Beta | NA |
-| **French (fr)**                    | GA | GA | Beta | GA |
-| **German (de)**                    | GA | GA | Beta | GA |
-| **Italian (it)**                   | GA | GA | Beta | GA |
-| **Japanese (ja)**                  | GA | GA | Beta | GA |
-| **Korean (ko)**                    | GA | GA | Beta | NA |
-| **Portuguese (Brazilian) (pt-br)** | GA | GA | Beta | GA |
-| **Spanish (es)**                   | GA | GA | Beta | GA |
+| Language | **[Defining intents](intents.html)** and **[dialog](dialog-build.html)** | **[Absolute scoring and 'Mark as irrelevant'](intents.html#mark-irrelevant)** | **[Content Catalog](catalog.html)** |
+|:---|:---:|:---:|:---:|
+| **English (en)**                   | GA | GA | GA |
+| **Arabic (ar)**                    | GA | Beta | GA |
+| **Chinese (Simplified) (zh-cn)**   | GA | GA | NA |
+| **Chinese (Traditional) (zh-tw)**  | Beta | Beta | NA |
+| **Czech (cs)**                     | GA | GA | NA |
+| **Dutch (nl)**                     | GA | GA | NA |
+| **French (fr)**                    | GA | GA | GA |
+| **German (de)**                    | GA | GA | GA |
+| **Italian (it)**                   | GA | GA | GA |
+| **Japanese (ja)**                  | GA | GA | GA |
+| **Korean (ko)**                    | GA | GA | NA |
+| **Portuguese (Brazilian) (pt-br)** | GA | GA | GA |
+| **Spanish (es)**                   | GA | GA | GA |
 {: caption="Feature support details" caption-side="top"}
 
 **Table 2. Entity feature support details**

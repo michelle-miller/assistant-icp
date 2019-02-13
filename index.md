@@ -1,13 +1,16 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-12-17"
+  years: 2015, 2019
+lastupdated: "2019-02-05"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
+{:important: .important}
+{:note: .note}
 {:tip: .tip}
 {:pre: .pre}
 {:codeblock: .codeblock}
@@ -68,7 +71,7 @@ Read more about these implementation steps by following these links:
 
 ## Browser support
 
-The {{site.data.keyword.conversationshort}} service tooling requires the same level of browser software as is required by {{site.data.keyword.Bluemix_notm}}. See the {{site.data.keyword.Bluemix_notm}} [Prerequisites ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/overview/prereqs.html#browsers){: new_window} topic for details.
+The {{site.data.keyword.conversationshort}} service tooling requires the same level of browser software as is required by {{site.data.keyword.icpfull_notm}}. See [Supported browsers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/supported_browsers.html){: new_window} for details.
 
 ## Language support
 

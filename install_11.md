@@ -2,12 +2,15 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2019-01-09"
+lastupdated: "2019-02-13"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
+{:important: .important}
+{:note: .note}
 {:tip: .tip}
 {:pre: .pre}
 {:codeblock: .codeblock}
@@ -22,10 +25,12 @@ lastupdated: "2019-01-09"
 # Installation checklist
 {: #install}
 
-Learn how to install the {{site.data.keyword.conversationshort}} tool into {{site.data.keyword.icpfull}} version 3.1.0.
+Learn how to install {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull}}
 {: shortdesc}
 
 The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
+
+{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0 and is compatible with {{site.data.keyword.icp4dfull}} version 1.2.
 
 ## Software requirements
 {: #prereqs}
@@ -38,7 +43,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 ## System requirements
 {: #sys-reqs}
 
-Table 1. Minimum hardware requirements for a development environment
+Table 1. Minimum hardware requirements for a deployment into a development environment
 
 | Node type  | Number of nodes | CPU per node | Memory per node | Disk per node |
 |------------|-----------------|--------------|-----------------|---------------|
@@ -57,6 +62,8 @@ The systems must meet these requirements:
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
 - CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of operating systems that include this support. The `ed-mm` microservice cannot function properly without AVX support.
+- Minimum CPU 23,900m
+- Minimum Memory 202Gi
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
@@ -101,22 +108,27 @@ In addition to these microservices, the Helm chart installs the following resour
 
 ### Language considerations
 
-The components that are necessary to process different natural languages require significant amounts of data. Resources to support English are always provided. Each other language that you enable during the installation process (besides Czech) increases the amount of resources that you need to support it.
+The components that are necessary to process natural languages require significant amounts of data. The base set of supported languages require 40 GB of memory per node. The following languages require that you add additional resources to support them:
 
 Table 3. Language resource requirements
 
-| Language | Memory requirements per pod |
+| Language | Additional memory requirements per pod |
 |----------|-----------------------------|
-| Base service + English, Czech | 40 GB |
-| Each other language you add | 10 GB (12 GB for Portuguese and Chinese) |
+| Chinese (Simplified or Traditional or both) | 12 GB |
+| German | 10 GB |
+| Japanese | 10 GB |
+| Korean | 10 GB |
 {: caption="Language resource requirements" caption-side="top"}
+
+For the full list of supported languages, see [Supported languages](/docs/services/assistant-icp/lang-support.html).
 
 ### Overview of the steps
 
-1.  [Download service installation artifacts](#download-wa-icp)
+1.  [Purchase and download installation artifacts](#download-wa-icp)
 1.  [Prepare the cloud environment](#install-icp)
-1.  [Add the service chart to the cloud repository](#add-wa-chart-to-icp)
-1.  [Install the service](#install-wa-from-catalog)
+1.  [Add the Helm chart to the cloud repository](#add-wa-chart-to-icp)
+1.  [Create persistent volumes](#create-pvs)
+1.  [Install the service from the catalog](#admin-install)
 1.  [Verify that the installation was successful](#verify)
 1.  [Launch the tool](#launch-tool)
 
@@ -143,13 +155,12 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
-1.  Synchronize the clocks of the client computer and the nodes in the IBM Cloud Private cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
 1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
 1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
-1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
+1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a IBM Cloud Private account that is assigned to the operator or administrator role for a team that can access the `kube-system` namespace.
 1.  Set up the Helm command line interface.
 
     See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
@@ -174,6 +185,10 @@ You must have cluster administrator or team administrator access to the systems 
 
         Client: &version.Version{SemVer:"v2.9.1" ... }
         Server: &version.Version{SemVer:"v2.9.1+icp" ... }
+
+1.  When you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is added to a file path on the proxy node of the cluster. It does not have its own subdomain. If you do not take action, users who open the tool from a web browser will see security warnings. To prevent users from seeing such warnings, add a known CA certificate for the proxy node. 
+
+    For more information about how to do so, see the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic.
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-wa-chart-to-icp}
@@ -208,14 +223,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
 
     Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
 
-## Step 4: Install the service
-{: #install-wa-from-catalog}
-
-- [4.1 Create persistent volumes](#create-pvs)
-- [4.2 Generate a MongoDB TLS certificate](#mongodb-tls)
-- [4.3 Install the service from the catalog](#admin-install)
-
-### 4.2 Create persistent volumes
+## Step 4: Create persistent volumes
 {: #create-pvs}
 
 A PersistentVolume (PV) is a unit of storage in the cluster. In the same way that a node is a cluster resource, a persistent volume is also a resource in the cluster.
@@ -262,7 +270,7 @@ kubectl apply -f {pv-yaml-file-name}
     - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
       - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
-      - For volumes 4-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
+      - For volumes 7-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
       - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
     - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
@@ -288,29 +296,10 @@ kubectl apply -f {pv-yaml-file-name}
     - pv-80g-2
     - pv-80g-3
 
-### 4.2 Generate a MongoDB TLS certificate
-{: #mongodb-tls}
-
-If you create your own certificate authority, you can replace the default values for the CA with details for your own certificate and key.
-
-1.  Generate your own TLS certificate authority for MongoDB.
-
-      `$ openssl genrsa -out ca.key 2048`
-
-      `$ openssl req -x509 -new -nodes -key ca.key -days 10000 -out ca.crt -subj "/CN=mydomain.com"`
-
-1.  Encode it in base64 format.
-
-      `$ cat ca.key | base64 -w0`
-
-      where `-w0` prevents base64 from wrapping the line when it reaches more than 80 characters in length. This option might not be supported on all base64 versions. If your version does not, then use another method to ensure that the output is a single line.
-
-1.  Update the base64 encoded certificate and base64 encoded key configuration settings (or override the configuraton values `global.mongodb.tls.cacert` and `global.mongodb.tls.cakey`) with the new certificate and key values.
-
-### 4.3 Install the service from the catalog
+## Step 5: Install the service from the catalog
 {: #admin-install}
 
-1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. Use the following command to create the namespace:
 
     ```bash
     kubectl create namespace {namespace-name}
@@ -385,8 +374,9 @@ Table 5. Configuration settings
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
 | Hostname of the ICP cluster proxy node | Specify the hostname of the proxy node of your private cloud instance. To discover this value, run the command: `kubectl get nodes --show-labels`, and then find the node that shows `proxy=true`, and get the hostname value. It might be an IP address instead of a typical hostname. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
-| Ingress path | Part of the Watson Assistant tool URL. The url syntax is https://{{ global.icp.masterHostname }}{{global.icp.ingress.path}}. If left empty, the default value `{{ .Release.Name }}/assistant` is used. |
-| Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](lang-support.html). |
+| Ingress path | Part of the Watson Assistant tool URL. You can access the service from`https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}`. The API is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/api`. The tool is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/ui`). If left empty, the default value `/{{ .Release.Name }}/assistant` is used. |
+| Ingress Secret | If you want to provide your own secret, specify it using the syntax: `api_key` for the API key, `instance_id` that is a UUID or GUID value for the INSTANCE_ID, and `service_name` using all lowercase letters separated with hyphens (-) for the SERVICE_NAME of the Ingress. If empty, then a secret is created for you. |
+| Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](/docs/services/assistant-icp/lang-support.html). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
 | COS Secret Key | Access key to the store used by CLU components. |
@@ -395,8 +385,8 @@ Table 5. Configuration settings
 | COS Hostname | Only used if Create COS is deselected. Hostname to connect to the store. Typical hostname when COS is running in the cluster is `cos.namespace.svc.cluster.local`. |
 | COS Port | Only used if Create COS is deselected. Port where COS is listening. Typical port is `443`. |
 | Create Redis | Boolean. Specify `true` to have a Redis store created for you. Specify `false` to provide your own instance. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.** |
+| Redis Secret | If you want to specify a custom password for Redis, create a secret with the password and specify the name of the secret. To create the secret, you can use the command `kubectl create --namespace "{{ .Release.Namespace }}" secret generic customsecrets-redis-password --from-literal=password=YOUR_REDIS_PASSORD`.  If empty, a random password is generated. |
 | Redis Hostname | Used only if Create Redis is deselected. Specifies the hostname of the running Redis service. |
-| Redis Password | Password for accessing Redis. (User is root.) |
 | Redis Port | Used only if Create Redis is deselected. Specifies the port from which the running Redis service can be accessed. |
 | Create Postgres | Boolean. Specify `true` to have a Postrgres store created for you. Specify `false` to provide your own instance. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.** |
 | Postgres Hostname | Used only if Create Postgres is deselected. Specifies the hostname of the running Postrgres service.  |
@@ -422,13 +412,13 @@ Table 5. Configuration settings
 | MongoDB Admin User | User ID for a MongoDB super user with rights to create databases and users in the MongoDB database. If you use your own instance, then you must change this name and its associated password. |
 | MongoDB Admin Password | Password associated with the user ID for a MongoDB super user with rights to create databases and users in the MongoDB database. If you use your own instance, then you must change this password and the associated name. |
 | Enable TLS | Boolean. Indicates whether to enable MongoDB TLS support. The default value is true. |
-| base64 encoded certificate | Replace the certificate with your own. See the Configuration page for certificate details. |
-| base64 encoded key | Replace the key with your own. See the Configuration page for key details. |
+| base64 encoded certificate | No action required. The certificate is generated for you when TLS is enabled. |
+| base64 encoded key | No action required. The key is generated for you when TLS is enabled. |
 | COS Configuration PVC Size | Specifies the size of the persistent volume claim to be used by the cloud object store. Default size is 5 Gi. |
-| COS Configuration Storage Class | Specifies the persistent volume storage class. Default class is local-storage. |
+| COS Configuration Storage Class | Specifies the persistent volume storage class. Default class is `local-storage`. |
 | etcd Configuration PVC Size | Specifies the size of the persistent volume claim to be used by the etcd data store. Default size is 10 Gi. |
-| etcd Configuration Storage Class | Specifies the persistent volume storage class. Default class is local-storage. |
-| PostgreSQL Datatore Storage Class | Specifies the storage class of the persistent volume for the PostgreSQL database. Default class is local-storage. |
+| etcd Configuration Storage Class | Specifies the persistent volume storage class. Default class is `local-storage`. |
+| PostgreSQL Datatore Storage Class | Specifies the storage class of the persistent volume for the PostgreSQL database. Default class is `local-storage`. |
 {: caption="Configuration settings" caption-side="top"}
 
 ## Step 5: Verify that the installation was successful
@@ -478,7 +468,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
     ```bash
-    helm delete --purge --tls my-release
+    helm delete --tls --no-hooks --purge my-release
     ```
     {: pre}
 
@@ -497,7 +487,7 @@ If you have trouble when you install from the catalog, you can install by using 
 
 To install from the command line, complete these steps:
 
-1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. If you enable a language other than English and Czech, then you must specify  `conversation` as the namespace. Otherwise, you can use any namespace you choose. Use the following command to create the namespace:
+1.  From the Kubernetes command line tool, create the namespace in which to deploy the service. Use the following command to create the namespace:
 
     ```bash
     kubectl create namespace {namespace-name}
@@ -586,21 +576,39 @@ After the installation finishes, [verify](#verify) that it was successful.
 ## Step 6: Launch the tool
 {: #launch-tool}
 
-1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
-1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
-1.  Find the deployment named `{release-name}-ui`.
-
-    If you don't know the `{release-name}`, filter the list of deployments to include only those associated with the namespace you used for the service, and then search on `-ui` to find it.
-
-1.  Click **Launch**.
-
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy/myrelease/assistant/ui`.
+1.  Open a new tab in a web browser, and then enter a URL with the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy/myrelease/assistant/ui`.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
+
+## Troubleshooting installation issues
+{: #install-troubleshoot}
+
+### Investigating issues
+{: #install-ts-get-logs}
+
+The first step to take if you hit an installation issue, such as a cluster node is not starting as expected, is to get logs from the cluster which can provide more detail.
+
+To get log files, complete the following steps:
+
+1.  Log into the cluster with administrator credentials.
+
+1.  Run the following command to get a list of the jobs that are currently running in the cluster and whether the job was successful:
+
+    ```bash
+    kubectl get jobs
+    ```
+    {: pre}
+
+1.  For any jobs that show a success status of 0, get the log file for the job by entering the following command:
+
+    ```bash
+    kubectl log {job-name} -f
+    ```
+    {: pre}
 
 ## Next steps
 {: #next-steps}
 
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
-- To learn more about the service first, read the [overview](index.html).
-- To see how it works for yourself, follow the steps in the [getting started tutorial](getting-started.html).
+- To learn more about the service first, read the [overview](/docs/services/assistant-icp/index.html).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp/getting-started.html).
