@@ -8,6 +8,9 @@ lastupdated: "2019-02-13"
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
+{:important: .important}
+{:note: .note}
 {:tip: .tip}
 {:pre: .pre}
 {:codeblock: .codeblock}
@@ -372,7 +375,7 @@ Table 5. Configuration settings
 | IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
 | Hostname of the ICP cluster proxy node | Specify the hostname of the proxy node of your private cloud instance. To discover this value, run the command: `kubectl get nodes --show-labels`, and then find the node that shows `proxy=true`, and get the hostname value. It might be an IP address instead of a typical hostname. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
 | Ingress path | Part of the Watson Assistant tool URL. You can access the service from`https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}`. The API is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/api`. The tool is available from `https://{{ global.icp.proxyHostname }}{{ global.icp.ingress.path }}/ui`). If left empty, the default value `/{{ .Release.Name }}/assistant` is used. |
-| Ingress Secret | If you want to provide your own secret, specify it using the syntax: `api_key` for the API key, `instance_id` that is a UUID or GUID value for the INSTANCE_ID, and `service_name` using all lowercase letters separated with dashes (-) for the SERVICE_NAME of the Ingress. If empty, then a secret is created for you. |
+| Ingress Secret | If you want to provide your own secret, specify it using the syntax: `api_key` for the API key, `instance_id` that is a UUID or GUID value for the INSTANCE_ID, and `service_name` using all lowercase letters separated with hyphens (-) for the SERVICE_NAME of the Ingress. If empty, then a secret is created for you. |
 | Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](/docs/services/assistant-icp/lang-support.html). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not set to `false`. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
@@ -586,7 +589,7 @@ The first step to take if you hit an installation issue, such as a cluster node 
 
 To get log files, complete the following steps:
 
-1.  Log into the cluster with administrator credentials OR ROOT USER?.
+1.  Log into the cluster with administrator credentials.
 
 1.  Run the following command to get a list of the jobs that are currently running in the cluster and whether the job was successful:
 
