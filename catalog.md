@@ -1,13 +1,16 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-03-07"
+  years: 2015, 2019
+lastupdated: "2019-02-13"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
+{:important: .important}
+{:note: .note}
 {:tip: .tip}
 {:pre: .pre}
 {:codeblock: .codeblock}
@@ -22,7 +25,8 @@ lastupdated: "2018-03-07"
 ***Content Catalogs*** provide an easy way to add common intents to your {{site.data.keyword.conversationshort}} service workspace.
 {: shortdesc}
 
-**IMPORTANT**: Content Catalog intents are meant to provide a starting point, and not meant to be fully built-out for production use. It is recommended that you review and expand on these intents, to make them better suited to how your application will use them.
+Content Catalog intents are meant to provide a starting point, and not meant to be fully built-out for production use. It is recommended that you review and expand on these intents, to make them better suited to how your application will use them.
+{: important}
 
 ## Adding a content catalog to your workspace
 {: #add-catalog}

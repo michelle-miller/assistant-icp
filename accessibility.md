@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-24"
+  years: 2015, 2019
+lastupdated: "2019-02-13"
 
 ---
 
@@ -34,4 +34,4 @@ The accessibility features in this product documentation allow users to do the f
 - Use screen magnifiers to magnify what is displayed on the screen.
 - Operate specific or equivalent features by using only the keyboard.
 
-The documentation content is published in the IBM Cloud Docs site. For information about the accessibility of the site, see [Accessibility features for IBM Cloud](https://console.bluemix.net/docs/overview/accessibility/accessibility_features.html).
+The documentation content is published in the IBM Cloud Docs site. For information about the accessibility of the site, see [Accessibility features for IBM Cloud ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/overview/accessibility/accessibility_features.html).
