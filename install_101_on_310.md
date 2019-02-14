@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2019-01-09"
+  years: 2015, 2019
+lastupdated: "2019-01-14"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2019-01-09"
 {:gif: data-image-type='gif'}
 
 # Installing on IBM Cloud Private 3.1.0
-{: #install_101_on_310}
+{: #install-101-on-310}
 
 Learn how to install {{site.data.keyword.conversationshort}} version 1.0.1 into {{site.data.keyword.icpfull}} version 3.1.0.
 {: shortdesc}
@@ -31,7 +31,7 @@ Learn how to install {{site.data.keyword.conversationshort}} version 1.0.1 into 
 The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
 
 ## Software requirements
-{: #prereqs}
+{: #install-101-on-310-prereqs}
 
 - {{site.data.keyword.icpfull_notm}} 3.1.0
 - Kubernetes 1.11.1
@@ -39,7 +39,7 @@ The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based contain
 - Tiller (Helm server) 2.9.1+icp
 
 ## System requirements
-{: #sys-reqs}
+{: #install-101-on-310-sys-reqs}
 
 Table 1. Minimum hardware requirements for a development environment
 
@@ -64,7 +64,7 @@ The systems must meet these requirements:
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 ### Resource requirements
-{: #resource-requirements}
+{: #install-101-on-310-resource-reqs}
 
 The following table lists the system resources that have been verified to support a deployment.
 
@@ -81,6 +81,7 @@ Table 2. Resource requirements
 You must provide at least 60 Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
 
 ### Microservices
+{: #install-101-on-310-microservices}
 
 Microservices are individual components that together comprise the service. The {{site.data.keyword.conversationshort}} service consists of the following microservices:
 
@@ -103,6 +104,7 @@ In addition to these microservices, the Helm chart installs the following resour
 - **Minio**: Stores CLU models.
 
 ### Language considerations
+{: #install-101-on-310-lang-considerations}
 
 The components that are necessary to process different natural languages require significant amounts of data. Resources to support English are always provided. Each other language that you enable during the installation process (besides Czech) increases the amount of resources that you need to support it.
 
@@ -115,16 +117,17 @@ Table 3. Language resource requirements
 {: caption="Language resource requirements" caption-side="top"}
 
 ### Overview of the steps
+{{: #install-101-on-310-task-overview}
 
-1.  [Download service installation artifacts](#download-wa-icp)
-1.  [Prepare the cloud environment](#install-icp)
-1.  [Add the service chart to the cloud repository](#add-wa-chart-to-icp)
-1.  [Install the service](#install-wa-from-catalog)
-1.  [Verify that the installation was successful](#verify)
-1.  [Launch the tool](#launch-tool)
+1.  [Download service installation artifacts](#install-101-on-310-download-wa-icp)
+1.  [Prepare the cloud environment](#install-101-on-310-install-icp)
+1.  [Add the service chart to the cloud repository](#install-101-on-310-add-wa-chart-to-icp)
+1.  [Install the service](#install-101-on-310-install-wa-from-catalog)
+1.  [Verify that the installation was successful](#install-101-on-310-verify)
+1.  [Launch the tool](#install-101-on-310-launch-tool)
 
 ## Step 1: Purchase and download installation artifacts
-{: #download-wa-icp}
+{: #install-101-on-310-download-wa-icp}
 
 1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html){:new_window}.
 
@@ -132,14 +135,14 @@ Table 3. Language resource requirements
 
     {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} includes {{site.data.keyword.icpfull_notm}} Foundation version 2.1.0.3.
 
-    If you want to use {{site.data.keyword.icpfull_notm}} version 3.1.0 instead, download the archive for {{site.data.keyword.conversationshort}} only and install {{site.data.keyword.icpfull_notm}} 3.1.0 separately. See [Prepare the cloud environment](#install-icp).
+    If you want to use {{site.data.keyword.icpfull_notm}} version 3.1.0 instead, download the archive for {{site.data.keyword.conversationshort}} only and install {{site.data.keyword.icpfull_notm}} 3.1.0 separately. See [Prepare the cloud environment](#install-101-on-310-install-icp).
 
 The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationshort}} contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
 **Attention**: If you downloaded the PPA file between 26 September 2018 and 22 November 2018, then you have an earlier version of the service package. The installation process was simplified with the PPA file version 1.0.1 made available on 23 November 2018. Download the latest version of the PPA file, named `ibm-watson-assistant-prod-1.0.1.tgz`.
 
 ## Step 2: Prepare the cloud environment
-{: #install-icp}
+{: #install-101-on-310-install-icp}
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
@@ -177,7 +180,7 @@ You must have cluster administrator or team administrator access to the systems 
         Server: &version.Version{SemVer:"v2.9.1+icp" ... }
 
 ## Step 3: Add the Helm chart to the cloud repository
-{: #add-wa-chart-to-icp}
+{: #install-101-on-310-add-wa-chart-to-icp}
 
 Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.keyword.icpfull_notm}} internal repository.
 
@@ -210,15 +213,15 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to the {{site.data.ke
     `{icp-url}` is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
 
 ## Step 4: Install the service
-{: #install-wa-from-catalog}
+{: #install-101-on-310-install-wa-from-catalog}
 
-- [4.1 Configure DNS name resolution](#dns-resolution)
-- [4.2 Create persistent volumes](#create-pvs)
-- [4.3 Gather information about your environment](#gather-info)
-- [4.4 Install the service from the command line](#cli)
+- [4.1 Configure DNS name resolution](#install-101-on-310-dns-resolution)
+- [4.2 Create persistent volumes](#install-101-on-310-create-pvs)
+- [4.3 Gather information about your environment](#install-101-on-310-gather-info)
+- [4.4 Install the service from the command line](#install-101-on-310-cli)
 
 ### 4.1 Configure DNS name resolution
-{: #dns-resolution}
+{: #install-101-on-310-dns-resolution}
 
 Work with your DNS provider to create a subdomain on your cluster named `assistant` that can be used by the {{site.data.keyword.conversationshort}} tool user interface.
 
@@ -232,13 +235,13 @@ The installation process and all worker nodes must be able to resolve the follow
 You must be able to ping both URLs and get replies.
 
 ### 4.2 Create persistent volumes
-{: #create-pvs}
+{: #install-101-on-310-create-pvs}
 
 A PersistentVolume (PV) is a unit of storage in the cluster. In the same way that a node is a cluster resource, a persistent volume is also a resource in the cluster.
 
 For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
-When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is **local-storage**, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/create_volume.html) for the steps to take to create one.
+When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is **local-storage**, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#install-101-on-310-sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/create_volume.html) for the steps to take to create one.
 
 **Note**: You must be a cluster administrator to create local storage volumes.
 
@@ -283,7 +286,7 @@ kubectl apply -f {pv-yaml-file-name}
       - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
     - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
-    - `{size}`: Reflect the size specified in the [resource requirements table](#resource-requirements).
+    - `{size}`: Reflect the size specified in the [resource requirements table](#install-101-on-310-resource-reqs).
 
 1.  Run the `apply` command on each YAML file that you create.
 
@@ -306,7 +309,7 @@ kubectl apply -f {pv-yaml-file-name}
     - pv-80g-3
 
 ### 4.3 Gather information about your environment
-{: #gather-info}
+{: #install-101-on-310-gather-info}
 
 When you install the service, many configuration settings are applied to it for you unless you override them with your own values. You might want to change things like user names and passwords for databases or stores that are created for you, for example. **You cannot change these settings after you complete the installation.**
 
@@ -337,7 +340,7 @@ Other actions you might want to take before starting the installation include:
   After you create the secret, update the TLS Secret configuration setting (or override the configuraton value `ui.ingress.tlsSecret`) with the name of that secret. Ingress will use that certificate when users access the tooling.
 
 ### 4.4 Installing from the command line
-{: #cli}
+{: #install-101-on-310-cli}
 
 If you have trouble when you install from the catalog, you can install by using the command line interface instead.
 
@@ -422,10 +425,10 @@ To install from the command line, complete these steps:
     - Replace `{namespace-name}` with the name of the Kubernetes namespace that hosts the Docker pods. If you enable a language other than English and Czech, then the namespace must be set to `conversation`.
     - The `ibm-watson-assistant-prod-1.0.1.tgz` parameter represents the name of the downloaded file that contains the Helm chart.
 
-After the installation finishes, [verify](#verify) that it was successful.
+After the installation finishes, [verify](#install-101-on-310-verify) that it was successful.
 
 #### Configuration details
-{: #config-details}
+{: #install-101-on-310-config-details}
 
 Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. There are configuration settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
@@ -483,7 +486,7 @@ Table 5. Configuration settings
 {: caption="Configuration settings" caption-side="top"}
 
 ## Step 5: Verify that the installation was successful
-{: #verify}
+{: #install-101-on-310-verify}
 
 To check the status of the installation process:
 
@@ -515,7 +518,7 @@ To run a test Helm chart:
     {: pre}
 
 ### Uninstalling the service
-{: #uninstall}
+{: #install-101-on-310-uninstall}
 
 If you need to start the deployment over, be sure to remove all trace of the current installation before you try to install again.
 
@@ -552,7 +555,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     ```
 
 ## Step 6: Launch the tool
-{: #launch-tool}
+{: #install-101-on-310-launch-tool}
 
 1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
@@ -566,7 +569,7 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ### Authenticating API calls
-{: #authenticate-api-calls}
+{: #install-101-on-310-authenticate-api-calls}
 
 The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
 
@@ -605,9 +608,9 @@ The authentication mechanism used by your service instance impacts how you must 
     To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
 
 ## Next steps
-{: #next-steps}
+{: #install-101-on-310-next-steps}
 
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
-- To learn more about the service first, read the [overview](index.html).
-- To see how it works for yourself, follow the steps in the [getting started tutorial](getting-started.html).
+- To learn more about the service first, read the [overview](/docs/services/assistant-icp/index.html).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp/getting-started.html).

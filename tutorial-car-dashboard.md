@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-08-27"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -28,6 +28,7 @@ In this tutorial, you will use the {{site.data.keyword.conversationshort}} servi
 {: shortdesc}
 
 ## Learning objectives
+{: #tut-car-objectives}
 
 By the time you finish the tutorial, you will understand how to:
 
@@ -36,18 +37,21 @@ By the time you finish the tutorial, you will understand how to:
 - Use node and response conditions in a dialog
 
 ### Duration
+{: #tut-car-duration}
+
 This tutorial will take approximately 2 to 3 hours to complete.
 
 ### Prerequisite
+{: #tut-car-prereqs}
 
-Before you begin, complete the [Getting Started tutorial](getting-started.html).
+Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html).
 
 You will use the {{site.data.keyword.conversationshort}} tutorial workspace that you created, and add nodes to the simple dialog that you built as part of the getting started exercise.
 
 If you do not have the workspace, you can add it to your instance by importing the [watson_assistant_tutorial.json ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://github.com/watson-developer-cloud/community/raw/master/watson-assistant/watson_assistant_tutorial.json){: new_window} file.
 
 ## Step 1: Add intents and examples
-{: #intents}
+{: #tut-car-intents}
 
 Add an intent on the Intents tab. An intent is the purpose or goal expressed in user input.
 
@@ -84,7 +88,7 @@ Add an intent on the Intents tab. An intent is the purpose or goal expressed in 
 You now have four intents: the `#turn_on` intent that you just added, and the `#General_Greetings`, `#General_Endings`, and `#Customer_Care_Contact_Us` intents that were added in the *Getting started tutorial* that you completed as a prerequisite step. Each intent has a set of example utterances that help train Watson to recognize the intents in user input.
 
 ## Step 2: Add entities
-{: #entities}
+{: #tut-car-entities}
 
 An entity definition includes a set of entity *values* that can be used to trigger different responses. Each entity value can have multiple *synonyms*, which define different ways that the same value might be specified in user input.
 
@@ -165,7 +169,7 @@ You defined two entities: `@appliance` (representing an appliance the bot can tu
 When the user's input is received, the {{site.data.keyword.conversationshort}} service identifies both the intents and entities. You can now define a dialog that uses intents and entities to choose the correct response.
 
 ## Step 3: Create a complex dialog
-{: #complex-dialog}
+{: #tut-car-complex-dialog}
 
 In this complex dialog, you will create dialog branches that handle the #turn_on intent you defined earlier.
 
@@ -299,6 +303,6 @@ Now add a peer node that is triggered if the user does not specify a valid appli
 Optionally, you can import the complete [Car Dashboard Tutorial ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://github.com/watson-developer-cloud/community/raw/master/watson-assistant/car_demo_workspace.json){: new_window} workspace as a JSON file to see this same use case fleshed out even more with a longer dialog and additional functionality.
 
 ## Next steps
-{: #see-demo}
+{: #tut-car-see-demo}
 
 Interact with a demo application that was built by deploying a similar car dashboard workspace as a web application. See the [Car Dashboard Demo ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://watson-assistant-demo.ng.bluemix.net/){: new_window}.

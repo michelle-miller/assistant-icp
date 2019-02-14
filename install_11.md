@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2015, 2018
+  years: 2015, 2019
 lastupdated: "2019-02-14"
 
 ---
@@ -30,7 +30,7 @@ Learn how to install {{site.data.keyword.conversationshort}} for {{site.data.key
 
 The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
 
-{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0 and is compatible with {{site.data.keyword.icp4dfull}} version 1.2.
+{{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0. This version is compatible with {{site.data.keyword.icp4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icp4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview.html) for more information, including installation instructions.
 
 ## Software requirements
 {: #install-110-prereqs}
@@ -264,7 +264,7 @@ kubectl apply -f {pv-yaml-file-name}
       capacity:
         storage: {size}
       hostPath:
-        path: /mnt/local-storage/storage/{dir-name}
+        path: {path}
         type: ''
       persistentVolumeReclaimPolicy: Recycle
       storageClassName: local-storage
@@ -273,34 +273,20 @@ kubectl apply -f {pv-yaml-file-name}
 
     Replace the variables in this snippet with the appropriate value for the volume.
 
-    - `{name`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
+    - `{name}`: If you use a naming convention that includes the storage size information, it will be easier to recognize the volumes later. For example, you could use names like these:
 
       - For volumes 1 through 6 that have a size of 10Gi, use `pv-10g-n` where n starts at 1 and goes up to 6.
       - For volumes 7-10 that have a size of 5Gi, use `pv-5g-n` where n starts at 1 and goes up to 4.
       - For volumes 11-13 that have a size of 80Gi, use `pv-80g-n` where n starts at 1 and goes up to 3.
 
-    - `{dir-name}`: Use the same value that you use for `{name}` so you can map the volume name to its physical location.
     - `{size}`: Reflect the size specified in the [resource requirements table](#install-110-resource-reqs).
+    - `{path}`: Path on the worker node where you create the persistent volume. For example, `/mnt/local-storage/storage/{dir-name}`. For `{dir-name}`, use the same value that you use for `{name}` so you can map the volume name to its physical location.
 
 1.  Run the `apply` command on each YAML file that you create.
 
     For example: `kubectl apply -f pv_001.yaml`. Rerun this command for each file up to `kubectl apply -f pv_013.yaml`.
 
-    The result is 13 volumes with names like these:
-
-    - pv-10g-1
-    - pv-10g-2
-    - pv-10g-3
-    - pv-10g-4
-    - pv-10g-5
-    - pv-10g-6
-    - pv-5g-1
-    - pv-5g-2
-    - pv-5g-3
-    - pv-5g-4
-    - pv-80g-1
-    - pv-80g-2
-    - pv-80g-3
+    The result is 13 volumes with names like these: `pv-10g-1`, `pv-10g-2`, `pv-10g-3`, `pv-10g-4`, `pv-10g-5`, `pv-10g-6`, `pv-5g-1`, `pv-5g-2`, `pv-5g-3`, `pv-5g-4`, `pv-80g-1`, `pv-80g-2`, and `pv-80g-3`.
 
 ## Step 5: Install the service from the catalog
 {: #install-110-admin-install}
@@ -332,7 +318,7 @@ kubectl apply -f {pv-yaml-file-name}
     ```
     {: pre}
 
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage.
+    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage. For example, `ibm-watson-assistant-prod-1.1.0.tar.gz`.
     - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
     - `{namespace-name}` is the Docker namespace that hosts the Docker image that you created in Step 1.
 
@@ -353,17 +339,21 @@ kubectl apply -f {pv-yaml-file-name}
 
     Click **Next** multiple times to read the full agreement, and then click **OK** to close the license terms. If you have read and agree to the license agreement, select the checkbox.
 
-1.  When you install the service, many configuration settings are applied to it for you unless you override them with your own values. At a minimum, provide your own values for the following configurable setting:
+1.  When you install the service, many configuration settings are applied to it for you unless you override them with your own values.
 
+    At a minimum, provide your own values for the following configurable setting:
+
+    - Deployment Type
+    - Languages
     - Hostname of the ICP cluster Master node
 
-1.  You might want to change additional configuration settings to specify things like user names and passwords for databases or stores that are created for you, for example. **You cannot change these settings after you complete the installation.**
+1.  You might want to change additional configuration settings at this timem. **You cannot change these settings after you complete the installation.**
 
     See [Configuration details](#install-110-config-details) for help understanding the configuration choices.
 
 1.  Click **Install**.
 
-    **Attention**: You might see an error message (that begins with `Error making request: Error: ESOCKETTIMEDOUT POST`) during the installation process. However, you can ignore the message; the installation continues in the background. Give it time (up to 6 minutes) to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#install-110-verify).
+You can check the Helm releases page to find out the status of the installation. See [Verify that the installation was successful](#install-110-verify).
 
 #### Configuration details
 {: #install-110-config-details}
@@ -375,7 +365,7 @@ Table 5. Configuration settings
 | Setting | Description |
 |---------|-------------|
 | Helm release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
-| Target namespace | Namespace used within the cluster to identify this service. Specify the namespace that you created earlier. |
+| Target namespace | Namespace used within the cluster to identify this service. This must be the same namespace to which you uploaded the product archive file earlier. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. This is the domain where you log in to the cluster. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as the `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is not a DNS-resolvable name, such as `mycluster.icp`. Specify the IP address of the master node. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |

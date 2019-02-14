@@ -51,7 +51,6 @@ Watson Assistant for IBM Cloud Private
     [API reference](https://cloud.ibm.com/apidocs/assistant-icp)
     dialog-methods.md
     expression-language.md
-    filter-reference.md
     sample-applications.md
     lang-support.md
     information-security.md

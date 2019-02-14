@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-03-19"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -27,6 +27,7 @@ In this tutorial, you will see firsthand how digressions work.
 {: shortdesc}
 
 ## Learning objectives
+{: #tut-dig-objectives}
 
 By the time you finish the tutorial, you will understand how:
 
@@ -35,14 +36,17 @@ By the time you finish the tutorial, you will understand how:
 - to test digression settings for a dialog
 
 ### Duration
+{: #tut-dig-duration}
+
 This tutorial will take approximately 20 minutes to complete.
 
 ### Prerequisite
+{: #tut-dig-prereqs}
 
-If you do not have a {{site.data.keyword.conversationshort}} instance, complete the **Before you begin** step from the [Getting Started tutorial](getting-started.html#prerequisites) to create one.
+If you do not have a {{site.data.keyword.conversationshort}} instance, complete the **Before you begin** step from the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html#prerequisites) to create one.
 
 ## Step 1: Import the Digressions showcase workspace
-{: #import-digression-json}
+{: #tut-dig-import-digression-json}
 
 First you will need to import the *Digression showcase* workspace into your {{site.data.keyword.conversationshort}} instance.
 
@@ -137,9 +141,11 @@ You can configure a dialog node to not go back to the node that the service digr
 Congratulations! You have successfully digressed away from a dialog without returning.
 
 ## Summary
+{: #tut-dig-summary}
 
 In this tutorial you experienced how digressions work, and saw how individual dialog node settings can impact the digressions behavior.
 
 ## Next steps
+{: #tut-dig-next-steps}
 
-For help as you configure digressions for your own dialog, see [Digressions](dialog-runtime.html#digressions).
+For help as you configure digressions for your own dialog, see [Digressions](/docs/services/assistant-icp/dialog-runtime.html#digressions).

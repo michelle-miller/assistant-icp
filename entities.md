@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-17"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -91,7 +91,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
 
     > **Important:** Don't include sensitive or personal information in entity names or values. The names and values can be exposed in URLs in an app.
 
-1.  For **Fuzzy Matching**, click the button to select either on or off; fuzzy matching is off by default. This feature is available for languages noted in the [Supported languages](lang-support.html) topic.
+1.  For **Fuzzy Matching**, click the button to select either on or off; fuzzy matching is off by default. This feature is available for languages noted in the [Supported languages](/docs/services/assistant-icp/lang-support.html) topic.
 
     ***Fuzzy matching***
     {: #fuzzy-matching}
@@ -135,7 +135,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
       - `email`: `\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b`, e.g. name@ibm.com
       - `website`: `(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$`, e.g. https://www.ibm.com
 
-      Often when using pattern entities, it will be necessary to store the text that matches the pattern in a context variable (or action variable), from within your dialog tree. For additional information, see [Defining a context variable](dialog-runtime.html#context-var-define).
+      Often when using pattern entities, it will be necessary to store the text that matches the pattern in a context variable (or action variable), from within your dialog tree. For additional information, see [Defining a context variable](/docs/services/assistant-icp/dialog-runtime.html#context-var-define).
 
       Imagine a case where you are asking a user for their email address. The dialog node condition will contain a condition similar to `@contactInfo:email`. In order to assign the user-entered email as a context variable, the following syntax can be used to capture the pattern match within the dialog node's response section:
       
@@ -156,7 +156,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
       - Variable: area_code
       - Value: `<? @fullUSphone.groups[1] ?>` 
 
-      For additional information about using capture groups in your dialog, see [Storing and recognizing entity pattern groups in input](dialog-tips.html#get-pattern-groups).
+      For additional information about using capture groups in your dialog, see [Storing and recognizing entity pattern groups in input](/docs/services/assistant-icp/dialog-tips.html#get-pattern-groups).
 
       The pattern matching engine employed by the {{site.data.keyword.conversationshort}} service has some syntax limitations, which are necessary in order to avoid performance concerns which can occur when using other regular expression engines.
         - Entity patterns may not contain:
@@ -253,7 +253,7 @@ To see the intent examples you have used in annotating your contextual entities:
 
     ![Annotation view selector highlighted](images/oe-annotate2.png)
 
-    If you have already [created annotated entities from the Intents tab](entities.html#create-open-entities), you will see a list of user examples with their associated intents.
+    If you have already [created annotated entities from the Intents tab](#create-open-entities), you will see a list of user examples with their associated intents.
 
     **NOTE**: Contextual entities understand values that you have not explicitly defined. The system makes predictions about additional entity values based on how your user examples are annotated, and uses those values to train other entities. Any similar user examples are added to the *Annotation* view, so you can see how this option impacts training.
 
@@ -355,7 +355,7 @@ System entities are centrally maintained, so any updates are available automatic
 
 1.  Browse through the list of system entities to choose the ones that are useful for your application.
     - To see more information about a system entity, including examples of matching input, click the entity in the list.
-    - For details about the available system entities, see [System entities](system-entities.html).
+    - For details about the available system entities, see [System entities](/docs/services/assistant-icp/system-entities.html).
 
 1.  Click the toggle switch next to a system entity to enable or disable it.
 

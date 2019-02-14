@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-07"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -36,11 +36,11 @@ To expand variable values inside other variables, or apply methods to output tex
 
 The following sections describe methods you can use to process values. They are organized by data type:
 
-- [Arrays](dialog-methods.html#arrays)
-- [Date and Time](dialog-methods.html#date-time)
-- [Numbers](dialog-methods.html#numbers)
-- [Objects](dialog-methods.html#objects)
-- [Strings](dialog-methods.html#strings)
+- [Arrays](#arrays)
+- [Date and Time](#date-time)
+- [Numbers](#numbers)
+- [Objects](#objects)
+- [Strings](#strings)
 
 ## Arrays
 {: #arrays}
@@ -502,7 +502,7 @@ To define a new array that will be filled in with values that are provided by us
 
 Several methods are available to work with date and time.
 
-For information about how to recognize and extract date and time information from user input, see [@sys-date and @sys-time entities](system-entities.html#sys-datetime).
+For information about how to recognize and extract date and time information from user input, see [@sys-date and @sys-time entities](/docs/services/assistant-icp/system-entities.html#sys-datetime).
 
 ### .after(String date or time)
 
@@ -882,11 +882,11 @@ The `(60*60*1000L)` value represents an hour in milliseconds. This expression ad
 
 These methods help you get and reformat number values.
 
-For information about system entities that can recognize and extract numbers from user input, see [@sys-number entity](system-entities.html#sys-number).
+For information about system entities that can recognize and extract numbers from user input, see [@sys-number entity](/docs/services/assistant-icp/system-entities.html#sys-number).
 
-If you want the service to recognize specific number formats in user input, such as order number references, consider creating a pattern entity to capture it. See [Creating entities](entities.html#creating-entities) for more details.
+If you want the service to recognize specific number formats in user input, such as order number references, consider creating a pattern entity to capture it. See [Creating entities](/docs/services/assistant-icp/entities.html#creating-entities) for more details.
 
-If you want to change the decimal placement for a number, to reformat a number as a currency value, for example, see the [String format() method](dialog-methods.html#java.lang.String).
+If you want to change the decimal placement for a number, to reformat a number as a currency value, for example, see the [String format() method](/docs/services/assistant-icp/dialog-methods.html#java.lang.String).
 
 ### toDouble()
 

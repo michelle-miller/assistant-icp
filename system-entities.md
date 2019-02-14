@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-07"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -22,10 +22,10 @@ lastupdated: "2018-09-07"
 
 # System entity details
 
-This reference section provides complete information about the available system entities. For more information about system entities and how to use them, refer to [Defining entities](entities.html#enable_system_entities) and search for "Enabling system entities".
+This reference section provides complete information about the available system entities. For more information about system entities and how to use them, refer to [Defining entities](/docs/services/assistant-icp/entities.html#enable_system_entities) and search for "Enabling system entities".
 {: shortdesc}
 
-System entities are available for languages noted in the [Supported languages](lang-support.html) topic.
+System entities are available for languages noted in the [Supported languages](/docs/services/assistant-icp/lang-support.html) topic.
 
 ## @sys-currency entity
 {: #sys-currency}
@@ -112,7 +112,7 @@ For time phrases like "for the last 3 days" or "in the next 4 hours", the logic 
 
 Mentions of a date or time that are relative to the current time are resolved with respect to a chosen time zone. By default, this is UTC (GMT). This means that by default, REST API clients located in time zones different from UTC will observe the value of `now` extracted according to the current UTC time.
 
-Optionally, the REST API client can add the local timezone as the context variable `$timezone`. This context variable should be sent with every client request. For example, the `$timezone` value should be `America/Los_Angeles`, `EST`, or `UTC`. For a full list of supported time zones, see [Supported time zones](supported-timezones.html).
+Optionally, the REST API client can add the local timezone as the context variable `$timezone`. This context variable should be sent with every client request. For example, the `$timezone` value should be `America/Los_Angeles`, `EST`, or `UTC`. For a full list of supported time zones, see [Supported time zones](/docs/services/assistant-icp/supported-timezones.html).
 
 When the `$timezone` variable is provided, the values of relative @sys-date and @sys-time mentions are computed based on the client time zone instead of UTC.
 
@@ -158,7 +158,7 @@ For the input `at 6 pm` @sys-time returns these values:
 
 - @sys-time always returns the time in this format: HH:mm:ss.
 
-For information about processing date and time values, see the [Date and time](dialog-methods.html#date-time) method reference.
+For information about processing date and time values, see the [Date and time](/docs/services/assistant-icp/dialog-methods.html#date-time) method reference.
 {: tip}
 
 ## @sys-number entity
@@ -211,7 +211,7 @@ You get equivalent results for other supported languages.
 
   Use `@sys-number AND @sys-number<4` instead. If no number is present, the first condition evaluates to false, which appropriately results in the whole condition evaluating to false.
 
-For information about processing number values, see the [Numbers](dialog-methods.html#numbers) method reference.
+For information about processing number values, see the [Numbers](/docs/services/assistant-icp/dialog-methods.html#numbers) method reference.
 {: tip}
 
 ## @sys-percentage entity

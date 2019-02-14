@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-16"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -28,6 +28,7 @@ In this tutorial, you will use the {{site.data.keyword.conversationshort}} servi
 {: shortdesc}
 
 ## Learning objectives
+{: #tut-objectives}
 
 By the time you finish the tutorial, you will understand how to:
 
@@ -39,17 +40,21 @@ By the time you finish the tutorial, you will understand how to:
 - Set and reference context variables
 
 ### Duration
+{: #tut-duration}
+
 This tutorial will take approximately 2 to 3 hours to complete.
 
 ### Prerequisite
+{: #tut-prereqs}
 
-Before you begin, complete the [Getting Started tutorial](getting-started.html).
+Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html).
 
 You will use the **{{site.data.keyword.conversationshort}} tutorial** workspace that you created, and add nodes to the simple dialog that you built as part of the getting started exercise.
 
 If you do not have the workspace, you can add it to your instance by importing the [watson_assistant_tutorial.json ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://github.com/watson-developer-cloud/community/raw/master/watson-assistant/watson_assistant_tutorial.json){: new_window} file.
 
 ## Step 1: Plan the dialog
+{: #tut-plan-dialog}
 
 You are building an assistant for a restaurant named *Truck Stop Gourmand* that has one location and a thriving cake-baking business. You want the simple assistant to answer user questions about the restaurant, its menu, and to cancel customer cake orders. Therefore, you need to create intents that handle inquiries related to the following subjects:
 
@@ -60,11 +65,12 @@ You are building an assistant for a restaurant named *Truck Stop Gourmand* that 
 You'll start by creating intents that represent these subjects, and then build a dialog that responds to user questions about them.
 
 ## Step 2: Answer questions about the restaurant
-{: #add-about-intent}
+{: #tut-add-about-intent}
 
 Add an intent that recognizes when customers ask for details about the restaurant itself. An intent is the purpose or goal expressed in user input. The `#General_About_You` intent that is provided with the *General* content catalog serves a similar function, but its user examples are designed to focus on queries about the assistant as opposed to the business that is using the assistant to help its customers. So, you will add your own intent.
 
 ### Add the #about_restaurant intent
+{: #tut-add-about-restaurant}
 
 1.  Click the **Intents** tab.
 1.  Click **Add intent**.
@@ -94,7 +100,7 @@ Add an intent that recognizes when customers ask for details about the restauran
 You added an intent and provided examples of utterances that real users might enter to trigger this intent.
 
 ### Add a dialog node that is triggered by the #about_restaurant intent
-{: #trigger-about-intent}
+{: #tut-trigger-about-intent}
 
 Add a dialog node that recognizes when the user input maps to the intent that you created in the previous step, meaning its condition checks whether the service recognized the `#about_restaurant` intent from the user input.
 
@@ -124,7 +130,7 @@ Add a dialog node that recognizes when the user input maps to the intent that yo
 1.  Click ![Close](images/close.png) to close the edit view.
 
 ### Test the #about_restaurant dialog node
-{: #test-about-intent}
+{: #tut-test-about-intent}
 
 Test the intent by checking whether user utterances that are similar to, but not exactly the same as, the examples you added to the training data have successfully trained the service to recognize input with an `#about_restaurant` intent.
 
@@ -151,11 +157,12 @@ The `#about_restaurant` intent is designed to recognize a variety of general que
 For general, low-hanging fruit types of questions, a single, general answer is suitable.
 
 ## Step 3: Answer questions about the menu
-{: #menu}
+{: #tut-menu}
 
 A key question from potential restaurant customers is about the menu. The Truck Stop Gourmand restaurant changes the menu daily. In addition to its standard menu, it has vegetarian and cake shop menus. When a user asks about the menu, the dialog needs to find out which menu to share, and then provide a hyperlink to the menu that is kept up to date daily on the restaurant's website. You never want to hard-code information into a dialog node if that information changes regularly.
 
 ### Add a #menu intent
+{: #tut-add-menu}
 
 1.  Click the **Intents** tab.
 1.  Click **Add intent**.
@@ -186,7 +193,7 @@ A key question from potential restaurant customers is about the menu. The Truck 
 1.  Click the **Close** ![Close arrow](images/close_arrow.png) icon to finish adding the `#menu` intent.
 
 ### Add a dialog node that is triggered by the #menu intent
-{: #trigger-menu-intent}
+{: #tut-trigger-menu-intent}
 
 Add a dialog node that recognizes when the user input maps to the intent that you created in the previous step, meaning its condition checks whether the service recognized the `#menu` intent from the user input.
 
@@ -246,7 +253,7 @@ Add a dialog node that recognizes when the user input maps to the intent that yo
 1.  Click ![Close](images/close.png) to close the edit view.
 
 ### Add a @menu entity
-{: #add-menu-entity}
+{: #tut-add-menu-entity}
 
 To recognize the different types of menus that customers indicate they want to see, you will add a `@menu` entity. Entities represent a class of object or a data type that is relevant to a user's purpose. By checking for the presence of specific entities in the user input, you can add more responses, each one tailored to address a distinct user request. In this case, you will add a `@menu` entity that can distinguish between different menu types.
 
@@ -304,7 +311,7 @@ To recognize the different types of menus that customers indicate they want to s
 1.  Click the **Close** ![Close arrow](images/close_arrow.png) icon to finish adding the `@menu` entity.
 
 ### Add child nodes that are triggered by the @menu entity types
-{: #trigger-menu-entity}
+{: #tut-trigger-menu-entity}
 
 In this step, you will add child nodes to the dialog node that checks for the `#menu` intent. Each child node will show a different response depending on the `@menu` entity type the user chooses from the options list.
 
@@ -358,7 +365,7 @@ In this step, you will add child nodes to the dialog node that checks for the `#
 You have added nodes that recognize user requests for menu details. Your response informs the user that there are three types of menus available, and asks them to choose one. When the user chooses a menu type, a response is displayed that provides a hypertext link to a web page with the requested menu details.
 
 ### Test the menu options dialog nodes
-{: #test-menu-options-intent}
+{: #tut-test-menu-options-intent}
 
 Test the dialog nodes that you added to recognize menu questions.
 
@@ -385,12 +392,12 @@ Well done. You have succesfully added an intent and entity that can recognize us
 The `#menu` intent represents a common, key need of potential restaurant customers. Due to its importance and popularity, you added a more complex section to the dialog to address it well.
 
 ## Step 4: Manage cake orders
-{: #manage-orders}
+{: #tut-manage-orders}
 
 Customers place orders in person, over the phone, or by using the order form on the website. After the order is placed, users can cancel the order through the virtual assistant. First, define an entity that can recognize order numbers. Then, add an intent that recognizes when users want to cancel a cake order.
 
 ### Adding an order number pattern entity
-{: add-pattern-entity}
+{: #tut-add-pattern-entity}
 
 You want the assistant to recognize order numbers, so you will create a pattern entity to recognize the unique format that the restaurant uses to identify its orders. The syntax of order numbers used by the restaurant's bakery is 2 upper-case letters followed by 5 numbers. For example, `YR34663`. Add an entity that can recognize this character pattern.
 
@@ -416,7 +423,7 @@ You want the assistant to recognize order numbers, so you will create a pattern 
     ![Shows that the @order_number entity was added.](images/gs-ass-entity-added.png)
 
 ### Add a cancel order intent
-{: #cancel-order-intent}
+{: #tut-cancel-order-intent}
 
 1.  Click the **Intents** tab.
 1.  Click **Add intent**.
@@ -439,7 +446,7 @@ You want the assistant to recognize order numbers, so you will create a pattern 
 1.  Click the **Close** ![Close arrow](images/close_arrow.png) icon to finish adding the `#cancel_order` intent.
 
 ### Add a yes intent
-{: #yes-intent}
+{: #tut-yes-intent}
 
 Before you perform an action on the user's behalf, you must get confirmation that you are taking the proper action. Add a #yes intent to the dialog that can recognize when a user agrees with what the service is proposing.
 
@@ -466,7 +473,7 @@ Before you perform an action on the user's behalf, you must get confirmation tha
 1.  Click the **Close** ![Close arrow](images/close_arrow.png) icon to finish adding the `#yes` intent.
 
 ### Add dialog nodes that can manage requests to cancel an order
-{: #cancel-order-dialog}
+{: #tut-cancel-order-dialog}
 
 Now, add a dialog node that can handle requests to cancel a cake order.
 
@@ -611,7 +618,7 @@ Now, add a dialog node that can handle requests to cancel a cake order.
     ![Shows setting the cancel order node being set to skip user input.](images/gs-ass-skip-user-input.png)
 
 ### Test order cancelations
-{: #test-cancel-order}
+{: #tut-test-cancel-order}
 
 Test whether the service can recognize character patterns that match the pattern used for product order numbers in user input.
 
@@ -684,17 +691,19 @@ If you do more testing, you might find that the dialog isn't very helpful in sce
 
 Now, when you test, you can provide a set of number or a mix of numbers and text as input, and the dialog reminds you of the correct order number format. You have successfully tested your dialog, found a weakness in it, and corrected it.
 
-Another way you can address this type of scenario is to add a node with slots. See the [Adding a node with slots to a dialog](tutorial-slots.html) tutorial to learn more about using slots.
+Another way you can address this type of scenario is to add a node with slots. See the [Adding a node with slots to a dialog](/docs/services/assistant-icp/tutorial-slots.html) tutorial to learn more about using slots.
 {:tip}
 
 ## Step 5: Add the personal touch
-{: #get-username}
+{: #tut-get-username}
 
 If the user shows interest in the bot itself, you want the virtual assistant to recognize that curiosity and engage with the user in a more personal way. You might remember the `#General_About_You` intent, which is provided with the *General* content catalog, that we considered using earlier, before you added your own custom `#about_restaurant` intent. It is built to recognize just such questions from the user. Add a node that condition on this intent. In your response, you can ask for the user's name and save it to a $username variable that you can use elsewhere in the dialog, if available.
 
 First, you need to make sure the service will recognize a name if the user provides one. So, you can enable the `@sys-person` entity, which is designed to recognize common first and last names (in English).
 
 ### Add a person system entity
+{: #tut-add-sys-person}
+
 The service provides a number of *system entities*, which are common entities that you can use for any application.
 
 1.  Click the **Entities** tab, and then click **System entities**.
@@ -704,6 +713,8 @@ The service provides a number of *system entities*, which are common entities th
     ![Shows the @sys-person entity being enabled.](images/gs-ass-enable-sys-person.png)
 
 ### Add a node that handles questions about the bot
+{: #tut-answer-about-bot}
+
 Now, add a dialog node that can recognize the user's interest in the bot, and respond.
 
 1.  Click the **Dialogs** tab.
@@ -765,7 +776,7 @@ Now, add a dialog node that can recognize the user's interest in the bot, and re
 If, at run time, the user triggers this node and provides a name, then you will know the user's name. If you know it, you should use it! Add conditional responses to the greeting dialog node you added previously to include a conditional response that uses the user name, if it is known.
 
 ### Add the user name to the greeting
-{: #get-username}
+{: #tut-get-username}
 
 If you know the user's name, you should include it in your greeting message. To do so, add conditional responses, and include a variation of the greeting that includes the user's name.
 
@@ -790,7 +801,7 @@ If you know the user's name, you should include it in your greeting message. To 
 1.  Click ![Close](images/close.png) to close the edit view.
 
 ### Test personalization
-{: #test-personalize}
+{: #tut-test-personalize}
 
 Test whether the service can recognize and save a user's name, and then refer to the user by it later.
 
@@ -813,10 +824,11 @@ Test whether the service can recognize and save a user's name, and then refer to
 You can add a conditional response that conditions on and includes the user's name for any other responses where personalization would add value to the conversation.
 
 ## Next steps
-{: #deploy}
+{: #tut-deploy}
 
 Now that you have built and tested your workspace, you can deploy it by connecting it to a user interface. There are several ways you can do this.
 
 ### Build your own front-end application
+{: #tut-build-client-app}
 
-You can use the Watson SDKs to [build your own](develop-app.html) front-end application that connects to your workspace using the {{site.data.keyword.conversationshort}} REST API.
+You can use the Watson SDKs to [build your own](/docs/services/assistant-icp/develop-app.html) front-end application that connects to your workspace using the {{site.data.keyword.conversationshort}} REST API.

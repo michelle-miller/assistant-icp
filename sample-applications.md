@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-08-01"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -21,6 +21,7 @@ lastupdated: "2018-08-01"
 {:swift: .ph data-hd-programlang='swift'}
 
 # Sample apps
+{: #sample-applications}
 
 Explore our sample applications to understand what you can develop with {{site.data.keyword.conversationshort}}.
 {: shortdesc}
