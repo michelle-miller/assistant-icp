@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-12-28"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -31,10 +31,10 @@ The assistant that you build is hosted by {{site.data.keyword.icpfull}}.
 
 For information about artifact limits per plan, see these topics:
 
-- [Workspaces](configure-workspace.html#workspace-limits)
-- [Dialog nodes](dialog-build.html#dialog-node-limits)
-- [Intents](intents.html#intent-limits)
-- [Entities](entities.html#entity-limits)
+- [Workspaces](/docs/services/assistant-icp/configure-workspace.html#workspace-limits)
+- [Dialog nodes](/docs/services/assistant-icp/dialog-build.html#dialog-node-limits)
+- [Intents](/docs/services/assistant-icp/intents.html#intent-limits)
+- [Entities](/docs/services/assistant-icp/entities.html#entity-limits)
 
 ## Service API Versioning
 {: shortdesc}
@@ -52,7 +52,7 @@ The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is 
 
 The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
 
-**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 2.1.0.3. If you are using {{site.data.keyword.icpfull}} version 3.1.0, then see [Authenticating API calls](install_101_on_310.html#authenticate-api-calls) instead.
+**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 2.1.0.3. If you are using {{site.data.keyword.icpfull}} version 3.1.0, then see [Authenticating API calls](/docs/services/assistant-icp/install_101_on_310.html#authenticate-api-calls) instead.
 
 1.  Get the service credentials.
 

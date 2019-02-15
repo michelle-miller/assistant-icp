@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -21,6 +21,7 @@ lastupdated: "2019-02-05"
 {:swift: .ph data-hd-programlang='swift'}
 
 # About
+{: #index}
 
 With {{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}}, you can build a solution that understands natural-language input and uses machine learning to respond to customers in a way that simulates a conversation between humans.
 {: shortdesc}
@@ -64,23 +65,25 @@ Here's how you will implement your conversation:
 
 Read more about these implementation steps by following these links:
 
-- [Intent creation overview](intents.html#intent-described)
-- [Dialog overview](dialog-overview.html)
-- [Entity creation overview](entities.html#entity-described)
-- [Building a client application](develop-app.html)
+- [Intent creation overview](/docs/services/assistant-icp/intents.html#intent-described)
+- [Dialog overview](/docs/services/assistant-icp/dialog-overview.html)
+- [Entity creation overview](/docs/services/assistant-icp/entities.html#entity-described)
+- [Building a client application](/docs/services/assistant-icp/develop-app.html)
 
 ## Browser support
 
 The {{site.data.keyword.conversationshort}} service tooling requires the same level of browser software as is required by {{site.data.keyword.icpfull_notm}}. See [Supported browsers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/supported_browsers.html){: new_window} for details.
 
 ## Language support
+{: #index-lang-support}
 
-Language support by feature is detailed in the [Supported languages](lang-support.html) topic.
+Language support by feature is detailed in the [Supported languages](/docs/services/assistant-icp/lang-support.html) topic.
 
 ## Next steps
+{: index-next steps}
 
-- [Get started](getting-started.html) with the service
-- Try out some [demos](sample-applications.html).
+- [Get started](/docs/services/assistant-icp/getting-started.html) with the service
+- Try out some [demos](/docs/services/assistant-icp/sample-applications.html).
 - View the list of [developer resources ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/watson/developer-resources/){: new_window}.
 
 Still have questions? Contact [IBM Sales ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/marketing/iwm/dre/signup?source=urx-20970){: new_window}.
@@ -88,10 +91,10 @@ Still have questions? Contact [IBM Sales ![External link icon](../../icons/launc
 ## Terms and notices
 {: #notices}
 
-See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/overview/terms-of-use/notices.html) for information about the terms of service.
+See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html) for information about the terms of service.
 
 ## Trademarks
-{: trademarks}
+{: #trademarks}
 
 IBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. A current list of IBM trademarks is available on the web at [Copyright and trademark information ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/legal/us/en/copytrade.shtml).
 

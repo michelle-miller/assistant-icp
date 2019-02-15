@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-08"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -21,6 +21,8 @@ lastupdated: "2019-02-08"
 {:swift: .ph data-hd-programlang='swift'}
 
 # Supported languages
+{: #lang-support}
+
 The {{site.data.keyword.conversationshort}} service supports the languages listed. Individual features of the service are supported to a greater or lesser extent for each language.
 {: shortdesc}
 
@@ -34,7 +36,7 @@ The first table shows the level of support for all features, except those relate
 
 **Table 1. Feature support details**
 
-| Language | **[Defining intents](intents.html)** and **[dialog](dialog-build.html)** | **[Absolute scoring and 'Mark as irrelevant'](intents.html#mark-irrelevant)** | **[Content Catalog](catalog.html)** |
+| Language | **[Defining intents](/docs/services/assistant-icp/intents.html)** and **[dialog](/docs/services/assistant-icp/dialog-build.html)** | **[Absolute scoring and 'Mark as irrelevant'](/docs/services/assistant-icp/intents.html#mark-irrelevant)** | **[Content Catalog](/docs/services/assistant-icp/catalog.html)** |
 |:---|:---:|:---:|:---:|
 | **English (en)**                   | GA | GA | GA |
 | **Arabic (ar)**                    | GA | Beta | GA |
@@ -53,7 +55,7 @@ The first table shows the level of support for all features, except those relate
 
 **Table 2. Entity feature support details**
 
-| Language | **[Defining entities](entities.html)** | **System entities ([number](system-entities.html#sys-number), [currency](system-entities.html#sys-currency), [percentage](system-entities.html#sys-percentage), [date, time](system-entities.html#sys-datetime))** | **[Entity fuzzy matching](entities.html#fuzzy-matching)** | **[Contextual entities](entities.html#defining-contextual-entities)** |
+| Language | **[Defining entities](/docs/services/assistant-icp/entities.html)** | **System entities ([number](/docs/services/assistant-icp/system-entities.html#sys-number), [currency](/docs/services/assistant-icp/system-entities.html#sys-currency), [percentage](/docs/services/assistant-icp/system-entities.html#sys-percentage), [date, time](/docs/services/assistant-icp/system-entities.html#sys-datetime))** | **[Entity fuzzy matching](/docs/services/assistant-icp/entities.html#fuzzy-matching)** | **[Contextual entities](/docs/services/assistant-icp/entities.html#defining-contextual-entities)** |
 |:---|:---:|:---:|:---:|:---:|
 | **English (en)**                   | GA | GA | Beta (Stemming, misspelling, and partial match) | Beta |
 | **Arabic (ar)**  | GA | Beta | Beta (Misspelling only) | NA |

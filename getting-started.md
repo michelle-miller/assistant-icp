@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-12-27"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -31,7 +31,7 @@ In this short tutorial, we introduce the {{site.data.keyword.conversationshort}}
 ## Before you begin
 {: #prerequisites}
 
-You'll need a service instance to start. The administrator must install the service for you. Details are provided in [Installation checklist](install.html).
+You'll need a service instance to start. The administrator must install the service for you. Details are provided in [Installation checklist](/docs/services/assistant-icp/install.html).
 
 If a {{site.data.keyword.conversationshort}} service instance is already set up in your {{site.data.keyword.BluOpenStackDed_full}} environment, then you're all set with these prerequisites. Go to [Step 1](#launch-tool).
 
@@ -59,7 +59,7 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
 
 Your first step in the {{site.data.keyword.conversationshort}} tool is to create a workspace.
 
-A [*workspace*](configure-workspace.html) is a container for the artifacts that define the conversation flow.
+A [*workspace*](/docs/services/assistant-icp/configure-workspace.html) is a container for the artifacts that define the conversation flow.
 
 1.  From the home page of the {{site.data.keyword.conversationshort}} tool, click the **Workspaces** tab.
 1.  Click **Create**.
@@ -87,7 +87,7 @@ You have successfully started to build your training data by adding prebuilt con
 ## Step 4: Build a dialog
 {: #build-dialog}
 
-A [dialog](dialog-build.html) defines the flow of your conversation in the form of a logic tree. Each node of the tree has a condition that triggers it, based on user input.
+A [dialog](/docs/services/assistant-icp/dialog-build.html) defines the flow of your conversation in the form of a logic tree. Each node of the tree has a condition that triggers it, based on user input.
 
 We'll create a simple dialog that handles the `#General_Greetings` and `#General_Ending` intents, each with a single node.
 
@@ -184,5 +184,5 @@ Open the sample workspace to see intents similar to the ones you just created pl
 
 This tutorial is built around a simple example. For a real application, you'll need to define some more interesting intents, some entities, and a more complex dialog.
 
-- Try the advanced [tutorial](tutorial.html) to add entities and clarify a user's purpose.
-- Check out the [sample apps](sample-applications.html).
+- Try the advanced [tutorial](/docs/services/assistant-icp/tutorial.html) to add entities and clarify a user's purpose.
+- Check out the [sample apps](/docs/services/assistant-icp/sample-applications.html).

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-21"
+  years: 2015, 2019
+lastupdated: "2019-09-21"
 
 ---
 
@@ -21,6 +21,7 @@ lastupdated: "2018-09-21"
 {:swift: .ph data-hd-programlang='swift'}
 
 # Defining intents
+{: #intents}
 
 ***Intents*** are purposes or goals expressed in a customer's input, such as answering a question or processing a bill payment. By recognizing the intent expressed in a customer's input, the {{site.data.keyword.conversationshort}} service can choose the correct dialog flow for responding to it.
 {: shortdesc}
@@ -89,7 +90,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create intents.
     ![Screen capture shows that the definition Pay my account balance is added as a user example.](images/define_intent.png)
     {: #entity-as-example}
 
-    You can also add entity annotations directly from user examples. See [Defining contextual entities](entities.html#defining-contextual-entities).
+    You can also add entity annotations directly from user examples. See [Defining contextual entities](/docs/services/assistant-icp/entities.html#defining-contextual-entities).
 
     *Important*:
 
@@ -106,9 +107,9 @@ Use the {{site.data.keyword.conversationshort}} tool to create intents.
     - Is the `@PhoneModelName` in stock?
     - Add a `@PhoneModelName` to my order.
 
-    ![Screen capture shows the @PhoneModelName entity being referenced in a user example for the #order_phone intent](images/define_intent_entity.png)
+    ![Screen capture shows the @PhoneModelName entity being referenced in a user example for the #order_phone intent](/docs/services/assistant-icp/images/define_intent_entity.png)
 
-    **Note**: Currently, you can only directly reference synonym entities that you define (pattern values are ignored). You cannot use [system entities](system-entities.html).
+    **Note**: Currently, you can only directly reference synonym entities that you define (pattern values are ignored). You cannot use [system entities](/docs/services/assistant-icp/system-entities.html).
 
     **Important**: If you choose to reference an entity as an intent example (for example, `@PhoneModelName`) *anywhere* in your training data it cancels out the value of using a direct reference (for example, *Galaxy S8*) in an intent example anywhere else. All intents will then use the entity-as-an-intent-example approach; you cannot select this approach for a specific intent only.
 
@@ -235,7 +236,7 @@ If your intents are not being correctly recognized, consider making the followin
 
 ## Absolute scoring and Mark as irrelevant
 
-As of February 2017, there is a new algorithm for scoring intent confidence and returning intents. You can also mark inputs as *irrelevant*. These changes might require you to [upgrade to your workspace ![External link icon](../../icons/launch-glyph.svg "External link icon")](upgrading.html){: new_window}.
+As of February 2017, there is a new algorithm for scoring intent confidence and returning intents. You can also mark inputs as *irrelevant*. These changes might require you to [upgrade to your workspace ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/services/assistant-icp/upgrading.html){: new_window}.
 
 ### Absolute scoring
 
@@ -246,7 +247,7 @@ As intent confidence scores change, your dialogs may need restructuring. For exa
 ### Mark as irrelevant
 {: #mark-irrelevant}
 
-Refer to [supported languages](lang-support.html) for the availability of this feature.
+Refer to [supported languages](/docs/services/assistant-icp/lang-support.html) for the availability of this feature.
 
 After you upgrade your workspace, you can [test input](#testing-your-intents) in the *Try it out* pane to see the changes. You can use **Mark as irrelevant** to indicate that the input is not related to your application.
 

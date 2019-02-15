@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-12-17"
+  years: 2015, 2019
+lastupdated: "2019-02-14"
 
 ---
 
@@ -44,7 +44,7 @@ The body of the /message API call request and response includes the following ob
   ```
   {: codeblock}
 
-  See [Retaining information across dialog turns](dialog-runtime.html#context) for more information.
+  See [Retaining information across dialog turns](#context) for more information.
 
 - `input`: The string of text that was submitted by the user. The text string can contain up to 2,048 characters.
 
@@ -86,7 +86,7 @@ In the resulting API /message response, the text response is formatted as follow
 }
 ```
 
-There are response types other than a text response that you can define. See [Responses](dialog-overview.html#responses) for more details.
+There are response types other than a text response that you can define. See [Responses](/docs/services/assistant-icp/dialog-overview.html#responses) for more details.
 
 **Note**: The following `output` object format is supported for backwards compatibility. Any workspaces that specify a text response by using this format will continue to function properly. With the introduction of rich response types, the `output.text` structure was augmented with the `output.generic` structure to facilitate supporting other types of responses in addition to text. Use the new format when you create new nodes to give yourself more flexibility, because you can subsequently change the response type, if needed.
 
@@ -104,7 +104,7 @@ There are response types other than a text response that you can define. See [Re
 
 If you specify an API version that pre-dates the introduction of the rich response types (version `2018-07-10`), then a workspace that contains non-textual or multiple response types will produce the first text response only. Only one text response can fit into the message `output.text` object. With version `2018-07-10`, existing workspaces with text responses in the older format produce both the `output.text` and `output.generic` objects to represent the text response.
 
-You can learn more about the /message API call from the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/assistant?curl=#get-response-to-user-input){: new_window}.
+You can learn more about the /message API call from the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/assistant-icp#get-response-to-user-input){: new_window}.
 
 ### Retaining information across dialog turns
 {: #context}
@@ -175,7 +175,7 @@ Define a context variable by adding the variable name to the **Variable** field 
 
     - The `name` can contain any upper- and lowercase alphabetic characters, numeric characters (0-9), and underscores.
 
-      You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](expression-language.html#shorthand-context) for more details.
+      You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-context) for more details.
       {:tip}
 
     - The `value` can be any supported JSON type, such as a simple string variable, a number, a JSON array, or a JSON object.
@@ -199,7 +199,7 @@ The resulting output is displayed as follows:
 
 `The customer, 18-year-old John, wants a pizza with onions and olives, and then cake.`
 
-You can use the JSON editor to define context variables also. You might prefer to use the JSON editor if you want to add a complex expression as the variable value. See [Context variables in the JSON editor](dialog-runtime.html#context-var-json) for more details.
+You can use the JSON editor to define context variables also. You might prefer to use the JSON editor if you want to add a complex expression as the variable value. See [Context variables in the JSON editor](#context-var-json) for more details.
 
 ### Common context variable tasks
 {: #context-common-tasks}
@@ -234,7 +234,7 @@ To store the value of a pattern entity, append .literal to the entity name. Usin
 
 For example, the user input is `Contact me at joe@example.com.` Your entity named `@email` recognizes the `name@domain.com` email format. By configuring the context variable to store `@email.literal`, you indicate that you want to store the part of the input that matched the pattern. If you omit the `.literal` property from the value expression, then the entity value name that you specified for the pattern is returned instead of the segment of user input that matched the pattern.
 
-Many of these value examples use methods to capture different parts of the user input. For more information about the methods available for you to use, see [Expression language methods](dialog-methods.html).
+Many of these value examples use methods to capture different parts of the user input. For more information about the methods available for you to use, see [Expression language methods](/docs/services/assistant-icp/dialog-methods.html).
 
 ### Deleting a context variable
 {: #context-delete}
@@ -245,7 +245,7 @@ To delete a context variable, set the variable to null.
 |------------|------------------|
 | order_form | `null`           |
 
-Alternatively you can delete the context variable in your application logic. For information about how to remove the variable entirely, see [Deleting a context variable in JSON](dialog-runtime.html#context-delete-json).
+Alternatively you can delete the context variable in your application logic. For information about how to remove the variable entirely, see [Deleting a context variable in JSON](#context-delete-json).
 
 ### Updating a context variable value
 {: #context-update}
@@ -254,7 +254,7 @@ To update a context variable's value, define a context variable with the same na
 
 When more than one node sets the value of the same context variable, the value for the context variable can change over the course of a conversation with a user. Which value is applied at any given time depends on which node is being triggered by the user in the course of the conversation. The value specified for the context variable in the last node that is processed overwrites any values that were set for the variable by nodes that were processed previously.
 
-For information about how to update the value of a context variable when the value is a JSON object or JSON array data type, see [Updating a context variable value in JSON](dialog-runtime.html#context-update-json)
+For information about how to update the value of a context variable when the value is a JSON object or JSON array data type, see [Updating a context variable value in JSON](#context-update-json)
 
 ### How context variables are processed
 {: #context-processing}
@@ -263,7 +263,7 @@ Where you define the context variable matters. The context variable is not creat
 
 For a node with conditional responses, the context variable is created and set when the condition for a specific response is met and that response is processed. For example, if you define a context variable for conditional response #1 and the service processes conditional response #2 only, then the context variable that you defined for conditional response #1 is not created and set.
 
-For information about where to add context variables that you want the service to create and set as a user interacts with a node with slots, see [Adding context variables to a node with slots](dialog-runtime.html#context-var-slots).
+For information about where to add context variables that you want the service to create and set as a user interacts with a node with slots, see [Adding context variables to a node with slots](#context-var-slots).
 
 ### Order of operation
 {: #context-order-of-ops}
@@ -284,7 +284,7 @@ Instead, use a slightly more complex expression to avoid having to rely on the v
 ### Adding context variables to a node with slots
 {: #context-var-slots}
 
-For more information about slots, see [Gathering information with slots](dialog-slots.html).
+For more information about slots, see [Gathering information with slots](/docs/services/assistant-icp/dialog-slots.html).
 
 1.  Open the node with slots in the edit view.
 
@@ -311,7 +311,7 @@ For more information about slots, see [Gathering information with slots](dialog-
           ```
           {: codeblock}
 
-      **Note**: There is currently no way to use the context editor to define context variables that are set during this phase of dialog node evaluation. You must use the JSON editor instead. For more information about using the JSON editor, see [Context variables in the JSON editor](dialog-runtime.html#context-var-json).
+      **Note**: There is currently no way to use the context editor to define context variables that are set during this phase of dialog node evaluation. You must use the JSON editor instead. For more information about using the JSON editor, see [Context variables in the JSON editor](#context-var-json).
 
       ![Shows how to access the JSON editor associated with a slot condition.](images/contextvar-json-slot-condition.png)
 
@@ -324,7 +324,7 @@ The name and value pair must meet these requirements:
 
 - The `name` can contain any upper- and lowercase alphabetic characters, numeric characters (0-9), and underscores.
 
-  You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](expression-language.html#shorthand-context) for more details.
+  You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-context) for more details.
   {:tip}
 
 - The `value` can be any supported JSON type, such as a simple string variable, a number, a JSON array, or a JSON object.
@@ -483,7 +483,7 @@ The result is this context:
 ```
 {: codeblock}
 
-See [Expression language methods](dialog-methods.html#objects) for more information about methods you can perform on objects.
+See [Expression language methods](/docs/services/assistant-icp/dialog-methods.html#objects) for more information about methods you can perform on objects.
 
 #### Updating arrays
 
@@ -633,7 +633,7 @@ Choose one of these actions to update the array. In each case, we see the array 
         ```
         {: codeblock}
 
-See [Expression language methods](dialog-methods.html#arrays) for more information about methods you can perform on arrays.
+See [Expression language methods](/docs/services/assistant-icp/dialog-methods.html#arrays) for more information about methods you can perform on arrays.
 
 ### Setting one context variable equal to another
 {: #var-equals-var}
@@ -674,12 +674,12 @@ Watch this video to learn more.
 
 <iframe class="embed-responsive-item" id="youtubeplayer" title="Digressions overview" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/I3K7mQ46K3o?rel=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
 
-- [Before you begin](dialog-runtime.html#prereqs)
-- [Customizing digressions](dialog-runtime.html#enable-digressions)
+- [Before you begin](#prereqs)
+- [Customizing digressions](#enable-digressions)
 - [Digression usage tips](#digress-tips)
-- [Disabling digressions into a root node](dialog-runtime.html#disable-digressions)
-- [Digression tutorial](dialog-runtime.html#digression-tutorial)
-- [Design considerations](dialog-runtime.html#digression-design-considerations)
+- [Disabling digressions into a root node](#disable-digressions)
+- [Digression tutorial](#digression-tutorial)
+- [Design considerations](#digression-design-considerations)
 
 ### Before you begin
 {: #prereqs}
@@ -728,7 +728,7 @@ To change the digression behavior for an individual node, complete the following
 
     - **Nodes with slots**: Choose whether you want to allow users to digress away from the node before all of the slots are filled. Set the *Allow digressions away while slot filling* toggle to **Yes** to enable digressions away.
 
-      If enabled, when the conversation returns from the digression, the prompt for the next unfilled slot is displayed to encourage the user to continue providing information. If disabled, then any inputs that the user submits which do not contain a value that can fill a slot are ignored. However, you can address unsolicited questions that you anticipate your users might ask while they interact with the node by defining slot handlers. See [Adding slots](dialog-slots.html#add-slots) for more information.
+      If enabled, when the conversation returns from the digression, the prompt for the next unfilled slot is displayed to encourage the user to continue providing information. If disabled, then any inputs that the user submits which do not contain a value that can fill a slot are ignored. However, you can address unsolicited questions that you anticipate your users might ask while they interact with the node by defining slot handlers. See [Adding slots](/docs/services/assistant-icp/dialog-slots.html#add-slots) for more information.
 
       The following image shows you how digressions away from the #reservation node with slots (shown in the earlier illustration) are configured.
 
@@ -742,7 +742,7 @@ To change the digression behavior for an individual node, complete the following
 
     You can make the following choices about how digressions into a node behave:
 
-    - Prevent users from being able to digress into the node. See [Disabling digressions into a root node](#diable-digressions) for more details.
+    - Prevent users from being able to digress into the node. See [Disabling digressions into a root node](#disable-digressions) for more details.
 
     - When digressions into the node are enabled, choose whether the dialog must go back to the dialog flow that it digressed away from. When selected, after the current node's branch is done being processed, the dialog flow goes back to the interrupted node. To make the dialog return afterwards, select **Return after digression**.
 
@@ -792,7 +792,7 @@ This section describes solutions to situations that you might encounter when usi
   context["username"] + "?" ?>
   ```
 
-  For full SpEL expression syntax details, see [Expression for accessing objects](expression-language.html#shorthand-syntax).
+  For full SpEL expression syntax details, see [Expression for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-syntax).
 
 - **Preventing returns**: In some cases, you might want to prevent a return to the interrupted conversation flow based on a choice the user makes in the current dialog flow. You can use special syntax to prevent a return from a specific node.
 
@@ -819,12 +819,12 @@ To disable digressions into a root node altogether, complete the following steps
 1.  Set the *Allow digressions into this node* toggle to **Off**.
 1.  Click **Apply**.
 
-If you decide that you want to prevent digressions into several root nodes, but do not want to edit each one individually, you can add the nodes to a folder. From the *Customize* page of the folder, you can set the *Allow digressions into this node* toggle to **Off** to apply the configuration to all of the nodes at once. See [Organizing the dialog with folders](dialog-build.html#folders) for more information.
+If you decide that you want to prevent digressions into several root nodes, but do not want to edit each one individually, you can add the nodes to a folder. From the *Customize* page of the folder, you can set the *Allow digressions into this node* toggle to **Off** to apply the configuration to all of the nodes at once. See [Organizing the dialog with folders](/docs/services/assistant-icp/dialog-build.html#folders) for more information.
 
 ### Digression tutorial
 {: #digression-tutorial}
 
-Follow the [tutorial](tutorial-digressions.html) to import a workspace that has a set of nodes already defined. You can walk through some exercises that illustrate how digressions work.
+Follow the [tutorial](/docs/services/assistant-icp/tutorial-digressions.html) to import a workspace that has a set of nodes already defined. You can walk through some exercises that illustrate how digressions work.
 
 ### Design considerations
 {: #digression-design-considerations}
@@ -1005,7 +1005,7 @@ To test disambiguation, complete the following steps:
 
       This SpEL expression shows the entities that were detected in the user input as an array. The array includes the entity name, location of the entity mention within the user input string, the entity mention string, and the level of confidence that the service has that the term is a mention of the entity type specified.
 
-    - To see details for all of the artifacts at once, including other properties, such as the value of a given context variable at the time of the call, you can inspect the entire API response. See [Viewing API call details](dialog-tips.html#inspect-api).
+    - To see details for all of the artifacts at once, including other properties, such as the value of a given context variable at the time of the call, you can inspect the entire API response. See [Viewing API call details](/docs/services/assistant-icp/dialog-tips.html#inspect-api).
 
 1.  Temporarily remove the description you added to the *node purpose* field for at least one of the nodes that you anticipate will be listed as a disambiguation option.
 
