@@ -124,7 +124,7 @@ The components that are necessary to process natural languages require significa
 
 Table 4. Language resource requirements
 
-The following resources are what you need to support a production deployment, where two pods are dedicated to each additional language. In a development deployment, only one pod is used per lanuage, which means you need half the number of resources in a development deployment.
+The following resources are what you need to support a production deployment, where two pods are dedicated to each additional language. In a development deployment, only one pod is used per language, which means you need half the number of resources in a development deployment.
 
 | Language | Additional memory requirements per pod | Additional VPCs required`*` |
 |----------|-----------------------------|------|
@@ -369,7 +369,7 @@ Table 5. Configuration settings
 | Setting | Description |
 |---------|-------------|
 | Helm release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
-| Target namespace | Namespace in the cluster where {{site.data.keyword.conversationshort}} will be installed. This is the same namespace you created and uploaded the product archive file to earlier. |
+| Target namespace | Namespace in the cluster where {{site.data.keyword.conversationshort}} will be installed. This is the namespace you created earlier, and to which you uploaded the product archive file. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. This is the domain where you log in to the cluster. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as the `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is not a DNS-resolvable name, such as `mycluster.icp`. Specify the IP address of the master node. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
