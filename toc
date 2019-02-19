@@ -10,7 +10,7 @@ Watson Assistant for IBM Cloud Private
     {: .topicgroup}
     Installing
         install.md
-        install_101_on_310.md
+        install-101-on-310.md
 
     getting-started.md
     tool-overview.md
