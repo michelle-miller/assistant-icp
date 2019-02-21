@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2018-09-04"
+lastupdated: "2019-02-21"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-09-04"
 
 # Upgrading
 
-Learn how to upgrade from one version of {{site.data.keyword.conversationfull}} for IBM Cloud Private to another.
+Learn how to upgrade from one version of {{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull_notm}} to another.
 {: shortdesc}
 
 Bulk feature updates are announced as they become available. You can choose whether to upgrade your instance to the latest version or not. If you want continuous updates to be applied to your service instance automatically, consider creating a service instance in the public IBM Cloud.

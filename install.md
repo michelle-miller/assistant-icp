@@ -32,6 +32,6 @@ The following table shows the available versions.
 
 | Watson Assistant chart | IBM Cloud Private cluster | Installation checklist |
 |------------------------|---------------------------|-------------------|
-| 1.0.1                  | 3.1.0                     | [checklist](/docs/services/assistant-icp?topic=assistant-private-install-101-on-310) |
+| 1.1                    | 3.1.0                     | [checklist](/docs/services/assistant-icp?topic=assistant-private-install-110) |
 | 1.0.1                  | 2.1.0.3                   | [checklist](/docs/services/assistant-icp?topic=assistant-private-install-101) |
 {: caption="Available versions" caption-side="top"}

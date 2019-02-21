@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-21"
 ---
 
 {:shortdesc: .shortdesc}
@@ -29,6 +29,22 @@ IBM releases services, features, and language support for your evaluation that a
 
 ## Change log
 {: #rn-change-log}
+
+### 21 February 2019
+{: #21February2019}
+
+**{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} version 1.1 is available.**
+
+  - The {{site.data.keyword.conversationshort}} tool now works with {{site.data.keyword.icpfull_notm}} 3.1.0.
+  
+  - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1 does not work with {{site.data.keyword.icpfull_notm}} 2.1.0.3. See [Upgrading](/docs/services/assistant-icp/upgrade.html).
+
+  - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1 is compatible with {{site.data.keyword.icp4dfull}} version 1.2.
+
+  - The number of required Virtual Private CPUs has decreased from its previous number (of 60 VPCs). See [VPC requirements](/docs/services/assistant-icp/install-110.html#install-110-vpc-reqs) for more details.
+
+  - Language support has been improved, which means you do not need as many additional resources when you add support for more languages. See [Language considerations](/docs/services/assistant-icp/install-110.html#install-110-lang-reqs) for more details.
+
 
 ### 23 November 2018
 {: #23November2018}
