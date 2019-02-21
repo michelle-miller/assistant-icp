@@ -22,7 +22,7 @@ lastupdated: "2019-02-21"
 {:download: .download}
 {:gif: data-image-type='gif'}
 
-# Version 1.1 installation checklist
+# Install 1.1 on private cloud 3.1.0
 {: #install-110}
 
 {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0.
