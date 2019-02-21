@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-21"
 
 ---
 
@@ -22,13 +22,11 @@ lastupdated: "2019-02-14"
 {:download: .download}
 {:gif: data-image-type='gif'}
 
-# Installing on IBM Cloud Private 2.1.0.3
+# Version 1.0.1 installation checklist
 {: #install-101}
 
-Learn how to install {{site.data.keyword.conversationshort}} version 1.0.1 into {{site.data.keyword.icpfull}} version 2.1.0.3.
+{{site.data.keyword.conversationshort}} version 1.0.1 runs on {{site.data.keyword.icpfull}} version 2.1.0.3.
 {: shortdesc}
-
-The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
 
 ## Software requirements
 {: #install-101-prereqs}

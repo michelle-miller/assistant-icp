@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-21"
 
 ---
 
@@ -47,12 +47,52 @@ The current version is `2018-09-20`.
 
 The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is using version `2018-07-10`.
 
-## Authenticating API calls
-{: #authenticate-api-calls}
+## Authenticating API calls on private cloud version 3.1.0
+{: #authenticate-api-calls-310}
 
 The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
 
-**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 2.1.0.3. If you are using {{site.data.keyword.icpfull}} version 3.1.0, then see [Authenticating API calls](/docs/services/assistant-icp/install_101_on_310.html#authenticate-api-calls) instead.
+**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 3.1.0. If you are using {{site.data.keyword.icpfull}} version 2.1.0.3, then see [Authenticating API calls on private cloud version 2.1.0.3](#authenticate-api-calls-2103) instead.
+
+1.  Get the service credentials by using the Kubernetes command line interface.
+
+    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+
+    1.  Log in to IBM Cloud Private.
+
+        ```bash
+        cloudctl login -a https://{icp_url}:8443
+        ```
+
+    1.  To get the API key for the secret, run the following command:
+
+        ```bash
+        kubectl -n [namespace-name} get secret wcs-{release-name}-serviceid-secret -o go-template='{{ index .data "api_key" | base64decode }}'
+        ```
+
+        The key is returned. For example: `icp-CXTvuAA2QwXZbETadG3zIpvqmi3djUmGBBBzV4803C6D`.
+    1.  Copy the key.
+
+1.  Use these credentials in your API call.
+
+    - The base URL uses the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/api`. For example: `https://myproxy/myrelease/assistant/api`.
+    - Provide the API key when you call the service. The following example shows an API key being used.
+
+      ```curl
+      curl -k -H "apikey:{API_KEY}" https://{icp_url}/assistant/api/v1/workspaces?version=2018-09-20
+      ```
+      {: codeblock}
+
+    To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
+
+See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
+
+## Authenticating API calls on private cloud version 2.1.0.3
+{: #authenticate-api-calls-2103}
+
+The authentication mechanism used by your service instance impacts how you must provide credentials when making an API call.
+
+**Note**: The following instructions describe how to authenticate calls when using {{site.data.keyword.icpfull}} version 2.1.0.3. If you are using {{site.data.keyword.icpfull}} version 3.1.0, then see [Authenticating API calls on private cloud version 3.1.0](#authenticate-api-calls-310) instead.
 
 1.  Get the service credentials.
 
@@ -86,4 +126,4 @@ The authentication mechanism used by your service instance impacts how you must 
 
     To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
 
-See [Platform overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
+See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
