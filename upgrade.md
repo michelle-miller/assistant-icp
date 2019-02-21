@@ -21,6 +21,7 @@ lastupdated: "2019-02-21"
 {:swift: .ph data-hd-programlang='swift'}
 
 # Upgrading
+{: #upgrade}
 
 Learn how to upgrade from one version of {{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull_notm}} to another.
 {: shortdesc}
@@ -29,9 +30,7 @@ Bulk feature updates are announced as they become available. You can choose whet
 
 To upgrade your instance, complete these steps:
 
-1.  Back up the data store.
-1.  Uninstall the data store.
-1.  Create a new service.
-1.  Shut down the new service.
-1.  Restore the data store.
-1.  Start the new service.
+1.  From the earlier version of the service, [export any workspaces](/docs/services/assistant-icp?topic=assistant-private-configure-workspace#exporting-and-copying-workspaces) you want to keep.
+1.  Uninstall the previous version.
+1.  Install the new version of the service.
+1.  [Import the workspaces](/docs/services/assistant-icp?topic=assistant-private-configure-workspace#creating-workspaces) that you exported earlier.

@@ -25,10 +25,12 @@ lastupdated: "2019-02-21"
 # Installing Watson Assistant for IBM Cloud Private
 {: #install}
 
-The installation procedure differs depending on the version you are installing.
+Learn how to install {{site.data.keyword.conversationshort}} into a private cloud.
 {: shortdesc}
 
-The following table shows the available versions.
+The {{site.data.keyword.icpfull_notm}} environment is a Kubernetes-based container platform that can help you quickly modernize and automate workloads that are associated with the applications and services you use. You can develop and deploy on your own infrastructure and in your data center which helps to mitigate risk and minimize vulnerabilities.
+
+The installation procedure differs depending on the version you are installing. The following table shows the available versions.
 
 | Watson Assistant chart | IBM Cloud Private cluster | Installation checklist |
 |------------------------|---------------------------|-------------------|

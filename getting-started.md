@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-21"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2019-02-14"
 {:gif: data-image-type='gif'}
 
 # Getting started tutorial
-{: #gettingstarted}
+{: #getting-started}
 
 In this short tutorial, we introduce the {{site.data.keyword.conversationshort}} tool and go through the process of creating your first assistant.
 {: shortdesc}
@@ -31,7 +31,7 @@ In this short tutorial, we introduce the {{site.data.keyword.conversationshort}}
 ## Before you begin
 {: #prerequisites}
 
-You'll need a service instance to start. The administrator must install the service for you. Details are provided in [Installation checklist](/docs/services/assistant-icp/install.html).
+You'll need a service instance to start. The administrator must install the service for you. Details are provided in the [installation checklist](/docs/services/assistant-icp/install.html).
 
 If a {{site.data.keyword.conversationshort}} service instance is already set up in your {{site.data.keyword.BluOpenStackDed_full}} environment, then you're all set with these prerequisites. Go to [Step 1](#launch-tool).
 
@@ -42,7 +42,7 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
 
     ![Shows the ICP menu choices to get to the deployment launch button.](images/gs-icp-admin-menu.png)
-1.  Filter the list of deployments by the `conversation` namespace.
+1.  Filter the list of deployments by the namespace you specified for your instance.
 
     ![Shows the ICP namespace filter.](images/gs-convo-namespace.png)
 1.  Find the deployment named `{release-name}-ui`.
@@ -50,8 +50,7 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
     If you don't know the `{release-name}`, search on `-ui` to find it.
 1.  Click **Launch**.
 
-    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page. The tool URL has the syntax `{{ ui.subdomain }}.{{ global.icp.masterHostname }}`. For example: `https://assistant.mycluster.icp`.
-
+    A new web browser tab opens and shows the {{site.data.keyword.conversationshort}} tool login page.
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Step 2: Create a workspace
