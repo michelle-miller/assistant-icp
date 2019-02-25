@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-02-25"
 
 ---
 
@@ -61,7 +61,10 @@ Table 2. Minimum hardware requirements for a production deployment
 | management (cloud) | 1               | 4            | 8               | 250           |
 | proxy (cloud)      | 1               | 2            | 4               | 140           |
 | worker (assistant) | 4               | 8            | 64              | 500           |
-{: caption="Minimum non-production hardware requirements" caption-side="top"}
+{: caption="Minimum production hardware requirements" caption-side="top"}
+
+Keep in mind these numbers reflect minimum requirements. In a cluster environment, where CPU and memory are assigned to containers dynamically, CPU and memory resources can become stranded on nodes, leaving insufficient resources to schedule subsequent workloads. Consider adding more than the minimum amount of required CPU and memory per node.
+{: note}
 
 All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
 
