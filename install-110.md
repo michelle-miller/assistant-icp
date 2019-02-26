@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-26"
 
 ---
 
@@ -41,6 +41,10 @@ Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, me
 ## System requirements
 {: #install-110-sys-reqs}
 
+See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+
+All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The following requirements must be met by the worker nodes to support {{site.data.keyword.conversationshort}}.
+
 Table 1. Minimum hardware requirements for a development deployment
 
 | Node type | Number of nodes | CPU per node | Memory per node (GB) | Disk per node (GB) |
@@ -66,16 +70,12 @@ Table 2. Minimum hardware requirements for a production deployment
 Keep in mind these numbers reflect minimum requirements. In a cluster environment, where CPU and memory are assigned to containers dynamically, CPU and memory resources can become stranded on nodes, leaving insufficient resources to schedule subsequent workloads. Consider adding more than the minimum amount of required CPU and memory per node.
 {: note}
 
-All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources.
-
-The systems must meet these requirements:
+The systems that host {{site.data.keyword.conversationshort}} must meet these requirements:
 
 - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
 - CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of CPUs that include this support (most CPUs since 2012). The `ed-mm` microservice cannot function properly without AVX support.
-
-See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 ### Storage requirements
 {: #install-110-storage-reqs}

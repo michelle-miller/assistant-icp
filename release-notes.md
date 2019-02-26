@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-02-26"
 ---
 
 {:shortdesc: .shortdesc}
@@ -21,6 +21,16 @@ lastupdated: "2019-02-21"
 
 # Release notes
 {: #release-notes}
+
+## Service API Versioning
+{: #release-notes-api-version}
+
+API requests require a version parameter that takes a date in the format `version=YYYY-MM-DD`. Whenever we change the API in a backwards-incompatible way, we release a new minor version of the API.
+
+Send the version parameter with every API request. The service uses the API version for the date you specify, or the most recent version before that date. Don't default to the current date. Instead, specify a date that matches a version that is compatible with your app, and don't change it until your app is ready for a later version.
+
+- The current version is `2018-09-20`.
+- The "Try it out" pane in the {{site.data.keyword.conversationshort}} tooling is using version `2018-07-10`.
 
 ## Beta features
 {: #rn-beta-features}
