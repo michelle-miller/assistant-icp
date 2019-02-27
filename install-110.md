@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-02-27"
 
 ---
 
@@ -126,8 +126,8 @@ Table 4. Virtual Private CPUs (VPCs) requirements
 
 | Deployment type | Number of VPCs required |
 |-----------------|-------------------------|
-| Development     | 18                      |
-| Production      | 25
+| Development     | 24                      |
+| Production      | 32
 
 ### Language considerations
 {: #install-110-lang-reqs}
