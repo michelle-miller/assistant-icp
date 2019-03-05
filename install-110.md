@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-27"
+lastupdated: "2019-03-05"
 
 ---
 
@@ -43,39 +43,52 @@ Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, me
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
-All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The following requirements must be met by the worker nodes to support {{site.data.keyword.conversationshort}}.
+All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The following requirements must be met by the worker nodes to support {{site.data.keyword.conversationshort}} at a minimum.
 
-Table 1. Minimum hardware requirements for a development deployment
+- **Development**: 21 CPU with 75 GB Memory across a minimum of 1 worker node
+- **Production**: 27 CPU with 112 GB Memory across a minimum of 4 worker nodes
+
+These numbers reflect the bare minimum requirements. In a cluster environment, where CPU and memory are assigned to containers dynamically, CPU and memory resources can become stranded on nodes, leaving insufficient resources to schedule subsequent workloads. In particular, the process of training a machine learning model requires at least one node to have 4 CPUs that can be dedicated to training. This capacity is only needed when training occurs, which happens after changes are made to the training data for an assistant.
+{: important}
+
+## Tested deployment configurations
+{: #install-110-tested-sys-reqs}
+
+Table 1. Hardware verified to support a development deployment
+
+| Node type | Number of nodes | CPU per node | Memory per node (GB) | Disk per node (GB) | Description |
+|-----------|-----------------|--------------|-----------------|---------------|----|
+| boot, master, management, proxy | 1 | 16  | 128 | 600 | Supports {{site.data.keyword.icpfull_notm}} infrastructure |
+| worker | 1  | 24 | 256 | 500 | Supports the {{site.data.keyword.conversationshort}} service |
+{: caption="Non-production hardware requirements" caption-side="top"}
+
+Table 2. Hardware verified to support a production deployment
 
 | Node type | Number of nodes | CPU per node | Memory per node (GB) | Disk per node (GB) |
-|--------------------|-----------------|--------------|-----------------|---------------|
-| boot (cloud)       | 1               | 2            | 8               | 250           |
-| master (cloud)     | 1               | 4            | 8               | 250           |
-| management (cloud) | 1               | 4            | 8               | 250           |
-| proxy (cloud)      | 1               | 2            | 4               | 140           |
-| worker (assistant) | 3               | 8            | 64              | 500           |
-{: caption="Minimum non-production hardware requirements" caption-side="top"}
-
-Table 2. Minimum hardware requirements for a production deployment
-
-| Node type | Number of nodes | CPU per node | Memory per node (GB) | Disk per node (GB) |
-|--------------------|-----------------|--------------|-----------------|---------------|
-| boot (cloud)       | 1               | 2            | 8               | 250           |
-| master (cloud)     | 1               | 4            | 8               | 250           |
-| management (cloud) | 1               | 4            | 8               | 250           |
-| proxy (cloud)      | 1               | 2            | 4               | 140           |
-| worker (assistant) | 4               | 8            | 64              | 500           |
-{: caption="Minimum production hardware requirements" caption-side="top"}
-
-Keep in mind these numbers reflect minimum requirements. In a cluster environment, where CPU and memory are assigned to containers dynamically, CPU and memory resources can become stranded on nodes, leaving insufficient resources to schedule subsequent workloads. Consider adding more than the minimum amount of required CPU and memory per node.
-{: note}
+|-----------|-----------------|--------------|-----------------|---------------|
+| boot, master, proxy | 1 | 16 | 32 | 250 |
+| management | 1 | 16  | 32 | 250 |
+| worker | 5 | 8 | 32 | 500 |
+{: caption="Production hardware requirements" caption-side="top"}
 
 The systems that host {{site.data.keyword.conversationshort}} must meet these requirements:
 
 - {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} can run on Intel architecture nodes only.
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
-- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of CPUs that include this support (most CPUs since 2012). The `ed-mm` microservice cannot function properly without AVX support.
+- CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of CPUs that include this support (most CPUs since 2012). The service cannot function properly without AVX support.
+
+### VPC requirements
+{: #install-110-vpc-reqs}
+
+You must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
+
+Table 4. Virtual Private CPUs (VPCs) requirements
+
+| Deployment type | Number of VPCs required |
+|-----------------|-------------------------|
+| Development     | 21 |
+| Production      | 27 |
 
 ### Storage requirements
 {: #install-110-storage-reqs}
@@ -116,18 +129,6 @@ In addition to these microservices, the Helm chart installs the following resour
 - **Redis**: Used by the {{site.data.keyword.conversationshort}} tool to store web session-related data.
 - **etcd**: Manages service registration and discovery.
 - **Minio**: Stores CLU models.
-
-### VPC requirements
-{: #install-110-vpc-reqs}
-
-You must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
-
-Table 4. Virtual Private CPUs (VPCs) requirements
-
-| Deployment type | Number of VPCs required |
-|-----------------|-------------------------|
-| Development     | 24                      |
-| Production      | 32
 
 ### Language considerations
 {: #install-110-lang-reqs}
@@ -238,12 +239,16 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to {{site.data.keywor
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
     ```bash
-    cloudctl login -a https://{icp_url}:8443 --skip-ssl-validation
-    docker login {icp_url}:8500
+    cloudctl login -a https://`{icp_url}`:8443 [--skip-ssl-validation]
+    docker login `{icp_url}`:8500 -u `{cluster_username}`
     ```
     {: pre}
 
-    Where {icp-url} is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
+    The `{icp-url}` is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
+
+    The `skip-ssl-validate` parameter is needed if your cluster is not set up with a certificate that you trust, such as a self-signed certificate.
+
+    The credentials that you must provide to log in to Docker are the same administrative credentials that you use to log into the {{site.data.keyword.icpfull_notm}} admin console. You will be prompted to provide the password that is associated with the user name that you specify in `u` parameter.
 
 ## Step 4: Create persistent volumes
 {: #install-110-create-pvs}
@@ -330,13 +335,14 @@ kubectl apply -f {pv-yaml-file-name}
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    cloudctl catalog load-archive --archive {compressed_file_name} --clustername {cluster_CA_domain} --namespace {namespace-name}
+    cloudctl catalog load-archive --archive `{result_ppa}` --registry `{icp_url}:8500`
     ```
     {: pre}
 
-    - `{compressed_file_name}` is the name of the file that you downloaded from Passport Advantage. For example, `ibm-watson-assistant-prod-1.1.0.tar.gz`.
-    - `{cluster_CA_domain}` is the {{site.data.keyword.icpfull_notm}} cluster domain, often referred to in this documentation as `{icp-url}`.
-    - `{namespace-name}` is the Docker namespace that hosts the Docker image that you created in Step 1.
+    - `{result_ppa}` is the name of the file that you downloaded from Passport Advantage. For example, `ibm-watson-assistant-prod-1.1.0.tar.gz`.
+    - `{icp_url}:8500` is the ICP cluster docker registry. `{icp_url}` is the IBM Cloud Private cluster domain.
+
+It is loaded to the default local-charts repo.
 
 1.  View the charts in the {{site.data.keyword.icpfull_notm}} Catalog. From the {{site.data.keyword.icpfull_notm}} management console navigation menu, click **Manage** > **Helm Repositories**.
 
@@ -363,7 +369,12 @@ kubectl apply -f {pv-yaml-file-name}
     - Languages
     - Hostname of the ICP cluster Master node
 
-1.  You might want to change additional configuration settings at this timem. **You cannot change these settings after you complete the installation.**
+    If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify values for these configuration settings:
+
+    - IP address of the master node
+    - Host name of the proxy node
+
+1.  You might want to change additional configuration settings at this time. **You cannot change these settings after you complete the installation.**
 
     See [Configuration details](#install-110-config-details) for help understanding the configuration choices.
 
@@ -558,6 +569,8 @@ To install from the command line, complete these steps:
 
     - `global.deploymentType`: Specify whether you want to set up a development or production instance.
     - `global.icp.masterHostname`: Specify the hostname of the master node of your private cloud instance. Do not include the protocol prefix (`https://`) or port number (`:8443`).  For example: `my.company.name.icp.net`.
+    - `global.icp.masterIP`: If you did not define a domain name for the master node of your private cloud instance, you are using the default hostname `mycluster.icp`, for example, then you must also specify this IP address.
+    - `global.icp.proxyHostname`: Specify the hostname (or IP address) of the proxy node of your private cloud instance.
 
     **Attention**: Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. The values YAML file has `{resource-name}.create` settings that suggest you can do so. However, do not change these settings from their default value of `true`.
 
@@ -606,6 +619,18 @@ To get log files, complete the following steps:
     kubectl log {job-name} -f
     ```
     {: pre}
+
+#### To check the configuration
+{: #install-110-check-config}
+
+If you want to check what configuration settings were applied to a deployment when it was set up, you can run the following command:
+
+```bash
+helm get <release-name> --tls
+```
+{: pre}
+
+The user-provided configuration values are listed at the start of the information that is returned.
 
 ## Next steps
 {: #install-110-next-steps}
