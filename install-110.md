@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-06"
+lastupdated: "2019-03-07"
 
 ---
 
@@ -344,7 +344,7 @@ It is loaded to the default local-charts repo.
 
     - Helm release name.
 
-      The release name must start with an alphbetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
+      The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
       {: important}
     - Target namespace
 
@@ -382,7 +382,7 @@ Table 6. Configuration settings
 
 | Setting | Description |
 |---------|-------------|
-| Helm release name | A unique ID for this deployment. The release name must start with an alphbetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*. When you install the service from the command line, you set this value by using the --name parameter. |
+| Helm release name | A unique ID for this deployment. The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*. When you install the service from the command line, you set this value by using the --name parameter. |
 | Target namespace | Namespace in the cluster where {{site.data.keyword.conversationshort}} will be installed. This is the namespace you created earlier, and to which you uploaded the product archive file. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. This is the domain where you log in to the cluster. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as the `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
@@ -572,7 +572,7 @@ To install from the command line, complete these steps:
     ```
     {: pre}
 
-    - Replace `{my-release}` with a name for your release. The release name must start with an alphbetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
+    - Replace `{my-release}` with a name for your release. The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
     - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `my-override.yaml`
     - Replace `{namespace-name}` with the name of the Kubernetes namespace that hosts the Docker pods.
     - The `ibm-watson-assistant-prod-1.1.0.tgz` parameter represents the name of the downloaded file that contains the Helm chart.
