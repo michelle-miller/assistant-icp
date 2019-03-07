@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 ---
 
@@ -43,7 +43,7 @@ Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, me
 
 See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
-All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The following requirements must be met by the worker nodes to support {{site.data.keyword.conversationshort}} at a minimum.
+All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The worker nodes must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} at a minimum.
 
 - **Development**: 21 CPU with 75 GB Memory across a minimum of 1 worker node
 - **Production**: 27 CPU with 112 GB Memory across a minimum of 4 worker nodes
@@ -77,18 +77,6 @@ The systems that host {{site.data.keyword.conversationshort}} must meet these re
 - CPUs must have 2.4 GHz or higher clock speed
 - CPUs must support Linux SSE 4.2
 - CPUs must support the AVX instruction set extension See the [Advanced Vector Extensions](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) Wikipedia page for a list of CPUs that include this support (most CPUs since 2012). The service cannot function properly without AVX support.
-
-### VPC requirements
-{: #install-110-vpc-reqs}
-
-You must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}}.
-
-Table 4. Virtual Private CPUs (VPCs) requirements
-
-| Deployment type | Number of VPCs required |
-|-----------------|-------------------------|
-| Development     | 21 |
-| Production      | 27 |
 
 ### Storage requirements
 {: #install-110-storage-reqs}
@@ -354,7 +342,10 @@ It is loaded to the default local-charts repo.
 1.  Scroll to find the **ibm-watson-assistant-prod** package, and then click the **Configuration** tab.
 1.  Specify values for the installation details fields.
 
-    - Helm release name
+    - Helm release name.
+
+      The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
+      {: important}
     - Target namespace
 
 1.  Click **License agreement**.
@@ -391,7 +382,7 @@ Table 6. Configuration settings
 
 | Setting | Description |
 |---------|-------------|
-| Helm release name | A unique ID for this deployment. When you install the service from the command line, you set this value by using the --name parameter. |
+| Helm release name | A unique ID for this deployment. The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*. When you install the service from the command line, you set this value by using the --name parameter. |
 | Target namespace | Namespace in the cluster where {{site.data.keyword.conversationshort}} will be installed. This is the namespace you created earlier, and to which you uploaded the product archive file. |
 | Deployment Type |  Options are **Development** and **Production**. Development is a Private cloud environment that you can use for testing purposes. It contains a single pod for each microservice. Production is a Private cloud environment that you can use to host applications and services used in production. Contains two replicas of each microservice pod. Development is the default. |
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. This is the domain where you log in to the cluster. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as the `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
@@ -525,7 +516,7 @@ To install from the command line, complete these steps:
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
     ```bash
-    cloudctl catalog load-archive  --registry {icp_url}:8500 --archive  ibm-watson-assistant.1.1.0.tar.gz  --repo local-charts --namespace {namespace-name}
+    cloudctl catalog load-archive  --registry {icp_url}:8500 --archive  ibm-watson-assistant.1.1.0.tar.gz  --repo local-charts
     ```
     {: pre}
 
@@ -581,7 +572,7 @@ To install from the command line, complete these steps:
     ```
     {: pre}
 
-    - Replace `{my-release}` with a name for your release.
+    - Replace `{my-release}` with a name for your release. The release name must start with an alphabetic character, end with an alphanumeric character, and consist of lower case alphanumeric characters or a hyphen (-). For example *my-110-wa*.
     - Replace `{override-file-name}` with the path to the file that contains the values that you want to override from the values.yaml file provided with the chart package. For example: `my-override.yaml`
     - Replace `{namespace-name}` with the name of the Kubernetes namespace that hosts the Docker pods.
     - The `ibm-watson-assistant-prod-1.1.0.tgz` parameter represents the name of the downloaded file that contains the Helm chart.
