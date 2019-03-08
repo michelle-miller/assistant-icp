@@ -182,7 +182,7 @@ Open the sample workspace to see intents similar to the ones you just created pl
 1.  On the **Customer Service - Sample** workspace tile, click the **Edit sample** button.
 
 ## Next steps
-{: #next-steps}
+{: #gs-next-steps}
 
 This tutorial is built around a simple example. For a real application, you'll need to define some more interesting intents, some entities, and a more complex dialog.
 

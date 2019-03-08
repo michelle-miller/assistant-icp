@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-09-21"
+lastupdated: "2019-03-08"
 
 subcollection: assistant-private
 
@@ -128,9 +128,6 @@ Use the {{site.data.keyword.conversationshort}} tool to create intents.
 
 1.  When you have finished adding examples, select ![Close arrow](images/close_arrow.png) to finish creating the intent.
 
-### Results
-{: #creating-results}
-
 The intent you created is added to the Intents tab, and the system begins to train itself on the new data.
 
 ## Editing intents
@@ -179,9 +176,6 @@ If you have a large number of intents and examples, you might find it easier to 
     ![Screen shot shows where the Import icon is located on the Intents page](images/ImportIntent.png)
 
     > **Important:** The maximum CSV file size is 10MB. If your CSV file is larger, consider splitting it into multiple files and importing them separately.
-
-### Results
-{: #importing-results}
 
 You can view the imported intents and the corresponding examples on the **Intents** tab. You might need to refresh the page in order to see the new intents and examples.
 

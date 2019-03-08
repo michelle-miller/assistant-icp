@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-03-08"
 
 subcollection: assistant-private
 
@@ -57,8 +57,6 @@ Use the {{site.data.keyword.conversationshort}} tool to add content catalogs.
 1.  Now, select the **Intents** tab, and verify that the *Banking* intents have been added to your workspace.
 
     ![Screen capture showing Banking intents listed on Intents tab](images/catalog_intents.png)
-
-### Results
 
 The intents from the *Banking* content catalog have been added to the **Intents** tab of your workspace, and the system begins to train itself on the new data.
 
