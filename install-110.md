@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-15"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -211,9 +210,33 @@ You must have cluster administrator or team administrator access to the systems 
         ```
         {: pre}
 
-1.  When you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is added to a file path on the proxy node of the cluster. Unlike with the previous version, the tool does not have its own subdomain. If you do not take action, users who open the tool from a web browser will see security warnings. To prevent users from seeing such warnings, add a known CA certificate for the proxy node.
+1.  When you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is added to a file path on the proxy node of the cluster. Unlike with the previous version, the tool does not have its own subdomain, so there is no certificate for ingress. If you do not take action, users who open the tool from a web browser will see security warnings. To prevent users from seeing such warnings, perform one of the following procedures:
 
-    For more information about how to do so, see the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic.
+    - If the proxy and management nodes of your cluster have different hostnames:
+
+      (You must have specified the separate hostnames (and IP addresses, if necessary) for the two nodes during the installation.)
+
+      1.  If you don't have a certificate for the proxy, create one.
+
+      1.  Store the certificate for the proxy under the `kube-system` namespace as `proxy-certs` secret.
+
+      1.  Modify the path command so it refers to the `proxy-certs` secret. Use the follow command to apply the patch:
+
+         ```bash
+         kubectl patch --namespace kube-system daemonset nginx-ingress-controller --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-1", "value": "--default-ssl-certificate=kube-system/proxy-certs"}]'
+         ```
+         {: pre}
+
+    - If the proxy and management nodes have the same hostname:
+
+      1.  Follow the instructions in the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic to get a private key and certificate signed by a trusted Certificate Authority.
+
+      1.  Start using the `router-certs` for the proxy node. Run the following command to apply the patch:
+
+         ```bash
+         kubectl patch --namespace kube-system daemonset nginx-ingress-controller --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-1", "value": "--default-ssl-certificate=kube-system/router-certs"}]'
+         ```
+         {: pre}
 
 ## Step 3: Upload the Watson Assistant chart to IBM Cloud Private
 {: #install-110-add-wa-chart-to-icp}
@@ -481,7 +504,14 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     ```
     {: pre}
 
-    This command removes all records for the deployment so that the name can be used for a subsequent installation.
+    This command removes the release resources.
+
+    Optionally, you can check whether any resources are left behind on the cluster that you need to explicitly delete by running this command:
+
+    ```bash
+    kubectl get configmap,deployment,ingress,job,pod,role,rolebinding,service,serviceaccount,statefulset,secret -n <namespace>
+    ```
+    {: pre}
 
 1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/delete_app_volume.html) for details.
 
