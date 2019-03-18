@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -24,6 +23,7 @@ subcollection: assistant-private
 {:swift: .ph data-hd-programlang='swift'}
 
 # Using content catalogs
+{: #catalog}
 
 ***Content Catalogs*** provide an easy way to add common intents to your {{site.data.keyword.conversationshort}} service workspace.
 {: shortdesc}

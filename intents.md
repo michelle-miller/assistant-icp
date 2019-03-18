@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
 
@@ -109,7 +109,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create intents.
     - Is the `@PhoneModelName` in stock?
     - Add a `@PhoneModelName` to my order.
 
-    ![Screen capture shows the @PhoneModelName entity being referenced in a user example for the #order_phone intent](/docs/services/assistant-icp?topic=assistant-private-images/define_intent_entity.png)
+    ![Screen capture shows the @PhoneModelName entity being referenced in a user example for the #order_phone intent](images/define_intent_entity.png)
 
     **Note**: Currently, you can only directly reference synonym entities that you define (pattern values are ignored). You cannot use [system entities](/docs/services/assistant-icp?topic=assistant-private-system-entities).
 
@@ -232,7 +232,7 @@ If your intents are not being correctly recognized, consider making the followin
 
 ## Absolute scoring and Mark as irrelevant
 
-As of February 2017, there is a new algorithm for scoring intent confidence and returning intents. You can also mark inputs as *irrelevant*. These changes might require you to [upgrade to your workspace ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/services/assistant-icp?topic=assistant-private-upgrading){: new_window}.
+As of February 2017, there is a new algorithm for scoring intent confidence and returning intents. You can also mark inputs as *irrelevant*. These changes might require you to [upgrade to your workspace ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/services/assistant-icp?topic=assistant-private-upgrade){: new_window}.
 
 ### Absolute scoring
 
