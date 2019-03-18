@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="assistant-private" audience="service" href="/docs/services/assistant-icp?topic=assistant-private-getting-started.html" path="services/assistant-icp"}
+{: .toc subcollection="assistant-private" audience="service" href="/docs/services/assistant-icp?topic=assistant-private-getting-started" path="services/assistant-icp"}
 Watson Assistant for IBM Cloud Private
 
     {: .navgroup id="learn"}

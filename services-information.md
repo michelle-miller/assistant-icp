@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -59,7 +58,7 @@ The authentication mechanism used by your service instance impacts how you must 
 
 1.  Get the service credentials by using the Kubernetes command line interface.
 
-    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli).
+    1.  You should have already installed the Kubernetes CLI (kubectl(), and configured access to your cluster. If not, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
 
     1.  Log in to IBM Cloud Private.
 
@@ -88,7 +87,7 @@ The authentication mechanism used by your service instance impacts how you must 
 
     To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
 
-See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/getting_started/introduction){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
+See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
 
 ## Authenticating API calls on private cloud version 2.1.0.3
 {: #authenticate-api-calls-2103}
@@ -129,4 +128,4 @@ The authentication mechanism used by your service instance impacts how you must 
 
     To get a workspace ID, go to the **Workspaces** tab of the tool, find the workspace you want to access programmatically, and then from the menu, choose **View details**.
 
-See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
+See the [{{site.data.keyword.icpfull}} overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/getting_started/introduction.html){: new_window} for more information about {{site.data.keyword.icpfull_notm}}.
