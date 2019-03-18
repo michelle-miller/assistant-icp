@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -154,7 +153,7 @@ You must have cluster administrator or team administrator access to the systems 
 1.  Synchronize the clocks of the client computer and the nodes in the {{site.data.keyword.icpfull_notm}} cluster. To synchronize your clocks, you can use network time protocol (NTP). For more information about setting up NTP, see the user documentation for your operating system.
 1.  If you have not done so, install the {{site.data.keyword.icpfull_notm}} command line interface and log in to your cluster. See [Installing the {{site.data.keyword.icpfull_notm}} CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_images/configuring_docker_cli.html).
-1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
+1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/linux/linux-postinstall/) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
 1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your {{site.data.keyword.icpfull_notm}} cluster by using the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/manage_cluster/cfc_cli.html).
 1.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need a {{site.data.keyword.icpfull_notm}} account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
@@ -434,7 +433,7 @@ Table 5. Configuration settings
 | Hostname of the ICP cluster Master node | Required. Specify the cluster_CA_domain hostname of the master node of your private cloud instance. For example: `my.company.name.icp.net`. Specify the hostname only, without a protocol prefix (`https://`) and without a port number (`:8443`). This unique URL is typically referred to as `{icp-url}` in this documentation. Corresponds to the `global.icp.masterHostname` value in the *values.yaml* file. |
 | IP (v4) address of the master node | Required only if the hostname of the master node is `mycluster.icp`. Specify the IP address of the master node of your private cloud instance. Corresponds to the `global.icp.masterIP` value in the *values.yaml* file. |
 | Hostname of the ICP cluster proxy node | Specify the hostname of the proxy node of your private cloud instance. To discover this value, run the command: `kubectl get nodes --show-labels`, and then find the node that shows `proxy=true`, and get the hostname value. It might be an IP address instead of a typical hostname. Corresponds to the `global.icp.proxyHostname` value in the *values.yaml* file. |
-| Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](/docs/services/assistant-icp/lang-support.html). |
+| Languages |  Specify the languages you want to support in addition to. English is required; do not deselect it. For more information about language options, see [Supported languages](/docs/services/assistant-icp?topic=assistant-private-lang-support). |
 | Create COS | Boolean. Indicates whether you want to provide your own cloud object store or have one created for you. If `true`, a Minio cloud object store is created. The default value is true. **Do not deselect this checkbox. The service does not currently support providing your own store.**  |
 | COS Access Key | Credential to access the store. |
 | COS Secret Key | Access key to the store used by CLU components. |
@@ -641,5 +640,5 @@ After the installation finishes, [verify](#intall-101-verify) that it was succes
 
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
-- To learn more about the service first, read the [overview](/docs/services/assistant-icp/index.html).
-- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp/getting-started.html).
+- To learn more about the service first, read the [overview](/docs/services/assistant-icp?topic=assistant-private-index).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started).

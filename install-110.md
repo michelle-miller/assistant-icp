@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
 
@@ -95,7 +95,7 @@ Table 3. Storage requirements
 | MongoDB   | 3 | 80 GB | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
-<!-- Consider evaluating [vSphere Cloud Provider](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/vsphere_land.html) -->
+<!-- Consider evaluating [vSphere Cloud Provider](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/vsphere_land) -->
 
 ### Microservices
 {: #install-110-microservices}
@@ -139,7 +139,7 @@ The following resources are what you need to support a production deployment, wh
 
 `*`Again, for a development environment, you only need a half of a VPC for each of these languages.
 
-For the full list of supported languages, see [Supported languages](/docs/services/assistant-icp/lang-support.html).
+For the full list of supported languages, see [Supported languages](/docs/services/assistant-icp?topic=assistant-private-lang-support).
 
 ### Overview of the steps
 {: #install-110-task-overview}
@@ -179,7 +179,7 @@ You must have cluster administrator or team administrator access to the systems 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
 1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
-1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
+1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/linux/linux-postinstall/) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
 1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
 1.  Set up the Helm command line interface.
@@ -661,5 +661,5 @@ The user-provided configuration values are listed at the start of the informatio
 
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
-- To learn more about the service first, read the [overview](/docs/services/assistant-icp/index.html).
-- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp/getting-started.html).
+- To learn more about the service first, read the [overview](/docs/services/assistant-icp?topic=assistant-private-index).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started).

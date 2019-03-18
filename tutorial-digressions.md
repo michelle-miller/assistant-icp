@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -46,7 +45,7 @@ This tutorial will take approximately 20 minutes to complete.
 ### Prerequisite
 {: #tut-dig-prereqs}
 
-If you do not have a {{site.data.keyword.conversationshort}} instance, complete the **Before you begin** step from the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html#prerequisites) to create one.
+If you do not have a {{site.data.keyword.conversationshort}} instance, complete the **Before you begin** step from the [Getting Started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started#gs-prerequisites) to create one.
 
 ## Step 1: Import the Digressions showcase workspace
 {: #tut-dig-import-digression-json}
@@ -151,4 +150,4 @@ In this tutorial you experienced how digressions work, and saw how individual di
 ## Next steps
 {: #tut-dig-next-steps}
 
-For help as you configure digressions for your own dialog, see [Digressions](/docs/services/assistant-icp/dialog-runtime.html#digressions).
+For help as you configure digressions for your own dialog, see [Digressions](/docs/services/assistant-icp?topic=assistant-private-dialog-runtime#digressions).

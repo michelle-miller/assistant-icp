@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2018-08-17"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -37,8 +36,8 @@ Links to resources, videos, tutorials, and articles that can help you to get sta
 - [Pizza ordering chatbot using slots ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/assemble-a-pizza-ordering-chatbot-dialog/){: new_window}
 - [Building an Amazon Alexa Skill with the service ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/alexa-skill-watson-conversation){: new_window}
 - [Adding a chatbot to WordPress with the service ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://wordpress.org/plugins/conversation-watson/){: new_window}
-- [Tutorial: Build a database-driven Slackbot ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/tutorials/slack-chatbot-database-watson.html){: new_window}
-- [Tutorial: Build a voice-enabled Android chatbot ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/tutorials/android-watson-chatbot.html){: new_window}
+- [Tutorial: Build a database-driven Slackbot ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/tutorials/slack-chatbot-database-watson.html){: new_window}
+- [Tutorial: Build a voice-enabled Android chatbot ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/tutorials/android-watson-chatbot.html){: new_window}
 
 ## Building with Watson videos
 
@@ -60,7 +59,7 @@ Additional videos created by IBMers. Again, some of these videos refer to the se
 
 ## IBM Watson Academy
 
-- [{{site.data.keyword.conversationshort}} Foundations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.watson-academy.info/course/view.php?id=273){: new_window}
+- [Watson Academy ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://ibm.com/training/watsonacademy){: new_window}
 
 ## Simon Burns on Medium
 

@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -24,6 +23,7 @@ subcollection: assistant-private
 {:swift: .ph data-hd-programlang='swift'}
 
 # Defining entities
+{: #entities}
 
 ***Entities*** represent information in the user input that is relevant to the user's purpose.
 
@@ -94,7 +94,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
 
     > **Important:** Don't include sensitive or personal information in entity names or values. The names and values can be exposed in URLs in an app.
 
-1.  For **Fuzzy Matching**, click the button to select either on or off; fuzzy matching is off by default. This feature is available for languages noted in the [Supported languages](/docs/services/assistant-icp/lang-support.html) topic.
+1.  For **Fuzzy Matching**, click the button to select either on or off; fuzzy matching is off by default. This feature is available for languages noted in the [Supported languages](/docs/services/assistant-icp?topic=assistant-private-lang-support) topic.
 
     ***Fuzzy matching***
     {: #fuzzy-matching}
@@ -138,7 +138,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
       - `email`: `\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b`, e.g. name@ibm.com
       - `website`: `(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$`, e.g. https://www.ibm.com
 
-      Often when using pattern entities, it will be necessary to store the text that matches the pattern in a context variable (or action variable), from within your dialog tree. For additional information, see [Defining a context variable](/docs/services/assistant-icp/dialog-runtime.html#context-var-define).
+      Often when using pattern entities, it will be necessary to store the text that matches the pattern in a context variable (or action variable), from within your dialog tree. For additional information, see [Defining a context variable](/docs/services/assistant-icp?topic=assistant-private-dialog-runtime#context-var-define).
 
       Imagine a case where you are asking a user for their email address. The dialog node condition will contain a condition similar to `@contactInfo:email`. In order to assign the user-entered email as a context variable, the following syntax can be used to capture the pattern match within the dialog node's response section:
       
@@ -159,7 +159,7 @@ Use the {{site.data.keyword.conversationshort}} tool to create entities.
       - Variable: area_code
       - Value: `<? @fullUSphone.groups[1] ?>` 
 
-      For additional information about using capture groups in your dialog, see [Storing and recognizing entity pattern groups in input](/docs/services/assistant-icp/dialog-tips.html#get-pattern-groups).
+      For additional information about using capture groups in your dialog, see [Storing and recognizing entity pattern groups in input](/docs/services/assistant-icp?topic=assistant-private-dialog-tips#get-pattern-groups).
 
       The pattern matching engine employed by the {{site.data.keyword.conversationshort}} service has some syntax limitations, which are necessary in order to avoid performance concerns which can occur when using other regular expression engines.
         - Entity patterns may not contain:
@@ -352,7 +352,7 @@ System entities are centrally maintained, so any updates are available automatic
 
 1.  Browse through the list of system entities to choose the ones that are useful for your application.
     - To see more information about a system entity, including examples of matching input, click the entity in the list.
-    - For details about the available system entities, see [System entities](/docs/services/assistant-icp/system-entities.html).
+    - For details about the available system entities, see [System entities](/docs/services/assistant-icp?topic=assistant-private-system-entities).
 
 1.  Click the toggle switch next to a system entity to enable or disable it.
 

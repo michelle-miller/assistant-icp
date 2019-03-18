@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -34,10 +33,10 @@ The assistant that you build is hosted by {{site.data.keyword.icpfull}}.
 
 For information about artifact limits per plan, see these topics:
 
-- [Workspaces](/docs/services/assistant-icp/configure-workspace.html#workspace-limits)
-- [Dialog nodes](/docs/services/assistant-icp/dialog-build.html#dialog-node-limits)
-- [Intents](/docs/services/assistant-icp/intents.html#intent-limits)
-- [Entities](/docs/services/assistant-icp/entities.html#entity-limits)
+- [Workspaces](/docs/services/assistant-icp?topic=assistant-private-configure-workspace#workspace-limits)
+- [Dialog nodes](/docs/services/assistant-icp?topic=assistant-private-dialog-build#dialog-node-limits)
+- [Intents](/docs/services/assistant-icp?topic=assistant-private-intents#intent-limits)
+- [Entities](/docs/services/assistant-icp?topic=assistant-private-entities#entity-limits)
 
 ## Service API Versioning
 {: shortdesc}

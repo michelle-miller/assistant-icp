@@ -6,7 +6,6 @@ lastupdated: "2019-02-21"
 
 subcollection: assistant-private
 
-
 ---
 
 {:shortdesc: .shortdesc}
@@ -32,14 +31,14 @@ In this short tutorial, we introduce the {{site.data.keyword.conversationshort}}
 {: shortdesc}
 
 ## Before you begin
-{: #prerequisites}
+{: #gs-prerequisites}
 
-You'll need a service instance to start. The administrator must install the service for you. Details are provided in the [installation checklist](/docs/services/assistant-icp/install.html).
+You'll need a service instance to start. The administrator must install the service for you. Details are provided in the [installation checklist](/docs/services/assistant-icp?topic=assistant-private-install).
 
 If a {{site.data.keyword.conversationshort}} service instance is already set up in your {{site.data.keyword.BluOpenStackDed_full}} environment, then you're all set with these prerequisites. Go to [Step 1](#launch-tool).
 
 ## Step 1: Open the tool
-{: #launch-tool}
+{: #gs-launch-tool}
 
 1.  Log in to the {{site.data.keyword.icpfull_notm}} management console.
 1.  From the main menu, expand **Workloads**, and then choose **Deployments**.
@@ -57,11 +56,11 @@ If a {{site.data.keyword.conversationshort}} service instance is already set up 
 1.  Log in using the same credentials you used to log into the {{site.data.keyword.icpfull_notm}} dashboard.
 
 ## Step 2: Create a workspace
-{: #create-workspace}
+{: #gs-create-workspace}
 
 Your first step in the {{site.data.keyword.conversationshort}} tool is to create a workspace.
 
-A [*workspace*](/docs/services/assistant-icp/configure-workspace.html) is a container for the artifacts that define the conversation flow.
+A [*workspace*](/docs/services/assistant-icp?topic=assistant-private-configure-workspace) is a container for the artifacts that define the conversation flow.
 
 1.  From the home page of the {{site.data.keyword.conversationshort}} tool, click the **Workspaces** tab.
 1.  Click **Create**.
@@ -72,7 +71,7 @@ A [*workspace*](/docs/services/assistant-icp/configure-workspace.html) is a cont
 ![Shows an animation of a user creating a {{site.data.keyword.conversationshort}} tutorial workspace.](images/gs-ass-create-workspace.gif){: gif}
 
 ## Step 3: Add intents from a content catalog
-{: #add-catalog}
+{: #gs-add-catalog}
 
 Add training data that was built by IBM to your workspace by adding intents from a content catalog. In particular, you will give your assistant access to the `General` content catalog so your dialog can greet users, and end conversations with them.
 
@@ -87,9 +86,9 @@ Add training data that was built by IBM to your workspace by adding intents from
 You have successfully started to build your training data by adding prebuilt content from IBM to your workspace.
 
 ## Step 4: Build a dialog
-{: #build-dialog}
+{: #gs-build-dialog}
 
-A [dialog](/docs/services/assistant-icp/dialog-build.html) defines the flow of your conversation in the form of a logic tree. Each node of the tree has a condition that triggers it, based on user input.
+A [dialog](/docs/services/assistant-icp?topic=assistant-private-dialog-build) defines the flow of your conversation in the form of a logic tree. Each node of the tree has a condition that triggers it, based on user input.
 
 We'll create a simple dialog that handles the `#General_Greetings` and `#General_Ending` intents, each with a single node.
 
@@ -124,6 +123,7 @@ We'll create a simple dialog that handles the `#General_Greetings` and `#General
    ![Shows that a general ending node was also added to the dialog.](images/gs-ass-general-ending-added.png)
 
 ## Step 5: Test the dialog
+{: #gs-test-dialog}
 
 You built a simple dialog to recognize and respond to both hello and goodbye inputs. Let's see how well it works.
 
@@ -143,7 +143,7 @@ You built a simple dialog to recognize and respond to both hello and goodbye inp
 {{site.data.keyword.watson}} can recognize your intents even when your input doesn't exactly match the examples you included. The dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify.
 
 ## Step 6: Add a business function to the dialog
-{: #add-ecommerce}
+{: #gs-add-ecommerce}
 
 Add the *Customer Care* content catalog to your training data, so your dialog can address user requests for contact information.
 
@@ -173,7 +173,7 @@ Add the *Customer Care* content catalog to your training data, so your dialog ca
 You have successfully added a node to the dialog that addresses the type of business-related question that real users might ask.
 
 ## Step 7: Review the sample workspace
-{: #review-sample-workspace}
+{: #gs-review-sample-workspace}
 
 Open the sample workspace to see intents similar to the ones you just created plus many more, and see how they are used in a more complex dialog.
 
@@ -186,5 +186,5 @@ Open the sample workspace to see intents similar to the ones you just created pl
 
 This tutorial is built around a simple example. For a real application, you'll need to define some more interesting intents, some entities, and a more complex dialog.
 
-- Try the advanced [tutorial](/docs/services/assistant-icp/tutorial.html) to add entities and clarify a user's purpose.
-- Check out the [sample apps](/docs/services/assistant-icp/sample-applications.html).
+- Try the advanced [tutorial](/docs/services/assistant-icp?topic=assistant-private-tutorial) to add entities and clarify a user's purpose.
+- Check out the [sample apps](/docs/services/assistant-icp?topic=assistant-private-sample-applications).

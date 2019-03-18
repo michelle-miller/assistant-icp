@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -68,10 +67,10 @@ Here's how you will implement your conversation:
 
 Read more about these implementation steps by following these links:
 
-- [Intent creation overview](/docs/services/assistant-icp/intents.html#intent-described)
-- [Dialog overview](/docs/services/assistant-icp/dialog-overview.html)
-- [Entity creation overview](/docs/services/assistant-icp/entities.html#entity-described)
-- [Building a client application](/docs/services/assistant-icp/develop-app.html)
+- [Intent creation overview](/docs/services/assistant-icp?topic=assistant-private-intents#intent-described)
+- [Dialog overview](/docs/services/assistant-icp?topic=assistant-private-dialog-overview)
+- [Entity creation overview](/docs/services/assistant-icp?topic=assistant-private-entities#entity-described)
+- [Building a client application](/docs/services/assistant-icp?topic=assistant-private-develop-app)
 
 ## Browser support
 
@@ -80,13 +79,13 @@ The {{site.data.keyword.conversationshort}} service tooling requires the same le
 ## Language support
 {: #index-lang-support}
 
-Language support by feature is detailed in the [Supported languages](/docs/services/assistant-icp/lang-support.html) topic.
+Language support by feature is detailed in the [Supported languages](/docs/services/assistant-icp?topic=assistant-private-lang-support) topic.
 
 ## Next steps
 {: index-next steps}
 
-- [Get started](/docs/services/assistant-icp/getting-started.html) with the service
-- Try out some [demos](/docs/services/assistant-icp/sample-applications.html).
+- [Get started](/docs/services/assistant-icp?topic=assistant-private-getting-started) with the service
+- Try out some [demos](/docs/services/assistant-icp?topic=assistant-private-sample-applications).
 - View the list of [developer resources ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/watson/developer-resources/){: new_window}.
 
 Still have questions? Contact [IBM Sales ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/marketing/iwm/dre/signup?source=urx-20970){: new_window}.
@@ -94,7 +93,7 @@ Still have questions? Contact [IBM Sales ![External link icon](../../icons/launc
 ## Terms and notices
 {: #notices}
 
-See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html) for information about the terms of service.
+See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/accessibility?topic=overview-terms) for information about the terms of service.
 
 ## Trademarks
 {: #trademarks}
