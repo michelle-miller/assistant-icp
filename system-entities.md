@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -24,6 +23,7 @@ subcollection: assistant-private
 {:swift: .ph data-hd-programlang='swift'}
 
 # System entity details
+{: #system-entities}
 
 This reference section provides complete information about the available system entities. For more information about system entities and how to use them, refer to [Defining entities](/docs/services/assistant-icp?topic=assistant-private-entities#enable_system_entities) and search for "Enabling system entities".
 {: shortdesc}

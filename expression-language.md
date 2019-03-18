@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -26,7 +25,7 @@ subcollection: assistant-private
 # Expressions for accessing objects
 {: #expression-language}
 
-You can write expressions that access objects and properties of objects by using the Spring Expression (SpEL) language. For more information, see [Spring Expression Language (SpEL) ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/expressions){: new_window}.
+You can write expressions that access objects and properties of objects by using the Spring Expression (SpEL) language. For more information, see [Spring Expression Language (SpEL) ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/expressions.html){: new_window}.
 {: shortdesc}
 
 ## Evaluation syntax
