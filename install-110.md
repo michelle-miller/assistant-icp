@@ -43,7 +43,7 @@ Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, me
 ## System requirements
 {: #install-110-sys-reqs}
 
-See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs#reqs_multi.html){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The worker nodes must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} at a minimum.
 

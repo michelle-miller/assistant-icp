@@ -61,7 +61,7 @@ The systems must meet these requirements:
 - CPUs must support Linux SSE 4.2
 - CPUs must support the AVX instruction set extension. The `ed-mm` microservice cannot function properly without AVX support.
 
-See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs#reqs_multi.html){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0.3/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 ### Resource requirements
 {: #install-101-resource-reqs}
