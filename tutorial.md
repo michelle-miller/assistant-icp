@@ -50,7 +50,7 @@ This tutorial will take approximately 2 to 3 hours to complete.
 ### Prerequisite
 {: #tut-prereqs}
 
-Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html).
+Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started).
 
 You will use the **{{site.data.keyword.conversationshort}} tutorial** workspace that you created, and add nodes to the simple dialog that you built as part of the getting started exercise.
 
@@ -694,7 +694,7 @@ If you do more testing, you might find that the dialog isn't very helpful in sce
 
 Now, when you test, you can provide a set of number or a mix of numbers and text as input, and the dialog reminds you of the correct order number format. You have successfully tested your dialog, found a weakness in it, and corrected it.
 
-Another way you can address this type of scenario is to add a node with slots. See the [Adding a node with slots to a dialog](/docs/services/assistant-icp/tutorial-slots.html) tutorial to learn more about using slots.
+Another way you can address this type of scenario is to add a node with slots. See the [Adding a node with slots to a dialog](/docs/services/assistant-icp?topic=assistant-private-tutorial-slots) tutorial to learn more about using slots.
 {:tip}
 
 ## Step 5: Add the personal touch
@@ -834,4 +834,4 @@ Now that you have built and tested your workspace, you can deploy it by connecti
 ### Build your own front-end application
 {: #tut-build-client-app}
 
-You can use the Watson SDKs to [build your own](/docs/services/assistant-icp/develop-app.html) front-end application that connects to your workspace using the {{site.data.keyword.conversationshort}} REST API.
+You can use the Watson SDKs to [build your own](/docs/services/assistant-icp?topic=assistant-private-develop-app) front-end application that connects to your workspace using the {{site.data.keyword.conversationshort}} REST API.

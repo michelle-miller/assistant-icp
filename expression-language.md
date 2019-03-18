@@ -26,7 +26,7 @@ subcollection: assistant-private
 # Expressions for accessing objects
 {: #expression-language}
 
-You can write expressions that access objects and properties of objects by using the Spring Expression (SpEL) language. For more information, see [Spring Expression Language (SpEL) ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/expressions.html){: new_window}.
+You can write expressions that access objects and properties of objects by using the Spring Expression (SpEL) language. For more information, see [Spring Expression Language (SpEL) ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/expressions){: new_window}.
 {: shortdesc}
 
 ## Evaluation syntax
@@ -232,7 +232,7 @@ The following example shows how to access input:
 - To execute a node if the user input is "Yes", add this expression to the node condition:
   `input.text == 'Yes'`
 
-You can use any of the [String methods](/docs/services/assitant-icp/dialog-methods.html#strings) to evaluate or manipulate text from the user input. For example:
+You can use any of the [String methods](/docs/services/assitant-icp/dialog-methods#strings) to evaluate or manipulate text from the user input. For example:
 
 - To check whether the user input contains "Yes", use: `input.text.contains( 'Yes' )`.
 - Returns true if the user input is a number: `input.text.matches( '[0-9]+' )`.

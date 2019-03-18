@@ -60,7 +60,7 @@ Using slots produces a more natural dialog flow between the user and the service
     - Delivery time
     - Size
 
-1.  If you have not started to create a dialog, follow the instructions in [Creating a dialog](/docs/services/assistant-icp/dialog-build.html) to create one.
+1.  If you have not started to create a dialog, follow the instructions in [Creating a dialog](/docs/services/assistant-icp?topic=assistant-private-dialog-build) to create one.
 
 1.  From the dialog node edit view, click **Customize**, and then click the toggle next to **Slots** to turn it **On**.
 
@@ -154,14 +154,14 @@ Using slots produces a more natural dialog flow between the user and the service
     This condition is triggered if the user provides input that matches the slot handler conditions at any time during the dialog node flow up until the node-level response is displayed. See [Handling requests to exit a process](#slots-node-level-handler) for more ways to use the slot handler.
 1.  **Add a node-level response**. The node-level response is not executed until after all of the required slots are filled. You can add a response that summarizes the information you collected. For example, `A $size pizza is scheduled for delivery at $time. Enjoy!`
 
-    If you want to define different responses based on certain conditions, click **Customize**, and then click the **Multiple responses** toggle to turn it **On**. For information about conditional responses, see [Conditional responses](/docs/services/assistant-icp/dialog-overview.html#multiple).
+    If you want to define different responses based on certain conditions, click **Customize**, and then click the **Multiple responses** toggle to turn it **On**. For information about conditional responses, see [Conditional responses](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#multiple).
 1.  **Add logic that resets the slot context variables**. As you collect answers from the user per slot, they are saved in context variables. You can use the context variables to pass the information to another node or to an application or external service for use. However, after passing the information, you must set the context variables to null to reset the node so it can start collecting information again. You cannot null the context variables within the current node because the service will not exit the node until the required slots are filled. Instead, consider using one of the following methods:
 
     - Add processing to the external application that nulls the variables.
     - Add a child node that nulls the variables.
     - Insert a parent node that nulls the variables, and then jumps to the node with slots.
 
-Give it a try! Follow the step-by-step [tutorial](/docs/services/assistant-icp/tutorial-slots.html).
+Give it a try! Follow the step-by-step [tutorial](/docs/services/assistant-icp?topic=assistant-private-tutorial-slots).
 
 ## Slots usage tips
 {: #slots-tips}
@@ -245,7 +245,7 @@ For example, time values are saved in the `hh:mm:ss` format. You can use the JSO
 ```
 {: codeblock}
 
-See [Methods to process values](/docs/services/assistant-icp/dialog-methods.html) for other reformatting ideas.
+See [Methods to process values](/docs/services/assistant-icp?topic=assistant-private-dialog-methods) for other reformatting ideas.
 
 ### Dealing with zeros
 {: #slots-zero}

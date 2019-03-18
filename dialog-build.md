@@ -86,22 +86,22 @@ To build a dialog, complete the following steps:
 
     The condition you define must be less than 2,048 characters in length.
 
-    For more information about how to test for values in conditions, see [Conditions](/docs/services/assistant-icp/dialog-overview.html#conditions).
-1.  **Optional**: If you want to collect multiple pieces of information from the user in this node, then click **Customize** and enable **Slots**. See [Gathering information with slots](/docs/services/assistant-icp/dialog-slots.html) for more details.
+    For more information about how to test for values in conditions, see [Conditions](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#conditions).
+1.  **Optional**: If you want to collect multiple pieces of information from the user in this node, then click **Customize** and enable **Slots**. See [Gathering information with slots](/docs/services/assistant-icp?topic=assistant-private-dialog-slots) for more details.
 1.  Enter a response.
     - Add the text or multimedia elements that you want the service to display to the user as a response.
     - If you want to define different responses based on certain conditions, then click **Customize** and enable **Multiple responses**.
-    - For information about conditional responses, rich responses, or how to add variety to responses, see [Responses](/docs/services/assistant-icp/dialog-overview.html#responses).
+    - For information about conditional responses, rich responses, or how to add variety to responses, see [Responses](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#responses).
 
 1.  Specify what to do after the current node is processed. You can choose from the following options:
 
     - **Wait for user input**: The service pauses until new input is provided by the user.
     - **Skip user input**: The service jumps directly to the first child node. This option is only available if the current node has at least one child node.
-    - **Jump to**: The service continues the dialog by processing the node you specify. You can choose whether the service should evaluate the target node's condition or skip directly to the target node's response. See [Configuring the Jump to action](/docs/services/assistant-icp/dialog-overview.html#jump-to-config) for more details.
+    - **Jump to**: The service continues the dialog by processing the node you specify. You can choose whether the service should evaluate the target node's condition or skip directly to the target node's response. See [Configuring the Jump to action](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#jump-to-config) for more details.
 
 1.  **Optional**: If you want this node to be considered when users are shown a set of node choices at run time, and asked to pick the one that best matches their goal, then add a short description of the user goal handled by this node to the **node purpose** field. For example, *Place an order*.
 
-    ![Premium plan only](images/premium0.png) The *node purpose* field is only displayed to Premium plan users. See [Disambiguation](/docs/services/assistant-icp/dialog-runtime.html#disambiguation) for more details.
+    ![Premium plan only](images/premium0.png) The *node purpose* field is only displayed to Premium plan users. See [Disambiguation](/docs/services/assistant-icp?topic=assistant-private-dialog-runtime#disambiguation) for more details.
 
 1.  **Optional**: Name the node.
 
@@ -115,7 +115,7 @@ To build a dialog, complete the following steps:
     - To create a child node to the selected node, select **Add child node**. A child node is processed after its parent node.
     - To copy the current node, select **Duplicate**.
 
-    For more information about the order in which dialog nodes are processed, see [Dialog overview](/docs/services/assistant-icp/dialog-overview.html#dialog-flow).
+    For more information about the order in which dialog nodes are processed, see [Dialog overview](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#dialog-flow).
 1.  Test the dialog as you build it.
    See [Testing your dialog](#test) for more information.
 
@@ -150,7 +150,7 @@ As you make changes to your dialog, you can test it at any time to see how it re
     1.  To add a context variable, specify the variable name, and press **Enter**.
     1.  To define a default value for the context variable, find the context variable you added in the list, and then specify a value for it.
 
-    See [Context variables](/docs/services/assistant-icp/dialog-runtime.html#context) for more information.
+    See [Context variables](/docs/services/assistant-icp?topic=assistant-private-dialog-runtime#context) for more information.
 
 1.  Continue to interact with the dialog to see how the conversation flows through it.
     - To find and resubmit a test utterance, you can press the Up key to cycle through your recent inputs.
@@ -162,7 +162,7 @@ If you determine that the wrong intents or entities are being recognized, you mi
 
 If the correct intents and entities are being recognized, but the wrong nodes are being triggered in your dialog, make sure your conditions are written properly.
 
-See [Dialog building tips](/docs/services/assistant-icp/dialog-tips.html) for tips that might help you as you get started.
+See [Dialog building tips](/docs/services/assistant-icp?topic=assistant-private-dialog-tips) for tips that might help you as you get started.
 
 ## Finding a dialog node by its node ID
 {: #get-node-id}

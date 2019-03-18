@@ -47,7 +47,7 @@ This tutorial will take approximately 2 to 3 hours to complete.
 ### Prerequisite
 {: #tut-car-prereqs}
 
-Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp/getting-started.html).
+Before you begin, complete the [Getting Started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started).
 
 You will use the {{site.data.keyword.conversationshort}} tutorial workspace that you created, and add nodes to the simple dialog that you built as part of the getting started exercise.
 

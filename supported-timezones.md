@@ -25,7 +25,7 @@ subcollection: assistant-private
 
 # Time zones supported by system entities
 
-This list of supported time zones can be used with the time zone functions related to the [@sys-date and @sys-time entities](/docs/services/assistant-icp/system-entities.html#sys-datetime).
+This list of supported time zones can be used with the time zone functions related to the [@sys-date and @sys-time entities](/docs/services/assistant-icp?topic=assistant-private-system-entities#sys-datetime).
 {: shortdesc}
 
 |            Time zone           |             Time zone            |

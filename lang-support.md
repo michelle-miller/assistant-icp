@@ -39,7 +39,7 @@ The first table shows the level of support for all features, except those relate
 
 **Table 1. Feature support details**
 
-| Language | **[Defining intents](/docs/services/assistant-icp/intents.html)** and **[dialog](/docs/services/assistant-icp/dialog-build.html)** | **[Absolute scoring and 'Mark as irrelevant'](/docs/services/assistant-icp/intents.html#mark-irrelevant)** | **[Content Catalog](/docs/services/assistant-icp/catalog.html)** |
+| Language | **[Defining intents](/docs/services/assistant-icp?topic=assistant-private-intents)** and **[dialog](/docs/services/assistant-icp?topic=assistant-private-dialog-build)** | **[Absolute scoring and 'Mark as irrelevant'](/docs/services/assistant-icp?topic=assistant-private-intents#mark-irrelevant)** | **[Content Catalog](/docs/services/assistant-icp?topic=assistant-private-catalog)** |
 |:---|:---:|:---:|:---:|
 | **English (en)**                   | GA | GA | GA |
 | **Arabic (ar)**                    | GA | Beta | GA |
@@ -58,7 +58,7 @@ The first table shows the level of support for all features, except those relate
 
 **Table 2. Entity feature support details**
 
-| Language | **[Defining entities](/docs/services/assistant-icp/entities.html)** | **System entities ([number](/docs/services/assistant-icp/system-entities.html#sys-number), [currency](/docs/services/assistant-icp/system-entities.html#sys-currency), [percentage](/docs/services/assistant-icp/system-entities.html#sys-percentage), [date, time](/docs/services/assistant-icp/system-entities.html#sys-datetime))** | **[Entity fuzzy matching](/docs/services/assistant-icp/entities.html#fuzzy-matching)** | **[Contextual entities](/docs/services/assistant-icp/entities.html#defining-contextual-entities)** |
+| Language | **[Defining entities](/docs/services/assistant-icp?topic=assistant-private-entities)** | **System entities ([number](/docs/services/assistant-icp?topic=assistant-private-system-entities#sys-number), [currency](/docs/services/assistant-icp?topic=assistant-private-system-entities#sys-currency), [percentage](/docs/services/assistant-icp?topic=assistant-private-system-entities#sys-percentage), [date, time](/docs/services/assistant-icp?topic=assistant-private-system-entities#sys-datetime))** | **[Entity fuzzy matching](/docs/services/assistant-icp?topic=assistant-private-entities#fuzzy-matching)** | **[Contextual entities](/docs/services/assistant-icp?topic=assistant-private-entities#defining-contextual-entities)** |
 |:---|:---:|:---:|:---:|:---:|
 | **English (en)**                   | GA | GA | Beta (Stemming, misspelling, and partial match) | Beta |
 | **Arabic (ar)**  | GA | Beta | Beta (Misspelling only) | NA |

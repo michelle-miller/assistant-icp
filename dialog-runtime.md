@@ -89,7 +89,7 @@ In the resulting API /message response, the text response is formatted as follow
 }
 ```
 
-There are response types other than a text response that you can define. See [Responses](/docs/services/assistant-icp/dialog-overview.html#responses) for more details.
+There are response types other than a text response that you can define. See [Responses](/docs/services/assistant-icp?topic=assistant-private-dialog-overview#responses) for more details.
 
 **Note**: The following `output` object format is supported for backwards compatibility. Any workspaces that specify a text response by using this format will continue to function properly. With the introduction of rich response types, the `output.text` structure was augmented with the `output.generic` structure to facilitate supporting other types of responses in addition to text. Use the new format when you create new nodes to give yourself more flexibility, because you can subsequently change the response type, if needed.
 
@@ -178,7 +178,7 @@ Define a context variable by adding the variable name to the **Variable** field 
 
     - The `name` can contain any upper- and lowercase alphabetic characters, numeric characters (0-9), and underscores.
 
-      You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-context) for more details.
+      You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp?topic=assistant-private-expression-language#shorthand-context) for more details.
       {:tip}
 
     - The `value` can be any supported JSON type, such as a simple string variable, a number, a JSON array, or a JSON object.
@@ -237,7 +237,7 @@ To store the value of a pattern entity, append .literal to the entity name. Usin
 
 For example, the user input is `Contact me at joe@example.com.` Your entity named `@email` recognizes the `name@domain.com` email format. By configuring the context variable to store `@email.literal`, you indicate that you want to store the part of the input that matched the pattern. If you omit the `.literal` property from the value expression, then the entity value name that you specified for the pattern is returned instead of the segment of user input that matched the pattern.
 
-Many of these value examples use methods to capture different parts of the user input. For more information about the methods available for you to use, see [Expression language methods](/docs/services/assistant-icp/dialog-methods.html).
+Many of these value examples use methods to capture different parts of the user input. For more information about the methods available for you to use, see [Expression language methods](/docs/services/assistant-icp?topic=assistant-private-dialog-methods).
 
 ### Deleting a context variable
 {: #context-delete}
@@ -287,7 +287,7 @@ Instead, use a slightly more complex expression to avoid having to rely on the v
 ### Adding context variables to a node with slots
 {: #context-var-slots}
 
-For more information about slots, see [Gathering information with slots](/docs/services/assistant-icp/dialog-slots.html).
+For more information about slots, see [Gathering information with slots](/docs/services/assistant-icp?topic=assistant-private-dialog-slots).
 
 1.  Open the node with slots in the edit view.
 
@@ -327,7 +327,7 @@ The name and value pair must meet these requirements:
 
 - The `name` can contain any upper- and lowercase alphabetic characters, numeric characters (0-9), and underscores.
 
-  You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-context) for more details.
+  You can include other characters, such as periods and hyphens, in the name. However, if you do, then you must specify the shorthand syntax `$(variable-name)` every time you subsequently reference the variable. See [Expressions for accessing objects](/docs/services/assistant-icp?topic=assistant-private-expression-language#shorthand-context) for more details.
   {:tip}
 
 - The `value` can be any supported JSON type, such as a simple string variable, a number, a JSON array, or a JSON object.
@@ -486,7 +486,7 @@ The result is this context:
 ```
 {: codeblock}
 
-See [Expression language methods](/docs/services/assistant-icp/dialog-methods.html#objects) for more information about methods you can perform on objects.
+See [Expression language methods](/docs/services/assistant-icp?topic=assistant-private-dialog-methods#objects) for more information about methods you can perform on objects.
 
 #### Updating arrays
 
@@ -636,7 +636,7 @@ Choose one of these actions to update the array. In each case, we see the array 
         ```
         {: codeblock}
 
-See [Expression language methods](/docs/services/assistant-icp/dialog-methods.html#arrays) for more information about methods you can perform on arrays.
+See [Expression language methods](/docs/services/assistant-icp?topic=assistant-private-dialog-methods#arrays) for more information about methods you can perform on arrays.
 
 ### Setting one context variable equal to another
 {: #var-equals-var}
@@ -731,7 +731,7 @@ To change the digression behavior for an individual node, complete the following
 
     - **Nodes with slots**: Choose whether you want to allow users to digress away from the node before all of the slots are filled. Set the *Allow digressions away while slot filling* toggle to **Yes** to enable digressions away.
 
-      If enabled, when the conversation returns from the digression, the prompt for the next unfilled slot is displayed to encourage the user to continue providing information. If disabled, then any inputs that the user submits which do not contain a value that can fill a slot are ignored. However, you can address unsolicited questions that you anticipate your users might ask while they interact with the node by defining slot handlers. See [Adding slots](/docs/services/assistant-icp/dialog-slots.html#add-slots) for more information.
+      If enabled, when the conversation returns from the digression, the prompt for the next unfilled slot is displayed to encourage the user to continue providing information. If disabled, then any inputs that the user submits which do not contain a value that can fill a slot are ignored. However, you can address unsolicited questions that you anticipate your users might ask while they interact with the node by defining slot handlers. See [Adding slots](/docs/services/assistant-icp?topic=assistant-private-dialog-slots#add-slots) for more information.
 
       The following image shows you how digressions away from the #reservation node with slots (shown in the earlier illustration) are configured.
 
@@ -795,7 +795,7 @@ This section describes solutions to situations that you might encounter when usi
   context["username"] + "?" ?>
   ```
 
-  For full SpEL expression syntax details, see [Expression for accessing objects](/docs/services/assistant-icp/expression-language.html#shorthand-syntax).
+  For full SpEL expression syntax details, see [Expression for accessing objects](/docs/services/assistant-icp?topic=assistant-private-expression-language#shorthand-syntax).
 
 - **Preventing returns**: In some cases, you might want to prevent a return to the interrupted conversation flow based on a choice the user makes in the current dialog flow. You can use special syntax to prevent a return from a specific node.
 
@@ -822,12 +822,12 @@ To disable digressions into a root node altogether, complete the following steps
 1.  Set the *Allow digressions into this node* toggle to **Off**.
 1.  Click **Apply**.
 
-If you decide that you want to prevent digressions into several root nodes, but do not want to edit each one individually, you can add the nodes to a folder. From the *Customize* page of the folder, you can set the *Allow digressions into this node* toggle to **Off** to apply the configuration to all of the nodes at once. See [Organizing the dialog with folders](/docs/services/assistant-icp/dialog-build.html#folders) for more information.
+If you decide that you want to prevent digressions into several root nodes, but do not want to edit each one individually, you can add the nodes to a folder. From the *Customize* page of the folder, you can set the *Allow digressions into this node* toggle to **Off** to apply the configuration to all of the nodes at once. See [Organizing the dialog with folders](/docs/services/assistant-icp?topic=assistant-private-dialog-build#folders) for more information.
 
 ### Digression tutorial
 {: #digression-tutorial}
 
-Follow the [tutorial](/docs/services/assistant-icp/tutorial-digressions.html) to import a workspace that has a set of nodes already defined. You can walk through some exercises that illustrate how digressions work.
+Follow the [tutorial](/docs/services/assistant-icp?topic=assistant-private-tutorial-digressions) to import a workspace that has a set of nodes already defined. You can walk through some exercises that illustrate how digressions work.
 
 ### Design considerations
 {: #digression-design-considerations}
@@ -1008,7 +1008,7 @@ To test disambiguation, complete the following steps:
 
       This SpEL expression shows the entities that were detected in the user input as an array. The array includes the entity name, location of the entity mention within the user input string, the entity mention string, and the level of confidence that the service has that the term is a mention of the entity type specified.
 
-    - To see details for all of the artifacts at once, including other properties, such as the value of a given context variable at the time of the call, you can inspect the entire API response. See [Viewing API call details](/docs/services/assistant-icp/dialog-tips.html#inspect-api).
+    - To see details for all of the artifacts at once, including other properties, such as the value of a given context variable at the time of the call, you can inspect the entire API response. See [Viewing API call details](/docs/services/assistant-icp?topic=assistant-private-dialog-tips#inspect-api).
 
 1.  Temporarily remove the description you added to the *node purpose* field for at least one of the nodes that you anticipate will be listed as a disambiguation option.
 

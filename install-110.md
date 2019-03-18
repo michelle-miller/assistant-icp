@@ -30,7 +30,7 @@ subcollection: assistant-private
 {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0.
 {: shortdesc}
 
-Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icp4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview.html) for more information about that offering, including installation instructions.
+Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icp4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview) for more information about that offering, including installation instructions.
 
 ## Software requirements
 {: #install-110-prereqs}
@@ -43,7 +43,7 @@ Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, me
 ## System requirements
 {: #install-110-sys-reqs}
 
-See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs.html#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
+See [Hardware requirements and recommendations ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/hardware_reqs#reqs_multi){:new_window} for information about what is required for {{site.data.keyword.icpfull_notm}} itself.
 
 All nodes, with the exception of the worker nodes, host the {{site.data.keyword.icpfull_notm}} cluster infrastructure. The worker nodes host the {{site.data.keyword.conversationshort}} resources. The worker nodes must provide the following number of Virtual Private CPUs (VPCs) to support {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} at a minimum.
 
@@ -95,7 +95,7 @@ Table 3. Storage requirements
 | MongoDB   | 3 | 80 GB | local-storage |
 {: caption="Resource requirements" caption-side="top"}
 
-<!-- Consider evaluating [vSphere Cloud Provider](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/vsphere_land.html) -->
+<!-- Consider evaluating [vSphere Cloud Provider](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/vsphere_land) -->
 
 ### Microservices
 {: #install-110-microservices}
@@ -139,7 +139,7 @@ The following resources are what you need to support a production deployment, wh
 
 `*`Again, for a development environment, you only need a half of a VPC for each of these languages.
 
-For the full list of supported languages, see [Supported languages](/docs/services/assistant-icp/lang-support.html).
+For the full list of supported languages, see [Supported languages](/docs/services/assistant-icp?topic=assistant-private-lang-support).
 
 ### Overview of the steps
 {: #install-110-task-overview}
@@ -157,7 +157,7 @@ Follow these steps to install {{site.data.keyword.conversationshort}} for {{site
 ## Step 1: Purchase and download installation artifacts
 {: #install-110-download-wa-icp}
 
-1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html){:new_window}.
+1.  Purchase {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} from [Passport Advantage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index){:new_window}.
 
 1.  Download the appropriate package for your environment.
 
@@ -176,15 +176,15 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
-1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
-1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers).
+1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli).
+1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
-1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli).
 1.  Set up the Helm command line interface.
 
-    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
+    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli) for details.
 
     1.  Initialize the Helm command line interface.
 
@@ -229,7 +229,7 @@ You must have cluster administrator or team administrator access to the systems 
 
     - If the proxy and management nodes have the same hostname:
 
-      1.  Follow the instructions in the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic to get a private key and certificate signed by a trusted Certificate Authority.
+      1.  Follow the instructions in the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs) topic to get a private key and certificate signed by a trusted Certificate Authority.
 
       1.  Start using the `router-certs` for the proxy node. Run the following command to apply the patch:
 
@@ -258,7 +258,7 @@ Add the {{site.data.keyword.conversationshort}} Helm chart to {{site.data.keywor
     ```
     {: pre}
 
-    The `{icp-url}` is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
+    The `{icp-url}` is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is `mycluster.icp`. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert).
 
     The `skip-ssl-validate` parameter is needed if your cluster is not set up with a certificate that you trust, such as a self-signed certificate.
 
@@ -271,7 +271,7 @@ A PersistentVolume (PV) is a unit of storage in the cluster. In the same way tha
 
 For an overview, see [Persistent Volumes in the Kubernetes documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
-When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is **local-storage**, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#install-110-sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/create_volume.html) for the steps to take to create one.
+When you install the service, persistent volume claims are created for the components automatically. However, because the preferred storage class for the service is **local-storage**, you must explicitly create persistent volumes before you install the service. Create one persistent volumes for each replica specified in the [system requirements](#install-110-sys-reqs) table earlier. See [Creating a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/create_volume) for the steps to take to create one.
 
 **Note**: You must be a cluster administrator to create local storage volumes.
 
@@ -344,7 +344,7 @@ kubectl apply -f {pv-yaml-file-name}
 
 1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
 
-    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html)
+    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert)
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
@@ -513,9 +513,9 @@ If you need to start the deployment over, be sure to remove all trace of the cur
     ```
     {: pre}
 
-1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/delete_app_volume.html) for details.
+1.  The PersistentVolumeClaims will not be deleted and will remain bound to persistent volumes. You must remove them manually. See [Deleting a PersistentVolumeClaim ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/delete_app_volume) for details.
 
-1.  Remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/delete_volume.html) for more information.
+1.  Remove all content from any persistent volumes that you used for the previous deployment before you restart the installation. See [Deleting a PersistentVolume ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/manage_cluster/delete_volume) for more information.
 
 ### Installing from the command line
 {: #install-110-cli}
@@ -540,11 +540,11 @@ To install from the command line, complete these steps:
     ```
     {:codeblock}
 
-    If you do not have the Kubernetes command line tool set up, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html) for instructions.
+    If you do not have the Kubernetes command line tool set up, see [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli) for instructions.
 
 1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
 
-    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
+    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert).
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
 
@@ -661,5 +661,5 @@ The user-provided configuration values are listed at the start of the informatio
 
 Use the {{site.data.keyword.conversationshort}} tool to build training data and a dialog that can be used by your assistant.
 
-- To learn more about the service first, read the [overview](/docs/services/assistant-icp/index.html).
-- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp/getting-started.html).
+- To learn more about the service first, read the [overview](/docs/services/assistant-icp?topic=assistant-private-index).
+- To see how it works for yourself, follow the steps in the [getting started tutorial](/docs/services/assistant-icp?topic=assistant-private-getting-started).

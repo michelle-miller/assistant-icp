@@ -529,7 +529,7 @@ To return the flight codes only, you can create a collection projection expressi
 <? $flights_found.![flight_code] ?>
 ```
 
-This expression returns an array of the `flight_code` values as `["OK123","LH421","TS4156"]`. See the [SpEL Collection projection documentation](https://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) for more details.
+This expression returns an array of the `flight_code` values as `["OK123","LH421","TS4156"]`. See the [SpEL Collection projection documentation](https://docs.spring.io/spring/docs/3.0.x/reference/expressions) for more details.
 
 If you apply the `join()` method to the values in the returned array, the flight codes are displayed in a comma-separated list. For example, you can use the following syntax in a response:
 
@@ -999,7 +999,7 @@ For example, this context variable definition creates a $time variable that save
 ```
 {: codeblock}
 
-Format follows the Java [SimpleDateFormat ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html){: new_window} rules.
+Format follows the Java [SimpleDateFormat ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat){: new_window} rules.
 
 **Note**: When trying to format time only, the date is treated as `1970-01-01`.
 
@@ -1386,7 +1386,7 @@ You can use the the Class methods, including these:
 ```
 {: codeblock}
 
-See the [java.lang.Math reference documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html) for information about other methods.
+See the [java.lang.Math reference documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Math) for information about other methods.
 
 ### java.util.Random()
 
@@ -1423,7 +1423,7 @@ Condition = @sys-number
 ```
 {: codeblock}
 
-See the [java.util.Random reference documentation](https://docs.oracle.com/javase/7/docs/api/java/util/Random.html) for information about other methods.
+See the [java.util.Random reference documentation](https://docs.oracle.com/javase/7/docs/api/java/util/Random) for information about other methods.
 
 You can use standard methods of the following classes also:
 

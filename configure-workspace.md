@@ -31,9 +31,9 @@ The natural-language processing for the {{site.data.keyword.conversationshort}} 
 
 A single {{site.data.keyword.conversationshort}} service instance can contain multiple workspaces. A workspace contains the following types of artifacts:
 
-- [**Intents**](/docs/services/assistant-icp/intents.html): An *intent* represents the purpose of a user's input, such as a question about business locations or a bill payment. You define an intent for each type of user request you want your application to support. In the tool, the name of an intent is always prefixed with the `#` character. To train the workspace to recognize your intents, you supply lots of examples of user input and indicate which intents they map to.
-- [**Entities**](/docs/services/assistant-icp/entities.html); An *entity* represents a term or object that is relevant to your intents and that provides a specific context for an intent. For example, an entity might represent a city where the user wants to find a business location, or the amount of a bill payment. In the tool, the name of an entity is always prefixed with the `@` character. To train the workspace to recognize your entities, you list the possible values for each entity and synonyms that users might enter.
-- [**Dialog**](/docs/services/assistant-icp/dialog-build.html): A *dialog* is a branching conversation flow that defines how your application responds when it recognizes the defined intents and entities. You use the dialog builder in the tool to create conversations with users, providing responses based on the intents and entities that you recognize in their input.
+- [**Intents**](/docs/services/assistant-icp?topic=assistant-private-intents): An *intent* represents the purpose of a user's input, such as a question about business locations or a bill payment. You define an intent for each type of user request you want your application to support. In the tool, the name of an intent is always prefixed with the `#` character. To train the workspace to recognize your intents, you supply lots of examples of user input and indicate which intents they map to.
+- [**Entities**](/docs/services/assistant-icp?topic=assistant-private-entities); An *entity* represents a term or object that is relevant to your intents and that provides a specific context for an intent. For example, an entity might represent a city where the user wants to find a business location, or the amount of a bill payment. In the tool, the name of an entity is always prefixed with the `@` character. To train the workspace to recognize your entities, you list the possible values for each entity and synonyms that users might enter.
+- [**Dialog**](/docs/services/assistant-icp?topic=assistant-private-dialog-build): A *dialog* is a branching conversation flow that defines how your application responds when it recognizes the defined intents and entities. You use the dialog builder in the tool to create conversations with users, providing responses based on the intents and entities that you recognize in their input.
 
 The *content catalog* contains prebuilt common intents and entities that you can add to your application rather than building your own. For example, most applications require a greeting intent that starts a dialog with the user. You can add the **General** content catalog to add a group of intents that recognize and respond to utterances that are commonly used to start and end a conversation, among other things.
 
@@ -55,7 +55,7 @@ You can create a workspace from scratch, use the provided sample workspace, or i
 
 You use the {{site.data.keyword.conversationshort}} tool to create workspaces. 
 
-1.  [Launch the tool](/docs/services/assistant-icp/install.html#launch-tool).
+1.  [Launch the tool](/docs/services/assistant-icp?topic=assistant-private-install#launch-tool).
 1.  Click the **Workspaces** tab.
 1.  From the tool, do one of the following things:
     - To create a workspace from scratch, click **Create**.

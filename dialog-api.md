@@ -28,7 +28,7 @@ subcollection: assistant-private
 
 The {{site.data.keyword.conversationshort}} REST API supports modifying your dialog programmatically, without using the {{site.data.keyword.conversationshort}} tool. You can use the /dialog_nodes API to create, delete, or modify dialog nodes.
 
-Remember that the dialog is a tree of interconnected nodes, and that it must conform to certain rules in order to be valid. This means that any change you make to a dialog node might have cascading effects on other nodes, or on the structure of your dialog. Before using the /dialog_nodes API to modify your dialog, make sure you understand how your changes will affect the rest of the dialog. You can make a backup copy of the current dialog by exporting the workspace in which it resides. See [Exporting and copying workspaces](/docs/services/assistant-icp/configure-workspace.html#exporting-and-copying-workspaces) for details.
+Remember that the dialog is a tree of interconnected nodes, and that it must conform to certain rules in order to be valid. This means that any change you make to a dialog node might have cascading effects on other nodes, or on the structure of your dialog. Before using the /dialog_nodes API to modify your dialog, make sure you understand how your changes will affect the rest of the dialog. You can make a backup copy of the current dialog by exporting the workspace in which it resides. See [Exporting and copying workspaces](/docs/services/assistant-icp?topic=assistant-private-configure-workspace#exporting-and-copying-workspaces) for details.
 
 A valid dialog always satisfies the following criteria:
 

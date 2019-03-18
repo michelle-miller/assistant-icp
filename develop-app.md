@@ -39,13 +39,13 @@ You can view this tutorial for Node.js (Javascript), Python 3, or Java by clicki
 The example application we will create in this section connects to a {{site.data.keyword.conversationshort}} workspace, where the cognitive processing (such as the detection of user intents) takes place. Before continuing with this example, you need to set up the required {{site.data.keyword.conversationshort}} workspace:
 
 1.  Download the workspace <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/conversation/conversation-simple-example.json" download="conversation-simple-example.json">JSON file</a>.
-1.  [Import the workspace](/docs/services/assistant-icp/configure-workspace.html#creating-workspaces) into an instance of the {{site.data.keyword.conversationshort}} service.
+1.  [Import the workspace](/docs/services/assistant-icp?topic=assistant-private-configure-workspace#creating-workspaces) into an instance of the {{site.data.keyword.conversationshort}} service.
 
 ## Getting service information
 
 To access the {{site.data.keyword.conversationshort}} service REST APIs, your application needs to be able to authenticate with {{site.data.keyword.Bluemix}} and connect to the right {{site.data.keyword.conversationshort}} workspace. You'll need to copy the service credentials and workspace ID and paste them into your application code.
 
-For information about how to find your service credentials, see [Service information](/docs/services/assistant-icp/services-information.html#services-information).
+For information about how to find your service credentials, see [Service information](/docs/services/assistant-icp?topic=assistant-private-services-information#services-information).
 
 To find the workspace ID from your workspace, go to the **Workspaces** page of the {{site.data.keyword.conversationshort}} tool and then select **View details** from the menu of the workspace tile.
 
@@ -849,4 +849,4 @@ Success! The application now uses the {{site.data.keyword.conversationshort}} se
 
 Of course, a real-world application would use a more sophisticated user interface, such as a web chat window. And it would implement more complex actions, possibly integrating with a customer database or other business systems. But the basic principles of how the application interacts with the {{site.data.keyword.conversationshort}} service would remain the same.
 
-For some more complex examples, see [Sample apps](/docs/services/assistant-icp/sample-applications.html).
+For some more complex examples, see [Sample apps](/docs/services/assistant-icp?topic=assistant-private-sample-applications).
