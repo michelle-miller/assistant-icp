@@ -36,8 +36,8 @@ The products, services, and other capabilities described herein are not suitable
 
 If you need to request GDPR support for {{site.data.keyword.cloud}} {{site.data.keyword.watson}} resources that are created
 
-- In the European Union, see [Requesting support for IBM Cloud Watson resources created in the European Union![External link icon](../../icons/launch-glyph.svg "External link icon")](https:///docs/services/watson/getting-started-gdpr-sar#request-EU){: new_window}.
-- Outside the European Union, see [Requesting support for resources outside the European Union![External link icon](../../icons/launch-glyph.svg "External link icon")](https:///docs/services/watson/getting-started-gdpr-sar#request-non-EU){: new_window}.
+- In the European Union, see [Requesting support for IBM Cloud Watson resources created in the European Union![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/services/watson/getting-started-gdpr-sar#request-EU){: new_window}.
+- Outside the European Union, see [Requesting support for resources outside the European Union![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/services/watson/getting-started-gdpr-sar#request-non-EU){: new_window}.
 
 ## European Union General Data Protection Regulation (GDPR)
 {: #gdpr}

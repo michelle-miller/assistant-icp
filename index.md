@@ -94,7 +94,7 @@ Still have questions? Contact [IBM Sales ![External link icon](../../icons/launc
 ## Terms and notices
 {: #notices}
 
-See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](https:///docs/overview/terms-of-use/notices) for information about the terms of service.
+See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/terms-of-use/notices) for information about the terms of service.
 
 ## Trademarks
 {: #trademarks}
