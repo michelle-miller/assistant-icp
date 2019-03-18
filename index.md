@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -75,7 +74,7 @@ Read more about these implementation steps by following these links:
 
 ## Browser support
 
-The {{site.data.keyword.conversationshort}} service tooling requires the same level of browser software as is required by {{site.data.keyword.icpfull_notm}}. See [Supported browsers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/supported_browsers){: new_window} for details.
+The {{site.data.keyword.conversationshort}} service tooling requires the same level of browser software as is required by {{site.data.keyword.icpfull_notm}}. See [Supported browsers ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/supported_system_config/supported_browsers.html){: new_window} for details.
 
 ## Language support
 {: #index-lang-support}
@@ -94,7 +93,7 @@ Still have questions? Contact [IBM Sales ![External link icon](../../icons/launc
 ## Terms and notices
 {: #notices}
 
-See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/terms-of-use/notices) for information about the terms of service.
+See [IBM Cloud Terms and Notices ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/accessibility?topic=overview-terms) for information about the terms of service.
 
 ## Trademarks
 {: #trademarks}
