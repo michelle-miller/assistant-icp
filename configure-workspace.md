@@ -53,9 +53,9 @@ The sample workspace does not count toward your workspace limit unless you edit 
 
 You can create a workspace from scratch, use the provided sample workspace, or import a workspace from a JSON file. You can also duplicate an existing workspace within the same service instance.
 
-You use the {{site.data.keyword.conversationshort}} tool to create workspaces. 
+You use the {{site.data.keyword.conversationshort}} tool to create workspaces.
 
-1.  [Launch the tool](/docs/services/assistant-icp?topic=assistant-private-install#launch-tool).
+1.  [Launch the tool](/docs/services/assistant-icp?topic=assistant-private-getting-started#gs-launch-tool).
 1.  Click the **Workspaces** tab.
 1.  From the tool, do one of the following things:
     - To create a workspace from scratch, click **Create**.

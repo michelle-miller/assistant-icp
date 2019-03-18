@@ -2,10 +2,9 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-03-18"
 
 subcollection: assistant-private
-
 
 ---
 
@@ -40,4 +39,4 @@ The accessibility features in this product documentation allow users to do the f
 - Use screen magnifiers to magnify what is displayed on the screen.
 - Operate specific or equivalent features by using only the keyboard.
 
-The documentation content is published in the IBM Cloud Docs site. For information about the accessibility of the site, see [Accessibility features for IBM Cloud ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/accessibility/accessibility_features).
+The documentation content is published in the IBM Cloud Docs site. For information about the accessibility of the site, see [Accessibility features for IBM Cloud ![External link icon](../../icons/launch-glyph.svg "External link icon")](/docs/overview/accessibility?topic=overview-accessibility-platform).
