@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 subcollection: assistant-private
 
@@ -210,17 +210,15 @@ You must have cluster administrator or team administrator access to the systems 
         ```
         {: pre}
 
-1.  When you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is added to a file path on the proxy node of the cluster. Unlike with the previous version, the tool does not have its own subdomain, so there is no certificate for ingress. If you do not take action, users who open the tool from a web browser will see security warnings. To prevent users from seeing such warnings, perform one of the following procedures:
+1.  After you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is available from the proxy cluster nodes at the following path `/{{ release name }}/assistant/ui`. Unlike in the previous release, the tool UI does not have its own subdomain, so a certificate for the tool subdomain cannot be specified in the Helm configuration. If a cluster administrator does not set a certficate for the proxy nodes, then the default self-signed certificate is used. When your users go to the tool UI URL in a web browser to access a node with a self-signed certificate, they will see security warnings. To prevent users from seeing such warnings, perform one of the following procedures:
 
-    - If the proxy and management nodes of your cluster have different hostnames:
+    - If the cluster node with the proxy role is different from the cluster node with the management role, meaning the proxy and management nodes are different and have different hostnames, then complete these steps:
 
-      (You must have specified the separate hostnames (and IP addresses, if necessary) for the two nodes during the installation.)
+      1.  If you don't have a certificate for the proxy hostname that is signed by a trusted Certificate Authority, then get one.
 
-      1.  If you don't have a certificate for the proxy, create one.
+      1.  Store the certificate and private key for the proxy under the `kube-system` namespace as the `proxy-certs` secret.
 
-      1.  Store the certificate for the proxy under the `kube-system` namespace as `proxy-certs` secret.
-
-      1.  Modify the path command so it refers to the `proxy-certs` secret. Use the follow command to apply the patch:
+      1.  Modify the proxy (`nging`) so it refers to the `proxy-certs` secret. Use the follow command to apply the patch:
 
          ```bash
          kubectl patch --namespace kube-system daemonset nginx-ingress-controller --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-1", "value": "--default-ssl-certificate=kube-system/proxy-certs"}]'
@@ -229,7 +227,7 @@ You must have cluster administrator or team administrator access to the systems 
 
     - If the proxy and management nodes have the same hostname:
 
-      1.  Follow the instructions in the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic to get a private key and certificate signed by a trusted Certificate Authority.
+      1.  Follow the instructions in the *Replace the authentication certificate for the IBM Cloud Private management console* section of the [Create a new certificate authority (CA) ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/user_management/refresh_certs.html) topic to get and set a private key and certificate signed by a trusted Certificate Authority.
 
       1.  Start using the `router-certs` for the proxy node. Run the following command to apply the patch:
 
@@ -497,19 +495,26 @@ To run a test Helm chart:
 
 If you need to start the deployment over, be sure to remove all trace of the current installation before you try to install again.
 
-1.  To uninstall and delete the `my-release` deployment, run the following command from the Helm command line interface:
+1.  To uninstall and delete your deployment, run the following command from the Helm command line interface:
 
     ```bash
-    helm delete --tls --no-hooks --purge my-release
+    helm delete --tls --no-hooks --purge {release name}
     ```
     {: pre}
 
     This command removes the release resources.
 
-    Optionally, you can check whether any resources are left behind on the cluster that you need to explicitly delete by running this command:
+    To check whether any resources are left behind on the cluster, run this command:
 
     ```bash
-    kubectl get configmap,deployment,ingress,job,pod,role,rolebinding,service,serviceaccount,statefulset,secret -n <namespace>
+    kubectl get job,deploy,rs,pod,statefulset,configmap,secret,ingress,service,serviceaccount,role,rolebinding,pvc -l release={release name}
+    ```
+    {: pre}
+
+    You can then delete individual resources that you want to remove by using a command like this:
+
+    ```bash
+    kubectl delete {resource name}
     ```
     {: pre}
 
