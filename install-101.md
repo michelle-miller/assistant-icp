@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-05-06"
 
 subcollection: assistant-private
 
@@ -418,7 +418,7 @@ Other actions you might want to take before starting the installation include:
 
     **Attention**: You might see an error message (that begins with `Error making request: Error: ESOCKETTIMEDOUT POST`) during the installation process. However, you can ignore the message; the installation continues in the background. Give it time to complete. Check the Helm releases page for the status. See [Verify that the installation was successful](#intall-101-verify).
 
-#### Configuration details
+### Configuration details
 {: #install-101-config-details}
 
 Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. There are configuration settings that suggest you can do so. However, do not change these settings from their default value of `true`.
