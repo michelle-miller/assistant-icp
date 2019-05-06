@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-05-06"
 
 subcollection: assistant-private
 
@@ -177,6 +177,7 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
+1.  If you do not have Docker installed on your local system, install it now. You can download the Docker Community Edition for free from the [Docker site ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/). Pick the appropriate installation package for your operating system. No Docker Proxy is configured, so you can skip the instructions related to a Docker Proxy.
 1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/linux/linux-postinstall/) in the Docker documentation.
@@ -397,7 +398,7 @@ It is loaded to the default local-charts repo.
 
 You can check the Helm releases page to find out the status of the installation. See [Verify that the installation was successful](#install-110-verify).
 
-#### Configuration details
+### Configuration details
 {: #install-110-config-details}
 
 Currently, the service does not support the ability to provide your own instances of resources, such as Postgres or MongoDB. There are configuration settings that suggest you can do so. However, do not change these settings from their default value of `true`.
@@ -456,7 +457,7 @@ Table 6. Configuration settings
 | PostgreSQL Datatore Storage Class | Specifies the storage class of the persistent volume for the PostgreSQL database. Default class is `local-storage`. |
 {: caption="Configuration settings" caption-side="top"}
 
-## Step 5: Verify that the installation was successful
+## Step 6: Verify that the installation was successful
 {: #install-110-verify}
 
 To check the status of the installation process:
@@ -617,7 +618,7 @@ To install from the command line, complete these steps:
 
 After the installation finishes, [verify](#install-110-verify) that it was successful.
 
-## Step 6: Launch the tool
+## Step 7: Launch the tool
 {: #install-110-launch-tool}
 
 1.  Open a new tab in a web browser, and then enter a URL with the syntax `https://{global.icp.proxyHostname}{global.icp.ingress.path}/ui`. For example: `https://myproxy.icp/my-release/assistant/ui`.
@@ -649,7 +650,7 @@ To get log files, complete the following steps:
     ```
     {: pre}
 
-#### To check the configuration
+### To check the configuration
 {: #install-110-check-config}
 
 If you want to check what configuration settings were applied to a deployment when it was set up, you can run the following command:
