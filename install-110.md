@@ -233,7 +233,7 @@ You must have cluster administrator or team administrator access to the systems 
         ```
         {: pre}
 
-1.  If you can not successfully run the commands specified in the previous steps, then stop here.
+1.  If you cannot successfully run the commands specified in the previous steps, then stop here.
 
     Review the installation and setup instructions for these command line tools to get them working before you proceed with the installation. You will not be able to successfully install and manage software on your {{site.data.keyword.icpfull_notm}} deployment without these tools.
 
