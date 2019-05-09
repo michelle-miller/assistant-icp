@@ -235,11 +235,11 @@ You must have cluster administrator or team administrator access to the systems 
 
 1.  If you can not successfully run the commands specified in the previous steps, then stop here.
 
-    Review the installation and setup instructions for these command line tools to get them working before you proceed with the installation. You will not be able to successfully install and manage software on your {{site.data.keyword.icpfull_notm}} deployment without them.
+    Review the installation and setup instructions for these command line tools to get them working before you proceed with the installation. You will not be able to successfully install and manage software on your {{site.data.keyword.icpfull_notm}} deployment without these tools.
 
 1.  Take action now to prevent your users from seeing security warnings when they try to access {{site.data.keyword.conversationshort}} later.
 
-    When you have finished installing {{site.data.keyword.conversationshort}} later, the {{site.data.keyword.conversationshort}} tool will be available from the proxy cluster nodes at the following path `/{{ release name }}/assistant/ui`. Unlike in the previous release, the tool UI does not have its own subdomain, so a certificate for the tool subdomain cannot be specified in the Helm configuration. If a cluster administrator does not set a certficate for the proxy nodes, then the default self-signed certificate is used. When your users go to the tool UI URL in a web browser to access a node with a self-signed certificate, they will see security warnings. To prevent users from seeing such warnings later, you must perform one of the following procedures now:
+    After you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool will be available from the proxy cluster nodes at the following path `/{{ release name }}/assistant/ui`. Unlike in the previous release, the tool UI does not have its own subdomain, so a certificate for the tool subdomain cannot be specified in the Helm configuration. If a cluster administrator does not set a certficate for the proxy nodes, then the default self-signed certificate is used. When your users go to the tool UI URL in a web browser to access a node with a self-signed certificate, they will see security warnings. To prevent users from seeing such warnings later, you must perform one of the following procedures now:
 
     - If the cluster node with the proxy role is different from the cluster node with the management role, meaning the proxy and management nodes are different and have different hostnames, then complete these steps:
 
