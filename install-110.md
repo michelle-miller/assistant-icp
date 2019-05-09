@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-05-06"
+lastupdated: "2019-05-09"
 
 subcollection: assistant-private
 
@@ -31,6 +31,8 @@ subcollection: assistant-private
 {: shortdesc}
 
 Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icp4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview.html) for more information about that offering, including installation instructions.
+
+If you already have {{site.data.keyword.icp4dfull_notm}} version 1.2 running on {{site.data.keyword.icpfull_notm}} version 3.1.0, you can install {{site.data.keyword.conversationshort}} 1.1.0 on that same {{site.data.keyword.icpfull_notm}} version 3.1.0 instance.
 
 ## Software requirements
 {: #install-110-prereqs}
@@ -177,12 +179,32 @@ The Passport Advantage archive (PPA) file for {{site.data.keyword.conversationsh
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
 1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
-1.  If you do not have Docker installed on your local system, install it now. You can download the Docker Community Edition for free from the [Docker site ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/). Pick the appropriate installation package for your operating system. No Docker Proxy is configured, so you can skip the instructions related to a Docker Proxy.
+1.  If you do not have Docker installed on your local system, install it now. 
+
+    You can download the Docker Community Edition for free from the [Docker site ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/). Pick the appropriate installation package for your operating system. No Docker Proxy is configured, so you can skip the instructions related to a Docker Proxy.
 1.  If you have not done so, install the IBM Cloud Private command line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
+
+    After completing the step, you should be able to run the following command:
+
+    ```bash
+    cloudctl login -a https://<cluster_host_name>:8443 --skip-ssl-validation
+    ```
+    {: pre}
+
+    To log in to your cluster, choose the account, and then choose the ibmcom namespace.
+
 1.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
 1.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/install/linux/linux-postinstall/) in the Docker documentation.
 1.  Ensure that you have a stable network connection between your computer and the cluster.
 1.  Install the Kubernetes command line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
+
+    After completing this step, you should be able to run the following command:
+
+    ```bash
+    kubectl cluster-info
+    ```
+    {: pre}
+
 1.  Set up the Helm command line interface.
 
     See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
@@ -211,7 +233,13 @@ You must have cluster administrator or team administrator access to the systems 
         ```
         {: pre}
 
-1.  After you install {{site.data.keyword.conversationshort}}, the {{site.data.keyword.conversationshort}} tool is available from the proxy cluster nodes at the following path `/{{ release name }}/assistant/ui`. Unlike in the previous release, the tool UI does not have its own subdomain, so a certificate for the tool subdomain cannot be specified in the Helm configuration. If a cluster administrator does not set a certficate for the proxy nodes, then the default self-signed certificate is used. When your users go to the tool UI URL in a web browser to access a node with a self-signed certificate, they will see security warnings. To prevent users from seeing such warnings, perform one of the following procedures:
+1.  If you can not successfully run the commands specified in the previous steps, then stop here.
+
+    Review the installation and setup instructions for these command line tools to get them working before you proceed with the installation. You will not be able to successfully install and manage software on your {{site.data.keyword.icpfull_notm}} deployment without them.
+
+1.  Take action now to prevent your users from seeing security warnings when they try to access {{site.data.keyword.conversationshort}} later.
+
+    When you have finished installing {{site.data.keyword.conversationshort}} later, the {{site.data.keyword.conversationshort}} tool will be available from the proxy cluster nodes at the following path `/{{ release name }}/assistant/ui`. Unlike in the previous release, the tool UI does not have its own subdomain, so a certificate for the tool subdomain cannot be specified in the Helm configuration. If a cluster administrator does not set a certficate for the proxy nodes, then the default self-signed certificate is used. When your users go to the tool UI URL in a web browser to access a node with a self-signed certificate, they will see security warnings. To prevent users from seeing such warnings later, you must perform one of the following procedures now:
 
     - If the cluster node with the proxy role is different from the cluster node with the management role, meaning the proxy and management nodes are different and have different hostnames, then complete these steps:
 
@@ -242,12 +270,17 @@ You must have cluster administrator or team administrator access to the systems 
 
 Add the {{site.data.keyword.conversationshort}} Helm chart to {{site.data.keyword.icpfull_notm}}.
 
-1.  Ensure that you have enough disk space to load the images in the compressed files to your computer.
+1.  Make sure that you have enough Docker disk space to load the images in the compressed files to your computer.
 
     You need 60 GB of space on your local system to support the extraction and loading of the archive file. To add more disk space, take one of the following actions:
 
-    - Remove old Docker images.
-    - Increase the amount of storage that the Docker daemon uses. To increase the amount of storage that the Docker daemon uses, see the entry for `dm.basesize` in the [dockerd Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/dockerd).
+    - Prune or remove old Docker containers, images, and volumes.
+    - If you are on a client computer with a dockerd, increase the amount of storage that the Docker daemon uses.
+
+      To increase the amount of storage that the Docker daemon uses, see the entry for `dm.basesize` in the [dockerd Docker documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/reference/commandline/dockerd).
+    - If you are on a Mac with Docker Desktop, make sure the Disk Image size is set to 60 GB or greater in the Disk Image Location properties.
+
+      If the Disk Image file has grown too close to the total allowed Disk Image size, docker image save your important images, and then remove this file and restart Docker to free up space.
 
 1.  If you have not, log in to your cluster from the {{site.data.keyword.icpfull_notm}} CLI and log in to the Docker private image registry.
 
@@ -320,7 +353,32 @@ kubectl apply -f {pv-yaml-file-name}
 
     For example: `kubectl apply -f pv_001.yaml`. Rerun this command for each file up to `kubectl apply -f pv_013.yaml`.
 
-    The result is 13 volumes with names like these: `pv-10g-1`, `pv-10g-2`, `pv-10g-3`, `pv-10g-4`, `pv-10g-5`, `pv-10g-6`, `pv-5g-1`, `pv-5g-2`, `pv-5g-3`, `pv-5g-4`, `pv-80g-1`, `pv-80g-2`, and `pv-80g-3`.
+    You can use the following command to verify that the persistent volumes were created successfully:
+
+    ```bash
+    kubectl get pv | grep g-
+    ```
+    {: pre}
+
+    The resulting list should look something like this:
+
+    ```bash
+    pv-10g-1 10G RWO Recycle Available local-storage 11m
+    pv-10g-2 10G RWO Recycle Available local-storage 7m
+    pv-10g-3 10G RWO Recycle Available local-storage 7m
+    pv-10g-4 10G RWO Recycle Available local-storage 7m
+    pv-10g-5 10G RWO Recycle Available local-storage 7m
+    pv-10g-6 10G RWO Recycle Available local-storage 7m
+    pv-5g-1 5G RWO Recycle Available local-storage 7m
+    pv-5g-2 5G RWO Recycle Available local-storage 7m
+    pv-5g-3 5G RWO Recycle Available local-storage 7m
+    pv-5g-4 5G RWO Recycle Available local-storage 7m
+    pv-80g-1 80G RWO Recycle Available local-storage 7m
+    pv-80g-2 80G RWO Recycle Available local-storage 7m
+    pv-80g-3 80G RWO Recycle Available local-storage 7m
+    ```
+    {: pre}
+
 
 ## Step 5: Install the service from the catalog
 {: #install-110-admin-install}
@@ -341,11 +399,21 @@ kubectl apply -f {pv-yaml-file-name}
 
     If you do not have the Kubernetes command line tool set up, complete the steps in [Prepare the cloud environment]install-110-install-icp).
 
-1.  Get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
+1.  Check whether you can log in to Docker by using the following command:
 
-    See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html)
+    ```bash
+    docker login <cluster_CA_domain>:8500
+    ```
+    {: pre}
+
+    If you cannot log in, then you need to get a certificate from your {{site.data.keyword.icpfull_notm}} cluster and install it to Docker or add the {cluster_CA_domain} as a Docker Daemon insecure registry. You must do one or the other for Docker to be able to pull from your {{site.data.keyword.icpfull_notm}} cluster.
+
+    Follow the steps documented in [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
 
 1.  To load the file from Passport Advantage into {{site.data.keyword.icpfull_notm}}, enter the following command in the {{site.data.keyword.icpfull_notm}} command line interface.
+
+    The load process takes a while. Be sure you have a wired connection to the network; do not try to load the chart over a wireless connection.
+    {: tip}
 
     ```bash
     cloudctl catalog load-archive --archive `{result_ppa}` --registry `{icp_url}:8500`
@@ -466,30 +534,44 @@ To check the status of the installation process:
 1.  From the main menu, expand **Workloads**, and then choose **Helm releases**.
 1.  Find the release name you used for the deployment in the list.
 
-To run a test Helm chart:
+    - If the deployment failed, use the following command to get information about each pod:
 
-1.  From the Helm command line interface, run the following command:
+      ```bash
+      kubectl get pods -n {namespace-name} | grep {release name}
+      ```
+      {: pre}
 
-    ```bash
-    helm test --tls {release name} --timeout 900
-    ```
-    {: pre}
+      And then use this command to see the logs for a pod that failed:
 
-1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {podname} -n {namespace-name} -f --timestamps`. For example:
+      ```bash
+      kubectl logs {podname} -n {namespace} -f --timestamps
+      ```
+      {: pre}
 
-    ```bash
-    kubectl logs my-release-bdd-test -n conversation -f --timestamps
-    ```
-    {: pre}
+    - If the deployment process was successful, test {{site.data.keyword.conversationshort}} by running a test Helm chart.
 
-1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {namespace-name}`. For example:
+      1.  From the Helm command line interface, run the following command:
 
-    ```bash
-    kubectl delete pod my-release-bdd-test --namespace conversation
-    ```
-    {: pre}
+          ```bash
+          helm test --tls {release name} --timeout 900
+          ```
+          {: pre}
 
-    You must delete all of the `{podname}` pods, not just the one that failed, or the other tests will fail also.
+      1.  If one of the tests fails, review the logs to learn more. To see the log, use a command with the syntax `kubectl logs {podname} -n {namespace-name} -f --timestamps`. For example:
+
+          ```bash
+          kubectl logs my-release-test -n conversation -f --timestamps
+          ```
+          {: pre}
+
+      1.  To run the test script again, first delete the test pods by using a command with the syntax `kubectl delete pod {podname} --namespace {namespace-name}`. For example:
+
+          ```bash
+          kubectl delete pod my-release-test --namespace conversation
+          ```
+          {: pre}
+
+          You must delete all of the `{podname}` pods, not just the one that failed, or the other tests will fail also.
 
 ### Uninstalling the service
 {: #install-110-uninstall}
