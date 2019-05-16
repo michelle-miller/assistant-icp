@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-05-09"
+lastupdated: "2019-05-16"
 
 subcollection: assistant-private
 
@@ -326,10 +326,10 @@ kubectl apply -f {pv-yaml-file-name}
       - kubernetes.io/pv-protection
       name: {name}
     spec:
-      accessModes:
-      - ReadWriteOnce
       capacity:
         storage: {size}
+      accessModes:
+      - ReadWriteOnce
       hostPath:
         path: {path}
         type: ''
@@ -378,7 +378,6 @@ kubectl apply -f {pv-yaml-file-name}
     pv-80g-3 80G RWO Recycle Available local-storage 7m
     ```
     {: pre}
-
 
 ## Step 5: Install the service from the catalog
 {: #install-110-admin-install}
@@ -548,6 +547,11 @@ To check the status of the installation process:
       ```
       {: pre}
 
+      A common issue that can block successful deployments is that the persistent volume claims (PVCs) can bind themselves to the wrong persistent volumes, volumes that you did not create.
+      {: tip}
+
+      Next, complete the steps in [Uninstalling the service](#install-110-uninstall), so you can start the installation over with a clean set of nodes.
+
     - If the deployment process was successful, test {{site.data.keyword.conversationshort}} by running a test Helm chart.
 
       1.  From the Helm command line interface, run the following command:
@@ -598,6 +602,20 @@ If you need to start the deployment over, be sure to remove all trace of the cur
 
     ```bash
     kubectl delete {resource name}
+    ```
+    {: pre}
+
+    Also check for any remaining release resources associated with the namespace you used, and delete them. You can use this command to find them:
+
+    ```bash
+    kubectl get all -n {namespace-name} | grep {release name}
+    ```
+    {: pre}
+
+    And then delete them by resource name. For example:
+
+    ```bash
+    kubectl delete configmap/stolon-cluster-{release name}
     ```
     {: pre}
 
