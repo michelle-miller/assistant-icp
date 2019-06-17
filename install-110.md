@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-05-16"
+lastupdated: "2019-06-17"
 
 subcollection: assistant-private
 
@@ -30,9 +30,9 @@ subcollection: assistant-private
 {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1.0 runs on {{site.data.keyword.icpfull_notm}} version 3.1.0.
 {: shortdesc}
 
-Version 1.1.0 is compatible with {{site.data.keyword.icp4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icp4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview.html) for more information about that offering, including installation instructions.
+Version 1.1.0 is compatible with {{site.data.keyword.icpvt4dfull}} version 1.2, meaning that both {{site.data.keyword.conversationshort}} and {{site.data.keyword.icpvt4dfull_notm}} can run on the same instance of {{site.data.keyword.icpfull_notm}} version 3.1.0. See [Overview of IBM Cloud Private for Data ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/overview/overview.html) for more information about that offering, including installation instructions.
 
-If you already have {{site.data.keyword.icp4dfull_notm}} version 1.2 running on {{site.data.keyword.icpfull_notm}} version 3.1.0, you can install {{site.data.keyword.conversationshort}} 1.1.0 on that same {{site.data.keyword.icpfull_notm}} version 3.1.0 instance.
+If you already have {{site.data.keyword.icpvt4dfull_notm}} version 1.2 running on {{site.data.keyword.icpfull_notm}} version 3.1.0, you can install {{site.data.keyword.conversationshort}} 1.1.0 on that same {{site.data.keyword.icpfull_notm}} version 3.1.0 instance.
 
 ## Software requirements
 {: #install-110-prereqs}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-06-17"
 
 subcollection: assistant-private
 
@@ -48,7 +48,7 @@ IBM releases services, features, and language support for your evaluation that a
 
 **{{site.data.keyword.conversationfull}} for {{site.data.keyword.icpfull}} version 1.1 is available.**: The {{site.data.keyword.conversationshort}} tool now works with {{site.data.keyword.icpfull_notm}} 3.1.0. It does not work with {{site.data.keyword.icpfull_notm}} 2.1.0.3. See [Upgrading](/docs/services/assistant-icp?topic=assistant-private-upgrade).
 
-- {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1 is compatible with {{site.data.keyword.icp4dfull}} version 1.2.
+- {{site.data.keyword.conversationshort}} for {{site.data.keyword.icpfull_notm}} version 1.1 is compatible with {{site.data.keyword.icpvt4dfull}} version 1.2.
 
 - The number of required Virtual Private CPUs has decreased from its previous number (of 60 VPCs). See [VPC requirements](/docs/services/assistant-icp?topic=assistant-private-install-110#install-110-vpc-reqs) for more details.
 
